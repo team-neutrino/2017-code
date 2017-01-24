@@ -1,37 +1,43 @@
 package org.usfirst.frc.team3928.robot;
 
+import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.Victor;
 
-
-public class Robot extends SampleRobot {
+public class Robot extends IterativeRobot {
 	
-	Victor vic0;
-	Victor vic1;
-	Joystick rightJoy;
-	Joystick leftJoy;
+	Victor driveRight1;
+	Victor driveRight0;
+	Victor driveLeft1;
+	Victor driveLeft0;
 	
-	public Robot() {
-		vic0 = new Victor(0);
-		vic1 = new Victor(1);
-	}
-
+	Joystick joyLeft;
+	Joystick joyRight;
+	
 	@Override
 	public void robotInit() {
+		
 	}
 
 	@Override
-	public void autonomous() {
+	public void autonomousInit() {
 	}
 
 	@Override
-	public void operatorControl() {
-		vic0.set(Math.pow(leftJoy.getY(), 2));
-		vic1.set(Math.pow(rightJoy.getY(), 2));
+	public void autonomousPeriodic() {
 	}
 
 	@Override
-	public void test() {
+	public void teleopPeriodic() {
+		
+		driveLeft1.set(Math.pow(joyLeft.getY(), 2));
+		driveLeft0.set(Math.pow(joyLeft.getY(), 2));
+		
+		driveRight1.set(Math.pow(joyRight.getY(), 2));
+		driveRight0.set(Math.pow(joyRight.getY(), 2));
+	}
+
+	@Override
+	public void testPeriodic() {
 	}
 }
