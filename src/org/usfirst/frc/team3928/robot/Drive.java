@@ -34,9 +34,9 @@ public class Drive implements Runnable
 			DriveLeft1 = new Victor(Constants.DRIVE_LEFT_1_CHANNEL);
 			DriveLeft2 = new Victor(Constants.DRIVE_LEFT_2_CHANNEL);
 			
-			EncoderRight = new Encoder(Constants.ENCODER_RIGHT_CHANNEL_A, Constants.ENCODER_RIGHT_CHANNEL_B);
-			EncoderLeft = new Encoder(Constants.ENCODER_LEFT_CHANNEL_A, Constants.ENCODER_LEFT_CHANNEL_B);
-			double distPerRev = Math.PI * Constants.WHEEL_DIAMETER;
+			EncoderRight = new Encoder(Constants.ENCODER_DRIVE_RIGHT_CHANNEL_A, Constants.ENCODER_DRIVE_RIGHT_CHANNEL_B);
+			EncoderLeft = new Encoder(Constants.ENCODER_DRIVE_LEFT_CHANNEL_A, Constants.ENCODER_DRIVE_LEFT_CHANNEL_B);
+			double distPerRev = Math.PI * Constants.DRIVE_WHEEL_DIAMETER;
 			double distPerPulse = distPerRev / Constants.PULSE_PER_REV;
 			
 			EncoderRight.setDistancePerPulse(distPerPulse);

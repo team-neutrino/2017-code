@@ -16,7 +16,7 @@ public class Robot extends IterativeRobot
 		DriveInst = new Drive();
 		JoyRight = new Joystick(Constants.JOY_LEFT_CHANNEL);
 		JoyLeft = new Joystick(Constants.JOY_RIGHT_CHANNEL);
-
+		Camera cam = new Camera("cam0");
 	}
 
 	@Override
@@ -32,9 +32,8 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic()
 	{
-
-		DriveInst.SetRight(-JoyRight.getY());
-		DriveInst.SetLeft(JoyLeft.getY());
+		DriveInst.SetRight(Math.pow(-JoyRight.getY(), 2));
+		DriveInst.SetLeft(Math.pow(-JoyLeft.getY(), 2));
 
 	}
 
