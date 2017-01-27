@@ -45,19 +45,19 @@ public class Drive implements Runnable
 		}
 	}
 
-	public void SetRight(double speed)
+	public void setRight(double speed)
 	{
 		DriveRight1.set(speed);
 		DriveRight2.set(speed);
 	}
 
-	public void SetLeft(double speed)
+	public void setLeft(double speed)
 	{
 		DriveLeft1.set(speed);
 		DriveLeft2.set(speed);
 	}
 
-	public void DriveDist(double distance, double speed)
+	public void driveDist(double distance, double speed)
 	{
 		RunnableDistance = distance;
 		RunnableSpeed = speed;
@@ -79,17 +79,25 @@ public class Drive implements Runnable
 		EncoderRight.reset();
 		EncoderLeft.reset();
 		
-		SetRight(RunnableSpeed);
-		SetLeft(RunnableSpeed);
+		setRight(RunnableSpeed);
+		setLeft(RunnableSpeed);
 		
 		while(EncoderRight.getDistance() < RunnableDistance && 
 			  EncoderLeft.getDistance() < RunnableDistance)
 		{
+			if(EncoderRight.getDistance() >= RunnableDistance)
+			{
+				setRight(0);
+			}
+			if(EncoderRight.getDistance() >= RunnableDistance)
+			{
+				setRight(0);
+			}
 			
 		}
 		
-		SetRight(0);
-		SetLeft(0);
+		setRight(0);
+		setLeft(0);
 		
 		ThreadRunning = false;
 	}

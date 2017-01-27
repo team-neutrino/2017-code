@@ -35,6 +35,10 @@ public class Constants
 	public static final int ENCODER_SHOOTER_CHANNEL_A = 0; //TODO
 	public static final int ENCODER_SHOOTER_CHANNEL_B = 0; //TODO
 	
+	public static final int SHOOTER_BASE_SPEED = 0; //TODO
+	public static final int INTAKE_BASE_SPEED = 0; //TODO
+
+	public static final double EXPECTED_RATE_INTAKE = 0; //TODO
 	public static final double EXPECTED_RATE_SHOOTER = 0; //TODO
 	public static final double DRIVE_WHEEL_DIAMETER = 4;
 	public static final double SHOOTER_WHEEL_DIAMETER = 0; //TODO

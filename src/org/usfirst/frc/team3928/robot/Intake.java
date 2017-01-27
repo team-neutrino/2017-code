@@ -1,17 +1,15 @@
 package org.usfirst.frc.team3928.robot;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 
-public class Shooter implements Runnable{
+public class Intake implements Runnable{
 
 	private SpeedController leftMotor;
 	private SpeedController rightMotor;
-	private Encoder encoder;
 	private boolean threadRunning;
 	
-	public Shooter()
+	public Intake()
 	{
 		threadRunning = false;
 		
@@ -22,15 +20,10 @@ public class Shooter implements Runnable{
 		{
 			leftMotor = new Victor(Constants.SHOOTER_1_POWER_CHANNEL);
 			rightMotor = new Victor(Constants.SHOOTER_2_POWER_CHANNEL);
-			
-			encoder = new Encoder(Constants.ENCODER_DRIVE_LEFT_CHANNEL_A, Constants.ENCODER_SHOOTER_CHANNEL_B);
-			double distPerRev = Math.PI * Constants.SHOOTER_WHEEL_DIAMETER; 
-			double distPerPulse = distPerRev / Constants.PULSE_PER_REV;
-			encoder.setDistancePerPulse(distPerPulse);
 		}
 	}
 	
-	public void shoot()
+	public void intake()
 	{
 		if (!threadRunning)
 		{
@@ -46,19 +39,10 @@ public class Shooter implements Runnable{
 
 	@Override
 	public void run() {
-		double power = Constants.SHOOTER_BASE_SPEED;
+		double power = Constants.INTAKE_BASE_SPEED;
 		
 		while(threadRunning)
 		{
-			if(encoder.getRate() < Constants.EXPECTED_RATE_SHOOTER)
-			{
-				power += .01;
-			}
-			if(encoder.getRate() > Constants.EXPECTED_RATE_SHOOTER)
-			{
-				power -= .01;
-			}
-			
 			leftMotor.set(power);
 			leftMotor.set(-power);
 		}
@@ -70,3 +54,4 @@ public class Shooter implements Runnable{
 	
 
 }
+
