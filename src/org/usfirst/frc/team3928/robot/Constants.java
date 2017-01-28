@@ -12,6 +12,8 @@ public class Constants
 
 	public static final int SOLENOID_FLAP_CHANNEL = 2; //TODO
 	public static final int SOLENOID_CHANNEL_1 = 2; //TODO
+	public static final int SOLENOID_INTAKE_CHANNEL_1 = 2; //TODO
+	public static final int ANALOG_CHANNEL = 2; //TODO
 	
 	public static final int BMax = 255;
 	public static final int BMin = 50;
@@ -40,6 +42,8 @@ public class Constants
 	public static final int ENCODER_DRIVE_LEFT_CHANNEL_B = 4;
 	public static final int ENCODER_SHOOTER_CHANNEL_A = 0; //TODO
 	public static final int ENCODER_SHOOTER_CHANNEL_B = 0; //TODO
+	public static final int DRIVE_TIME_PER_INCH = 100; // In ms
+	public static final int DRIVE_TIME_PER_DEGREE = 100; // in degrees
 
 	public static final int SHOOTER_FOR_INTAKE_BASE_SPEED = 0; //TODO
 	public static final int SHOOTER_BASE_SPEED = 0; //TODO
@@ -51,5 +55,8 @@ public class Constants
 	public static final double SHOOTER_WHEEL_DIAMETER = 0; //TODO
 	public static final int CYCLES_PER_REV = 360;
 	public static final int PULSE_PER_REV = CYCLES_PER_REV * 4;
+	
+	// Auton mode
+	public static final int GEARFORWARD_PICKUP_TIME = 2000; // in ms
 
 }
