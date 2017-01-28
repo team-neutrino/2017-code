@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3928.robot;
 
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
@@ -14,7 +16,7 @@ public class Drive implements Runnable
 
 	private Encoder EncoderRight;
 	private Encoder EncoderLeft;
-	
+	private CANTalon t;
 	private double RunnableDistance;
 	private double RunnableSpeed;
 	
@@ -26,28 +28,28 @@ public class Drive implements Runnable
 		
 		if (Constants.REAL_ROBOT)
 		{
-
+			
 		} else
 		{
-			DriveRight1 = new Victor(Constants.DRIVE_RIGHT_1_CHANNEL);
+			t = new CANTalon(Constants.DRIVE_RIGHT_1_CHANNEL);
+		//	DriveRight1 = new Victor(Constants.DRIVE_RIGHT_1_CHANNEL);
 			DriveRight2 = new Victor(Constants.DRIVE_RIGHT_2_CHANNEL);
 			DriveLeft1 = new Victor(Constants.DRIVE_LEFT_1_CHANNEL);
 			DriveLeft2 = new Victor(Constants.DRIVE_LEFT_2_CHANNEL);
-			
-			EncoderRight = new Encoder(Constants.ENCODER_DRIVE_RIGHT_CHANNEL_A, Constants.ENCODER_DRIVE_RIGHT_CHANNEL_B);
-			EncoderLeft = new Encoder(Constants.ENCODER_DRIVE_LEFT_CHANNEL_A, Constants.ENCODER_DRIVE_LEFT_CHANNEL_B);
-			double distPerRev = Math.PI * Constants.DRIVE_WHEEL_DIAMETER;
-			double distPerPulse = distPerRev / Constants.PULSE_PER_REV;
-			
-			EncoderRight.setDistancePerPulse(distPerPulse);
-			EncoderLeft.setDistancePerPulse(distPerPulse);
-			
+
+//			EncoderRight = new Encoder(Constants.ENCODER_DRIVE_RIGHT_CHANNEL_A, Constants.ENCODER_DRIVE_RIGHT_CHANNEL_B);
+//			EncoderLeft = new Encoder(Constants.ENCODER_DRIVE_LEFT_CHANNEL_A, Constants.ENCODER_DRIVE_LEFT_CHANNEL_B);
+//			double distPerRev = Math.PI * Constants.DRIVE_WHEEL_DIAMETER;
+//			double distPerPulse = distPerRev / Constants.PULSE_PER_REV;
+//			
+//			EncoderRight.setDistancePerPulse(distPerPulse);
+//			EncoderLeft.setDistancePerPulse(distPerPulse);		
 		}
 	}
 
 	public void setRight(double speed)
 	{
-		DriveRight1.set(speed);
+		t.set(speed);
 		DriveRight2.set(speed);
 	}
 
@@ -93,7 +95,6 @@ public class Drive implements Runnable
 			{
 				setRight(0);
 			}
-			
 		}
 		
 		setRight(0);

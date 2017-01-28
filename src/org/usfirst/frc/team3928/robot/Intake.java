@@ -7,6 +7,10 @@ public class Intake implements Runnable{
 
 	private SpeedController leftMotor;
 	private SpeedController rightMotor;
+	
+	private SpeedController shooterLeftMotor;
+	private SpeedController shooterRightMotor;
+	
 	private boolean threadRunning;
 	
 	public Intake()
@@ -18,8 +22,10 @@ public class Intake implements Runnable{
 
 		} else
 		{
-			leftMotor = new Victor(Constants.SHOOTER_1_POWER_CHANNEL);
-			rightMotor = new Victor(Constants.SHOOTER_2_POWER_CHANNEL);
+			shooterLeftMotor = new Victor(Constants.SHOOTER_1_POWER_CHANNEL);
+			shooterRightMotor = new Victor(Constants.SHOOTER_2_POWER_CHANNEL);
+			leftMotor = new Victor(Constants.INTAKE_1_POWER_CHANNEL);
+			rightMotor = new Victor(Constants.INTAKE_2_POWER_CHANNEL);
 		}
 	}
 	
@@ -39,13 +45,17 @@ public class Intake implements Runnable{
 
 	@Override
 	public void run() {
-		double power = Constants.INTAKE_BASE_SPEED;
 		
 		while(threadRunning)
 		{
-			leftMotor.set(power);
-			leftMotor.set(-power);
+			shooterLeftMotor.set(Constants.SHOOTER_FOR_INTAKE_BASE_SPEED);
+			shooterRightMotor.set(-Constants.SHOOTER_FOR_INTAKE_BASE_SPEED);
+			leftMotor.set(Constants.INTAKE_BASE_SPEED);
+			rightMotor.set(-Constants.INTAKE_BASE_SPEED);
 		}
+
+		shooterLeftMotor.set(0);
+		shooterRightMotor.set(0);
 		leftMotor.set(0);
 		rightMotor.set(0);
 		

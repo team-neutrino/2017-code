@@ -9,6 +9,10 @@ public class Constants
 	public static final int DRIVE_LEFT_1_CHANNEL = 2;
 	public static final int DRIVE_LEFT_2_CHANNEL = 3;
 	
+
+	public static final int SOLENOID_FLAP_CHANNEL = 2; //TODO
+	public static final int SOLENOID_CHANNEL_1 = 2; //TODO
+	
 	public static final int BMax = 255;
 	public static final int BMin = 50;
 	public static final int GMax = 255;
@@ -24,6 +28,8 @@ public class Constants
 	public static final int DRIVE_LEFT_2_POWER_CHANNEL = 3;
 	public static final int SHOOTER_1_POWER_CHANNEL = 0; //TODO
 	public static final int SHOOTER_2_POWER_CHANNEL = 0; //TODO
+	public static final int INTAKE_1_POWER_CHANNEL = 0; //TODO
+	public static final int INTAKE_2_POWER_CHANNEL = 0; //TODO
 	
 	public static final int JOY_RIGHT_CHANNEL = 2;
 	public static final int JOY_LEFT_CHANNEL = 1;
@@ -34,7 +40,8 @@ public class Constants
 	public static final int ENCODER_DRIVE_LEFT_CHANNEL_B = 4;
 	public static final int ENCODER_SHOOTER_CHANNEL_A = 0; //TODO
 	public static final int ENCODER_SHOOTER_CHANNEL_B = 0; //TODO
-	
+
+	public static final int SHOOTER_FOR_INTAKE_BASE_SPEED = 0; //TODO
 	public static final int SHOOTER_BASE_SPEED = 0; //TODO
 	public static final int INTAKE_BASE_SPEED = 0; //TODO
 

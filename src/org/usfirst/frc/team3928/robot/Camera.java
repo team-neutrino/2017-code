@@ -32,29 +32,59 @@ public class Camera {
 			MatOfInt hull = new MatOfInt();
 			MatOfInt temp = new MatOfInt();
 			Mat mat = new Mat();
-			ArrayList<MatOfPoint> contours = new ArrayList<MatOfPoint>(); 
-			
+			ArrayList<MatOfPoint> contours = new ArrayList<MatOfPoint>();
 			             
 			while (!Thread.interrupted()) {
 				if (cvSink.grabFrame(mat) == 0) {
 					outputStream.notifyError(cvSink.getError());
 					continue;
 				}
+				
 				//Imgproc.cvtColor(mat, mat, Imgproc.COLOR_BGR2HSV);
 				Core.inRange(mat, new Scalar(Constants.BMin, Constants.GMin, Constants.RMin), new Scalar(Constants.BMax, Constants.GMax, Constants.RMax),mat);
-				Imgproc.findContours(mat, contours, new Mat(), Imgproc.RETR_EXTERNAL,Imgproc.CHAIN_APPROX_SIMPLE);
-//				for(int i = 0; i < contours.size(); i++)
-//				{
-//					Imgproc.convexHull(contours.get(i), temp);
-//					if(temp.size().area() > hull.size().area())
-//					{
-//						hull = temp;
-//						contour = contours.get(i);
-//					}
-//				}
-//				
-//				Rect rect = Imgproc.boundingRect(hull2Points(hull, contour));
+				contours.clear();
+				contour = new MatOfPoint();
+				Imgproc.findContours(mat, contours, new Mat(), Imgproc.RETR_LIST,Imgproc.CHAIN_APPROX_SIMPLE);
+				for(MatOfPoint c : contours)
+				{
+					if(c.size().area() > contour.size().area())
+					{
+						contour = c;
+					}
+				}
+				System.out.println(contour.size().area());
+				List<Point> pts = contour.toList();
+				double x = 0;
+				double y = 0;
+				double xMin = Integer.MAX_VALUE;
+				double yMin = Integer.MAX_VALUE;
+				for(Point pt : pts)
+				{
+					if(pt.x > x)
+					{
+						x = pt.x;
+					}
+					if(pt.x < xMin)
+					{
+						xMin = pt.x;
+					}
+					if(pt.y < yMin)
+					{
+						yMin = pt.y;
+					}
+					if(pt.y > y)
+					{
+						y = pt.y;
+					}
+				}
+				
+				Rect rect = new Rect();
+				rect.height = (int) (x - xMin);
+				rect.x = (int) x;
+				rect.y = (int) y;
+				rect.width = (int) (y - yMin);
 				outputStream.putFrame(mat);
+				
 				System.gc();
 			}
 						
@@ -63,14 +93,4 @@ public class Camera {
 		visionThread.start();
 	}
 
-MatOfPoint hull2Points(MatOfInt hull, MatOfPoint contour) {
-    List<Integer> indexes = hull.toList();
-    List<Point> points = new ArrayList<>();
-    MatOfPoint point= new MatOfPoint();
-    for(Integer index:indexes) {
-        points.add(contour.toList().get(index));
-    }
-    point.fromList(points);
-    return point;
-}
 }

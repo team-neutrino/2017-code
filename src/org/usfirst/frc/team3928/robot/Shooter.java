@@ -43,7 +43,7 @@ public class Shooter implements Runnable{
 	{
 		threadRunning = false;
 	}
-
+	
 	@Override
 	public void run() {
 		double power = Constants.SHOOTER_BASE_SPEED;

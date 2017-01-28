@@ -17,11 +17,12 @@ public class Robot extends IterativeRobot
 	public void robotInit()
 	{
 		DriveInst = new Drive();
-		shoot = new Shooter();
-		 intake = new Intake();
+//		shoot = new Shooter();
+//		 intake = new Intake();
 		JoyRight = new Joystick(Constants.JOY_LEFT_CHANNEL);
 		JoyLeft = new Joystick(Constants.JOY_RIGHT_CHANNEL);
 		cam = new Camera("cam0");
+		System.out.println(100.);
 	}
 
 	@Override
@@ -33,12 +34,17 @@ public class Robot extends IterativeRobot
 	public void autonomousPeriodic()
 	{
 	}
-
+	
+	@Override
+	public void teleopInit()
+	{
+	}
 	@Override
 	public void teleopPeriodic()
 	{
-		DriveInst.setRight(Math.pow(-JoyRight.getY(), 2));
-		DriveInst.setLeft(Math.pow(-JoyLeft.getY(), 2));
+		DriveInst.setRight(-JoyRight.getY());
+		DriveInst.setLeft(-JoyLeft.getY());	
+		
 		
 		if(pad.getRawButton(0)) //TODO
 		{
@@ -53,5 +59,6 @@ public class Robot extends IterativeRobot
 	@Override
 	public void testPeriodic()
 	{
+		
 	}
 }
