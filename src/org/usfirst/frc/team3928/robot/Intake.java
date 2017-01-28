@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj.Victor;
 
 public class Intake implements Runnable{
 
-	private SpeedController leftMotor;
-	private SpeedController rightMotor;
+	private SpeedController LeftMotor;
+	private SpeedController RightMotor;
 	
-	private SpeedController shooterLeftMotor;
-	private SpeedController shooterRightMotor;
+	private SpeedController ShooterLeftMotor;
+	private SpeedController ShooterRightMotor;
 	
 	private boolean threadRunning;
 	
@@ -22,10 +22,10 @@ public class Intake implements Runnable{
 
 		} else
 		{
-			shooterLeftMotor = new Victor(Constants.SHOOTER_1_POWER_CHANNEL);
-			shooterRightMotor = new Victor(Constants.SHOOTER_2_POWER_CHANNEL);
-			leftMotor = new Victor(Constants.INTAKE_1_POWER_CHANNEL);
-			rightMotor = new Victor(Constants.INTAKE_2_POWER_CHANNEL);
+			ShooterLeftMotor = new Victor(Constants.SHOOTER_1_POWER_CHANNEL);
+			ShooterRightMotor = new Victor(Constants.SHOOTER_2_POWER_CHANNEL);
+			LeftMotor = new Victor(Constants.INTAKE_1_POWER_CHANNEL);
+			RightMotor = new Victor(Constants.INTAKE_2_POWER_CHANNEL);
 		}
 	}
 	
@@ -48,16 +48,16 @@ public class Intake implements Runnable{
 		
 		while(threadRunning)
 		{
-			shooterLeftMotor.set(Constants.SHOOTER_FOR_INTAKE_BASE_SPEED);
-			shooterRightMotor.set(-Constants.SHOOTER_FOR_INTAKE_BASE_SPEED);
-			leftMotor.set(Constants.INTAKE_BASE_SPEED);
-			rightMotor.set(-Constants.INTAKE_BASE_SPEED);
+			ShooterLeftMotor.set(Constants.HOPPER_SHOOTER_TARGET_SPEED);
+			ShooterRightMotor.set(-Constants.HOPPER_SHOOTER_TARGET_SPEED);
+			LeftMotor.set(Constants.INTAKE_SPEED);
+			RightMotor.set(-Constants.INTAKE_SPEED);
 		}
 
-		shooterLeftMotor.set(0);
-		shooterRightMotor.set(0);
-		leftMotor.set(0);
-		rightMotor.set(0);
+		ShooterLeftMotor.set(0);
+		ShooterRightMotor.set(0);
+		LeftMotor.set(0);
+		RightMotor.set(0);
 		
 	}
 	

@@ -12,6 +12,7 @@ public class Shooter implements Runnable{
 	private Encoder encoder;
 	private Solenoid sol1;
 	private boolean threadRunning;
+	private Solenoid shooterSol;
 	
 	public Shooter()
 	{
@@ -26,10 +27,7 @@ public class Shooter implements Runnable{
 			leftMotor = new Victor(Constants.SHOOTER_1_POWER_CHANNEL);
 			rightMotor = new Victor(Constants.SHOOTER_2_POWER_CHANNEL);
 			
-			encoder = new Encoder(Constants.ENCODER_DRIVE_LEFT_CHANNEL_A, Constants.ENCODER_SHOOTER_CHANNEL_B);
-			double distPerRev = Math.PI * Constants.SHOOTER_WHEEL_DIAMETER; 
-			double distPerPulse = distPerRev / Constants.PULSE_PER_REV;
-			encoder.setDistancePerPulse(distPerPulse);
+			encoder = new Encoder(Constants.SHOOTER_ENCODER_CHANNEL_A, Constants.SHOOTER_ENCODER_CHANNEL_B);
 		}
 	}
 	
@@ -49,6 +47,7 @@ public class Shooter implements Runnable{
 	
 	@Override
 	public void run() {
+<<<<<<< HEAD
 		double power = Constants.SHOOTER_BASE_SPEED;
 		sol1.set(true);
 		while(threadRunning)
@@ -70,6 +69,8 @@ public class Shooter implements Runnable{
 		
 		leftMotor.set(0);
 		rightMotor.set(0);
+=======
+>>>>>>> origin/master
 		
 	}
 	
