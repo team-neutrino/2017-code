@@ -41,7 +41,7 @@ public class Camera {
 				}
 				
 				//Imgproc.cvtColor(mat, mat, Imgproc.COLOR_BGR2HSV);
-				Core.inRange(mat, new Scalar(Constants.CAMERA_B_MIN, Constants.CAMERA_G_MIN, Constants.CAMERA_R_MIN), new Scalar(Constants.CAMERA_B_MAX, Constants.CAMERA_G_MAX, Constants.CAMERA_R_MAX), mat);
+				Core.inRange(mat, new Scalar(Constants.BMin, Constants.GMin, Constants.RMin), new Scalar(Constants.BMax, Constants.GMax, Constants.RMax),mat);
 				contours.clear();
 				contour = new MatOfPoint();
 				Imgproc.findContours(mat, contours, new Mat(), Imgproc.RETR_LIST,Imgproc.CHAIN_APPROX_SIMPLE);
