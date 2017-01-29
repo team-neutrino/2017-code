@@ -3,24 +3,37 @@ package org.usfirst.frc.team3928.robot;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 
-public class Intake implements Runnable{
+/**
+ * Intake object that takes in the balls. Is planned to get deleted so all this
+ * javadoc work was for nothing :(. Compensation for creating these javadoc
+ * comments is the author tag.
+ * 
+ * @author JamesBeetham
+ */
+public class Intake implements Runnable
+{
 
 	private SpeedController leftMotor;
 	private SpeedController rightMotor;
-	
+
 	private SpeedController shooterLeftMotor;
 	private SpeedController shooterRightMotor;
-	
-	private boolean threadRunning;
-	
+
+	private boolean ThreadRunning;
+
+	/**
+	 * Constructs new intake object. Sets ThreadRunning to false sets other
+	 * variables depending on which robot this code is running on.
+	 */
 	public Intake()
 	{
-		threadRunning = false;
-		
+		ThreadRunning = false;
+
 		if (Constants.REAL_ROBOT)
 		{
 
-		} else
+		}
+		else
 		{
 			shooterLeftMotor = new Victor(Constants.SHOOTER_1_POWER_CHANNEL);
 			shooterRightMotor = new Victor(Constants.SHOOTER_2_POWER_CHANNEL);
@@ -28,25 +41,34 @@ public class Intake implements Runnable{
 			rightMotor = new Victor(Constants.INTAKE_2_POWER_CHANNEL);
 		}
 	}
-	
+
+	/**
+	 * Starts the intake if ThreadRunning is false.
+	 */
 	public void intake()
 	{
-		if (!threadRunning)
+		if (!ThreadRunning)
 		{
-			threadRunning = true;
+			ThreadRunning = true;
 			new Thread(this).start();
 		}
 	}
-	
+
+	/**
+	 * Stops the intake by setting ThreadRunning to false.
+	 */
 	public void stop()
 	{
-		threadRunning = false;
+		ThreadRunning = false;
 	}
 
+	/**
+	 * Activates the intake while threadRunning is true.
+	 */
 	@Override
-	public void run() {
-		
-		while(threadRunning)
+	public void run()
+	{
+		while (ThreadRunning)
 		{
 			shooterLeftMotor.set(Constants.SHOOTER_FOR_INTAKE_BASE_SPEED);
 			shooterRightMotor.set(-Constants.SHOOTER_FOR_INTAKE_BASE_SPEED);
@@ -58,10 +80,5 @@ public class Intake implements Runnable{
 		shooterRightMotor.set(0);
 		leftMotor.set(0);
 		rightMotor.set(0);
-		
 	}
-	
-	
-
 }
-
