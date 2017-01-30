@@ -23,8 +23,8 @@ public abstract class AutonModes
 		DriveInst = driveInst;
 		Gear = gear;
 		Cannon = cannon;
-		Gear.open(true);
-		Gear.tilt(false);
+		Gear.Open(true);
+		Gear.Tilt(false);
 	}
 
 	/**

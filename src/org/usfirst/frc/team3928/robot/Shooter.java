@@ -35,11 +35,10 @@ public class Shooter implements Runnable
 		}
 		else
 		{
-			Solenoid sol1 = new Solenoid(Constants.SOLENOID_INTAKE_CHANNEL_1);
 			leftMotor = new Victor(Constants.SHOOTER_1_POWER_CHANNEL);
 			rightMotor = new Victor(Constants.SHOOTER_2_POWER_CHANNEL);
 
-			encoder = new Encoder(Constants.ENCODER_DRIVE_LEFT_CHANNEL_A, Constants.ENCODER_SHOOTER_CHANNEL_B);
+			encoder = new Encoder(Constants.SHOOTER_ENCODER_CHANNEL_A, Constants.SHOOTER_ENCODER_CHANNEL_B);
 			double distPerRev = Math.PI * Constants.SHOOTER_WHEEL_DIAMETER;
 			double distPerPulse = distPerRev / Constants.PULSE_PER_REV;
 			encoder.setDistancePerPulse(distPerPulse);
@@ -72,27 +71,6 @@ public class Shooter implements Runnable
 	@Override
 	public void run()
 	{
-		double power = Constants.SHOOTER_BASE_SPEED;
-		sol1.set(true);
-		while (ThreadRunning)
-		{
-			if (encoder.getRate() < Constants.EXPECTED_RATE_SHOOTER)
-			{
-				power += .01;
-			}
-			if (encoder.getRate() > Constants.EXPECTED_RATE_SHOOTER)
-			{
-				power -= .01;
-			}
-
-			leftMotor.set(power);
-			leftMotor.set(-power);
-		}
-
-		sol1.set(false);
-
-		leftMotor.set(0);
-		rightMotor.set(0);
 	}
 
 }

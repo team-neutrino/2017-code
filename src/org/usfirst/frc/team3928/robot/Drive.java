@@ -36,11 +36,11 @@ public class Drive
 	public Drive()
 	{
 		ThreadRunning = false;
-		Gyro = new AnalogGyro(Constants.ANALOG_CHANNEL);
+		Gyro = new AnalogGyro(Constants.DRIVE_GYRO_CHANNEL);
 		Gyro.calibrate();
 
-		EncoderRight = new Encoder(Constants.ENCODER_DRIVE_RIGHT_CHANNEL_A, Constants.ENCODER_DRIVE_RIGHT_CHANNEL_B);
-		EncoderLeft = new Encoder(Constants.ENCODER_DRIVE_LEFT_CHANNEL_A, Constants.ENCODER_DRIVE_LEFT_CHANNEL_B);
+		EncoderRight = new Encoder(Constants.DRIVE_ENCODER_RIGHT_CHANNEL_A, Constants.DRIVE_ENCODER_RIGHT_CHANNEL_B);
+		EncoderLeft = new Encoder(Constants.DRIVE_ENCODER_LEFT_CHANNEL_A, Constants.DRIVE_ENCODER_LEFT_CHANNEL_B);
 		double distPerRev = Math.PI * Constants.DRIVE_WHEEL_DIAMETER;
 		double distPerPulse = distPerRev / Constants.PULSE_PER_REV;
 

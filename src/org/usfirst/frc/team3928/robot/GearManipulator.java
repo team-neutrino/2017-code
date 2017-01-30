@@ -11,25 +11,23 @@ import edu.wpi.first.wpilibj.Solenoid;
 public class GearManipulator
 {
 
-	/*
-	 * TODO private / public on variables member variables capitalized fix
-	 * capitalizations of functions 2 sol instances per physical sol
-	 */
 
-	Solenoid sol1;
-	Solenoid sol2;
-	Solenoid flap1;
-	Solenoid flap2;
+	Solenoid Sol1;
+	Solenoid Sol2;
+	Solenoid Flap1;
+	Solenoid Flap2;
 
 	/**
 	 * Constructs new object.
 	 */
 	public GearManipulator()
 	{
-		sol1 = new Solenoid(Constants.SOLENOID_CHANNEL_1);
-		flap1 = new Solenoid(Constants.SOLENOID_FLAP_CHANNEL);
-		open(true);
-		tilt(false);
+		Sol1 = new Solenoid(Constants.GEAR_SOLENOID_A_CHANNEL);
+		Flap1 = new Solenoid(Constants.GEAR_SOLENOID_FLAP_A_CHANNEL);
+		Sol2 = new Solenoid(Constants.GEAR_SOLENOID_B_CHANNEL_1);
+		Flap2 = new Solenoid(Constants.GEAR_SOLENOID_FLAP_B_CHANNEL);
+		Open(true);
+		Tilt(false);
 		// set sol2 and flap2
 	}
 
@@ -39,10 +37,10 @@ public class GearManipulator
 	 * @param isOpen
 	 *            true to open, false to close
 	 */
-	public void open(boolean isOpen)
+	public void Open(boolean isOpen)
 	{
-		flap1.set(isOpen);
-		flap2.set(!isOpen);
+		Flap1.set(isOpen);
+		Flap2.set(!isOpen);
 	}
 
 	/**
@@ -51,10 +49,10 @@ public class GearManipulator
 	 * @param isTilted
 	 *            true to tilt, false to untilt
 	 */
-	public void tilt(boolean isTilted)
+	public void Tilt(boolean isTilted)
 	{
-		sol1.set(isTilted);
-		sol2.set(!isTilted);
+		Sol1.set(isTilted);
+		Sol2.set(!isTilted);
 	}
 
 }

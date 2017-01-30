@@ -43,7 +43,7 @@ public class GearLeft extends AutonModes
 
 		try
 		{
-			Thread.sleep(Constants.GEARFORWARD_PICKUP_TIME);
+			Thread.sleep(Constants.AUTON_GEAR_FORWARD_PICKUP_TIME);
 		} catch (InterruptedException e)
 		{
 			e.printStackTrace();
