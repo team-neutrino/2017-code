@@ -21,7 +21,7 @@ public class GearForward extends AutonModes
 	 * @param shoot
 	 *            shooter
 	 */
-	public GearForward(Drive driveInst, GearManipulator gear, Shooter cannon)
+	public GearForward(Drive driveInst, GearManipulator gear, BallManager cannon)
 	{
 		super(driveInst, gear, cannon);
 	}

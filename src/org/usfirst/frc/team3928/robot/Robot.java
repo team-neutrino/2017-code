@@ -16,8 +16,7 @@ public class Robot extends IterativeRobot
 	private Joystick JoyRight;
 	private Joystick JoyLeft;
 	private Joystick Pad;
-	private Shooter Cannon;
-	private Intake intake;
+	private BallManager Elevate;
 	private Camera Cam;
 
 	/**
@@ -26,13 +25,11 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
-		DriveInst = new Drive();
-		// shoot = new Shooter();
-		// intake = new Intake();
+		//DriveInst = new Drive();
+		//Elevate = new Elevator();
 		JoyRight = new Joystick(Constants.JOY_LEFT_CHANNEL);
 		JoyLeft = new Joystick(Constants.JOY_RIGHT_CHANNEL);
 		Cam = new Camera("cam0");
-		System.out.println(100.);
 	}
 
 	/**
@@ -44,7 +41,7 @@ public class Robot extends IterativeRobot
 	}
 
 	/**
-	 * TODO
+	 * Calls periodically over autonomous
 	 */
 	@Override
 	public void autonomousPeriodic()
@@ -59,28 +56,28 @@ public class Robot extends IterativeRobot
 	{
 	}
 
-	/**
-	 * TODO
-	 */
 	@Override
 	public void teleopPeriodic()
 	{
-		DriveInst.setRight(-JoyRight.getY());
-		DriveInst.setLeft(-JoyLeft.getY());
+//		DriveInst.setRight(-JoyRight.getY());
+//		DriveInst.setLeft(-JoyLeft.getY());
 
-		if (Pad.getRawButton(0)) // TODO
+		if (Pad.getRawButton(Constants.BUTTON_INTAKE)) // TODO
 		{
-			intake.intake();
 		}
-		if (Pad.getRawButton(0)) // TODO
+		else
 		{
-			Cannon.shoot();
+		}
+		
+		if (Pad.getRawButton(Constants.BUTTON_SHOOT)) // TODO
+		{
+			
+		}
+		else
+		{
 		}
 	}
-
-	/**
-	 * TODO
-	 */
+	
 	@Override
 	public void testPeriodic()
 	{

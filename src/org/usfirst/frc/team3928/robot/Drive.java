@@ -42,7 +42,7 @@ public class Drive
 		EncoderRight = new Encoder(Constants.DRIVE_ENCODER_RIGHT_CHANNEL_A, Constants.DRIVE_ENCODER_RIGHT_CHANNEL_B);
 		EncoderLeft = new Encoder(Constants.DRIVE_ENCODER_LEFT_CHANNEL_A, Constants.DRIVE_ENCODER_LEFT_CHANNEL_B);
 		double distPerRev = Math.PI * Constants.DRIVE_WHEEL_DIAMETER;
-		double distPerPulse = distPerRev / Constants.PULSE_PER_REV;
+		double distPerPulse = distPerRev / Constants.DRIVE_CYCLES_PER_REV;
 
 		EncoderRight.setDistancePerPulse(distPerPulse);
 		EncoderLeft.setDistancePerPulse(distPerPulse);

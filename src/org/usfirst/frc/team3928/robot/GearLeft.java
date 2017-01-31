@@ -16,7 +16,7 @@ public class GearLeft extends AutonModes
 	 * @param gear GearManipulator to use
 	 * @param cannon Shooter to use
 	 */
-	public GearLeft(Drive driveInst, GearManipulator gear, Shooter cannon)
+	public GearLeft(Drive driveInst, GearManipulator gear, BallManager cannon)
 	{
 		super(driveInst, gear, cannon);
 	}

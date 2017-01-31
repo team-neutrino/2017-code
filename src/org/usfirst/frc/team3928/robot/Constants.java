@@ -27,6 +27,8 @@ public class Constants
     public static final int DRIVE_GYRO_CHANNEL = 2; // TODO
     public static final int DRIVE_TIME_PER_INCH = 100; // In ms
     public static final int DRIVE_TIME_PER_DEGREE = 100; // in degrees
+    public static final int DRIVE_CYCLES_PER_REV = 360;
+    public static final int DRIVE_PULSE_PER_REV = DRIVE_CYCLES_PER_REV * 4;
 
     //Gear Manipulator
     public static final int GEAR_SOLENOID_FLAP_A_CHANNEL = 2; // TODO
@@ -35,40 +37,51 @@ public class Constants
     public static final int GEAR_SOLENOID_B_CHANNEL_1 = 2; // TODO
 
     //Intake
-    public static final int INTAKE_SOLENOID_CHANNEL_1 = 2; // TODO
+    public static final int INTAKE_SOLENOID_A_CHANNEL = 2; // TODO
+    public static final int INTAKE_SOLENOID_B_CHANNEL = 2; // TODO
     public static final int INTAKE_1_POWER_CHANNEL = 0; // TODO
     public static final int INTAKE_2_POWER_CHANNEL = 0; // TODO
-    public static final double INTAKE_EXPECTED_RATE = 0; // TODO
-    public static final int INTAKE_BASE_SPEED = 0; // TODO
+    public static final double INTAKE_SPEED = 0; // TODO
+    public static final int SHOOTER_FOR_INTAKE_SPEED = 0; // TODO
+    
+    //Elevator
+    public static final int ELEVATOR_CHANNEL = 0; //TODO
+    public static final int ELEVATOR_POWER_CHANNEL = 0; // TODO
+    public static final double ELEVATOR_SHOOT_SPEED = 0; //TODO
 
     //Shooter
-    public static final double SHOOTER_TARGET_PULSES_PER_ROTATION = 0; // TODO
     public static final int SHOOTER_1_POWER_CHANNEL = 0; // TODO
     public static final int SHOOTER_2_POWER_CHANNEL = 0; // TODO
+    public static final int SHOOTER_1_CHANNEL = 0; // TODO
+    public static final int SHOOTER_2_CHANNEL = 0; // TODO
     public static final int SHOOTER_ENCODER_CHANNEL_A = 0; // TODO
     public static final int SHOOTER_ENCODER_CHANNEL_B = 0; // TODO
-    public static final int SHOOTER_FOR_INTAKE_BASE_SPEED = 0; // TODO
-    public static final int SHOOTER_BASE_SPEED = 0; // TODO
-    public static final double SHOOTER_EXPECTED_RATE = 0; // TODO
+    public static final int SHOOTER_TARGET_SPEED = 0; // TODO
     public static final double SHOOTER_WHEEL_DIAMETER = 0; // TODO
-
+    public static final double SHOOTER_PID_P = 0; //TODO
+    public static final double SHOOTER_PID_I = 0; //TODO
+    public static final double SHOOTER_PID_D = 0; //TODO
+    public static final int SHOOTER_CYCLES_PER_REV = 360; //TODO
+    public static final int SHOOTER_PULSE_PER_REV = SHOOTER_CYCLES_PER_REV * 4;
 
     //Camera
     public static final int CAMERA_GREEN_MAX = 255;
-    public static final int CAMERA_GREEN_MIN = 50;
+    public static final int CAMERA_GREEN_MIN = 0;
     public static final int CAMERA_BLUE_MAX = 255;
-    public static final int CAMERA_BLUE_MIN = 50;
-    public static final int CAMERA_RED_MAX = 35;
-    public static final int CAMERA_RED_MIN = 25;
+    public static final int CAMERA_BLUE_MIN = 100;
+    public static final int CAMERA_RED_MAX = 73;
+    public static final int CAMERA_RED_MIN = 30;
 
     //Joysticks
     public static final int JOY_RIGHT_CHANNEL = 2;
     public static final int JOY_LEFT_CHANNEL = 1;
 
+    //Button Mappers
+    public static final int BUTTON_INTAKE = 0; //TODO
+    public static final int BUTTON_SHOOT = 1; //TODO
+    public static final int BUTTON_AIM_AT_GEAR = 2;
 
     //Encoder Magic Numbers
-    public static final int CYCLES_PER_REV = 360;
-    public static final int PULSE_PER_REV = CYCLES_PER_REV * 4;
 
     // Auton mode
     public static final int AUTON_GEAR_FORWARD_PICKUP_TIME = 2000; // in ms

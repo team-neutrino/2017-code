@@ -26,7 +26,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 public class Camera
 {
 	Thread visionThread;
-
+	public Rect rect;
 	/**
 	 * Constructs a new camera.
 	 * 
@@ -41,6 +41,7 @@ public class Camera
 			camera.setExposureManual(30);
 			CvSink cvSink = CameraServer.getInstance().getVideo();
 			CvSource outputStream = CameraServer.getInstance().putVideo("Threshold", 640, 480);
+			CvSource outputStream2 = CameraServer.getInstance().putVideo("Rectangle", 640, 480);
 			Mat rectangle = new Mat();
 			MatOfPoint contour = new MatOfPoint();
 			MatOfInt hull = new MatOfInt();
@@ -61,7 +62,10 @@ public class Camera
 						new Scalar(Constants.CAMERA_BLUE_MAX, Constants.CAMERA_GREEN_MAX, Constants.CAMERA_RED_MAX), mat);
 				contours.clear();
 				contour = new MatOfPoint();
+				//mat = threshold;
 				Imgproc.findContours(mat, contours, new Mat(), Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE);
+				
+				
 				for (MatOfPoint c : contours)
 				{
 					if (c.size().area() > contour.size().area())
@@ -94,13 +98,17 @@ public class Camera
 						y = pt.y;
 					}
 				}
+				
 
-				Rect rect = new Rect();
+				rect = new Rect();
 				rect.height = (int) (x - xMin);
 				rect.x = (int) x;
 				rect.y = (int) y;
 				rect.width = (int) (y - yMin);
-				outputStream.putFrame(mat);
+				cvSink.grabFrame(rectangle);
+				Imgproc.rectangle(rectangle, new Point(rect.x, rect.y), new Point(rect.x - rect.height, rect.y - rect.width), new Scalar(55, 255, 0, 255));
+				outputStream.putFrame(rectangle);
+				outputStream2.putFrame(mat);
 
 				System.gc();
 			}
