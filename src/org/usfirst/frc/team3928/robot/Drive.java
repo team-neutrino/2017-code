@@ -23,7 +23,7 @@ public class Drive extends PIDSubsystem
 	private SpeedController DriveLeft2;
 
 	private double GyroStartingLoc;
-	
+
 	private Encoder EncoderRight;
 	private Encoder EncoderLeft;
 	// private CANTalon t;
@@ -38,27 +38,49 @@ public class Drive extends PIDSubsystem
 	 */
 	public Drive()
 	{
-	    	super(Constants.DRIVE_PID_P, Constants.DRIVE_PID_I, Constants.DRIVE_PID_D);
-	    	super.setAbsoluteTolerance(.05);
-	    	super.disable();
+		super(Constants.DRIVE_PID_P, Constants.DRIVE_PID_I, Constants.DRIVE_PID_D);
+		super.setAbsoluteTolerance(.05);
+		super.disable();
 		ThreadRunning = false;
-		try{
-    		Gyro = new AnalogGyro(Constants.DRIVE_GYRO_CHANNEL);
-    		Gyro.calibrate();
-    		EncoderRight = new Encoder(Constants.DRIVE_ENCODER_RIGHT_CHANNEL_A, Constants.DRIVE_ENCODER_RIGHT_CHANNEL_B);
-		EncoderLeft = new Encoder(Constants.DRIVE_ENCODER_LEFT_CHANNEL_A, Constants.DRIVE_ENCODER_LEFT_CHANNEL_B);
+		try
+		{
+			Gyro = new AnalogGyro(Constants.DRIVE_GYRO_CHANNEL);
+			Gyro.calibrate();
+		}
+		catch (Exception e)
+		{
+			System.out.println("[Problem level: fine] Gyroscope unplugged.");
+		}
+		try
+		{
+			EncoderRight = new Encoder(Constants.DRIVE_ENCODER_RIGHT_CHANNEL_A,
+					Constants.DRIVE_ENCODER_RIGHT_CHANNEL_B);
+		}
+		catch (Exception e)
+		{
+			System.out.println("[Problem level: unsure] Right encoder unplugged.");
+		}
+		try
+		{
+			EncoderLeft = new Encoder(Constants.DRIVE_ENCODER_LEFT_CHANNEL_A, Constants.DRIVE_ENCODER_LEFT_CHANNEL_B);
+		}
+		catch (Exception e)
+		{
+			System.out.println("[Problem level: unsure] Right encoder unplugged.");
+		}
+
 		double distPerRev = Math.PI * Constants.DRIVE_WHEEL_DIAMETER;
 		double distPerPulse = distPerRev / Constants.DRIVE_CYCLES_PER_REV;
 
-		EncoderRight.setDistancePerPulse(distPerPulse);
-		EncoderLeft.setDistancePerPulse(distPerPulse);
-		}
-		catch(Exception e)
+		try
 		{
-		    
+			EncoderRight.setDistancePerPulse(distPerPulse);
+			EncoderLeft.setDistancePerPulse(distPerPulse);
 		}
-
-		
+		catch (Exception e)
+		{
+			System.out.println("[Problem level: unsure] Failed to set distance per pulse for 1 or more encoders.");
+		}
 
 		if (Constants.REAL_ROBOT)
 		{
@@ -138,9 +160,9 @@ public class Drive extends PIDSubsystem
 	 */
 	public void TurnDegrees(double degrees)
 	{
-	    GyroStartingLoc = Gyro.getAngle();
-	    super.enable();
-	    super.setSetpoint(degrees);
+		GyroStartingLoc = Gyro.getAngle();
+		super.enable();
+		super.setSetpoint(degrees);
 	}
 
 	/**
@@ -189,7 +211,7 @@ public class Drive extends PIDSubsystem
 	 */
 	public void BlockUntilComplete()
 	{
-		while (ThreadRunning  || !super.onTarget())
+		while (ThreadRunning || !super.onTarget())
 		{
 			try
 			{
@@ -206,22 +228,22 @@ public class Drive extends PIDSubsystem
 	@Override
 	protected double returnPIDInput()
 	{
-	    return Gyro.getAngle() - GyroStartingLoc;
+		return Gyro.getAngle() - GyroStartingLoc;
 	}
 
 	@Override
 	protected void usePIDOutput(double output)
 	{
-	    DriveLeft1.set(output);
-	    DriveRight1.set(output);
-	    DriveLeft2.set(output);
-	    DriveRight2.set(output);
+		DriveLeft1.set(output);
+		DriveRight1.set(output);
+		DriveLeft2.set(output);
+		DriveRight2.set(output);
 	}
 
 	@Override
 	protected void initDefaultCommand()
 	{
-	    
+
 	}
 
 }
