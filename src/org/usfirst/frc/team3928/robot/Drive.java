@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.GyroBase;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 /**
  * Object which drives the robot. Compensation for creating these javadoc
@@ -12,7 +13,7 @@ import edu.wpi.first.wpilibj.Victor;
  * 
  * @author JamesBeetham
  */
-public class Drive
+public class Drive extends PIDSubsystem
 {
 	// TODO overload threaded functions - true if threaded, false if not.
 
@@ -21,6 +22,8 @@ public class Drive
 	private SpeedController DriveLeft1;
 	private SpeedController DriveLeft2;
 
+	private double GyroStartingLoc;
+	
 	private Encoder EncoderRight;
 	private Encoder EncoderLeft;
 	// private CANTalon t;
@@ -35,17 +38,27 @@ public class Drive
 	 */
 	public Drive()
 	{
+	    	super(Constants.DRIVE_PID_P, Constants.DRIVE_PID_I, Constants.DRIVE_PID_D);
+	    	super.setAbsoluteTolerance(.05);
+	    	super.disable();
 		ThreadRunning = false;
-		Gyro = new AnalogGyro(Constants.DRIVE_GYRO_CHANNEL);
-		Gyro.calibrate();
-
-		EncoderRight = new Encoder(Constants.DRIVE_ENCODER_RIGHT_CHANNEL_A, Constants.DRIVE_ENCODER_RIGHT_CHANNEL_B);
+		try{
+    		Gyro = new AnalogGyro(Constants.DRIVE_GYRO_CHANNEL);
+    		Gyro.calibrate();
+    		EncoderRight = new Encoder(Constants.DRIVE_ENCODER_RIGHT_CHANNEL_A, Constants.DRIVE_ENCODER_RIGHT_CHANNEL_B);
 		EncoderLeft = new Encoder(Constants.DRIVE_ENCODER_LEFT_CHANNEL_A, Constants.DRIVE_ENCODER_LEFT_CHANNEL_B);
 		double distPerRev = Math.PI * Constants.DRIVE_WHEEL_DIAMETER;
 		double distPerPulse = distPerRev / Constants.DRIVE_CYCLES_PER_REV;
 
 		EncoderRight.setDistancePerPulse(distPerPulse);
 		EncoderLeft.setDistancePerPulse(distPerPulse);
+		}
+		catch(Exception e)
+		{
+		    
+		}
+
+		
 
 		if (Constants.REAL_ROBOT)
 		{
@@ -125,21 +138,9 @@ public class Drive
 	 */
 	public void TurnDegrees(double degrees)
 	{
-		if (!ThreadRunning)
-		{
-			ThreadRunning = true;
-			new Thread(new Runnable()
-			{
-				public void run()
-				{
-					turnDegreesRunnable(degrees);
-				}
-			}).start();
-		}
-		else
-		{
-			System.out.println("Drive turning thread is already running.");
-		}
+	    GyroStartingLoc = Gyro.getAngle();
+	    super.enable();
+	    super.setSetpoint(degrees);
 	}
 
 	/**
@@ -169,7 +170,6 @@ public class Drive
 			{
 				setRight(0);
 			}
-
 			if (startTime + Constants.DRIVE_TIME_PER_INCH * distance < System.currentTimeMillis())
 			{
 				System.out.println("Encoder unplugged or slow robot");
@@ -184,68 +184,12 @@ public class Drive
 	}
 
 	/**
-	 * Turns the robot.
-	 * 
-	 * @param degrees
-	 *            how far to turn (360 = all the way around)
-	 */
-	private void turnDegreesRunnable(double degrees)
-	{
-		double angle = Gyro.getAngle();
-		if (degrees > 0)
-		{
-			this.setLeft(0.5);
-			this.setRight(-0.5);
-
-			long startTime = System.currentTimeMillis();
-			while (Gyro.getAngle() - angle < degrees)
-			{
-				try
-				{
-					Thread.sleep(50);
-				}
-				catch (InterruptedException e)
-				{
-					e.printStackTrace();
-				}
-
-				if (startTime + Constants.DRIVE_TIME_PER_DEGREE < System.currentTimeMillis())
-				{
-					System.out.println("Took too long to turn.");
-					break;
-				}
-			}
-		}
-		else
-		{
-			this.setLeft(-0.5);
-			this.setRight(0.5);
-			while (Gyro.getAngle() - angle > degrees)
-			{
-				try
-				{
-					Thread.sleep(50);
-				}
-				catch (InterruptedException e)
-				{
-					e.printStackTrace();
-				}
-			}
-
-			ThreadRunning = false;
-		}
-
-		this.setLeft(0);
-		this.setRight(0);
-	}
-
-	/**
 	 * Sleeps until ThreadRunning is false (when drive has completed previous
 	 * task).
 	 */
 	public void BlockUntilComplete()
 	{
-		while (ThreadRunning)
+		while (ThreadRunning  || !super.onTarget())
 		{
 			try
 			{
@@ -256,6 +200,28 @@ public class Drive
 				e.printStackTrace();
 			}
 		}
+		super.disable();
+	}
+
+	@Override
+	protected double returnPIDInput()
+	{
+	    return Gyro.getAngle() - GyroStartingLoc;
+	}
+
+	@Override
+	protected void usePIDOutput(double output)
+	{
+	    DriveLeft1.set(output);
+	    DriveRight1.set(output);
+	    DriveLeft2.set(output);
+	    DriveRight2.set(output);
+	}
+
+	@Override
+	protected void initDefaultCommand()
+	{
+	    
 	}
 
 }

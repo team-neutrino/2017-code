@@ -29,6 +29,9 @@ public class Constants
     public static final int DRIVE_TIME_PER_DEGREE = 100; // in degrees
     public static final int DRIVE_CYCLES_PER_REV = 360;
     public static final int DRIVE_PULSE_PER_REV = DRIVE_CYCLES_PER_REV * 4;
+    public static final double DRIVE_PID_P = 0; //TODO
+    public static final double DRIVE_PID_I = 0; //TODO
+    public static final double DRIVE_PID_D = 0; //TODO
 
     //Gear Manipulator
     public static final int GEAR_SOLENOID_FLAP_A_CHANNEL = 2; // TODO

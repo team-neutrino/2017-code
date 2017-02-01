@@ -1,7 +1,8 @@
 package org.usfirst.frc.team3928.robot;
 
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
@@ -9,8 +10,6 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 public class BallManager extends PIDSubsystem
 {
-
-
     private SpeedController IntakeMotor;
     private SpeedController ShooterLeft;
     private SpeedController ShooterRight;
@@ -23,7 +22,7 @@ public class BallManager extends PIDSubsystem
 
     public BallManager()
     {
-	super("BallManager", Constants.SHOOTER_PID_P, Constants.SHOOTER_PID_I, Constants.SHOOTER_PID_D);
+	super(Constants.SHOOTER_PID_P, Constants.SHOOTER_PID_I, Constants.SHOOTER_PID_D);
 	ShooterEncoder = new Encoder(Constants.SHOOTER_ENCODER_CHANNEL_A, Constants.SHOOTER_ENCODER_CHANNEL_B);
 	ShooterEncoder.setDistancePerPulse(1 / Constants.SHOOTER_PULSE_PER_REV);
 	FlapSolenoidA = new Solenoid(Constants.INTAKE_SOLENOID_A_CHANNEL);
@@ -32,7 +31,12 @@ public class BallManager extends PIDSubsystem
 	FlapSolenoidB.set(true);
 	if (Constants.REAL_ROBOT)
 	{
+	    IntakeMotor = new CANTalon(Constants.INTAKE_1_POWER_CHANNEL);
 
+	    ShooterLeft = new CANTalon(Constants.SHOOTER_1_CHANNEL);
+	    ShooterRight = new CANTalon(Constants.SHOOTER_2_CHANNEL);
+	    
+	    ElevatorMotor = new CANTalon(Constants.ELEVATOR_CHANNEL);
 	}
 	else
 	{
@@ -57,7 +61,6 @@ public class BallManager extends PIDSubsystem
 	{
 	    ElevatorMotor.set(0);
 	}
-
     }
 
     public void SpinUpShooter()
@@ -70,7 +73,6 @@ public class BallManager extends PIDSubsystem
     {
 	getPIDController().setSetpoint(0);
     }
-
 
     public void Intake(boolean isIntaking)
     {
