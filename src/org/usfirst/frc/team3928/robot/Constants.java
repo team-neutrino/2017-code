@@ -74,6 +74,8 @@ public class Constants
     public static final int CAMERA_BLUE_MIN = 100;
     public static final int CAMERA_RED_MAX = 73;
     public static final int CAMERA_RED_MIN = 30;
+    public static final int CAMERA_XRES = 640;
+    public static final int CAMERA_YRES = 480;
 
     //Joysticks
     public static final int JOY_RIGHT_CHANNEL = 2;
