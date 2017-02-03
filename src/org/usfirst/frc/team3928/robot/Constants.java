@@ -74,16 +74,19 @@ public class Constants
     public static final int CAMERA_BLUE_MIN = 100;
     public static final int CAMERA_RED_MAX = 73;
     public static final int CAMERA_RED_MIN = 30;
-    public static final int CAMERA_XRES = 640;
-    public static final int CAMERA_YRES = 480;
 
     //Joysticks
     public static final int JOY_RIGHT_CHANNEL = 2;
     public static final int JOY_LEFT_CHANNEL = 1;
 
     //Button Mappers
-    public static final int BUTTON_INTAKE = 0; //TODO
-    public static final int BUTTON_SHOOT = 1; //TODO
+    public static final int BUTTON_HALF_SPEED = 0; //trigger
+    public static final int BUTTON_INTAKE = 0; //left bumper
+    public static final int BUTTON_SHOOT = 2; //TODO
+    public static final int BUTTON_GEAR_TOGGLE_GEAR = 0; //x
+    public static final int BUTTON_CLIMBER = 0; //XBox button
+    public static final int BUTTON_FLAP = 0; //R Tigger
+    public static final int BUTTON_SHOOTER_SPIN_UP = 0; //R bumper
     public static final int BUTTON_AIM_AT_GEAR = 2;
 
     //Encoder Magic Numbers
