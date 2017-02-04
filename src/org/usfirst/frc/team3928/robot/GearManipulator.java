@@ -8,20 +8,17 @@ import edu.wpi.first.wpilibj.Solenoid;
  * 
  * @author JamesBeetham
  */
-public class GearManipulator
-{
+public class GearManipulator {
 
-
-	Solenoid Sol1;
-	Solenoid Sol2;
-	Solenoid Flap1;
-	Solenoid Flap2;
+	private Solenoid Sol1;
+	private Solenoid Sol2;
+	private Solenoid Flap1;
+	private Solenoid Flap2;
 
 	/**
 	 * Constructs new object.
 	 */
-	public GearManipulator()
-	{
+	public GearManipulator() {
 		Sol1 = new Solenoid(Constants.GEAR_SOLENOID_A_CHANNEL);
 		Flap1 = new Solenoid(Constants.GEAR_SOLENOID_FLAP_A_CHANNEL);
 		Sol2 = new Solenoid(Constants.GEAR_SOLENOID_B_CHANNEL_1);
@@ -37,8 +34,7 @@ public class GearManipulator
 	 * @param isOpen
 	 *            true to open, false to close
 	 */
-	public void Open(boolean isOpen)
-	{
+	public void Open(boolean isOpen) {
 		Flap1.set(isOpen);
 		Flap2.set(!isOpen);
 	}
@@ -49,8 +45,7 @@ public class GearManipulator
 	 * @param isTilted
 	 *            true to tilt, false to untilt
 	 */
-	public void Tilt(boolean isTilted)
-	{
+	public void Tilt(boolean isTilted) {
 		Sol1.set(isTilted);
 		Sol2.set(!isTilted);
 	}
