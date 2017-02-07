@@ -13,14 +13,17 @@ public class BallManager2
     private SpeedController ShooterLeft;
     private SpeedController ShooterRight;
     private SpeedController ElevatorMotor;
-
     private Encoder ShooterEncoder;
     double Speed;
     private Solenoid FlapSolenoidA;
     private Solenoid FlapSolenoidB;
+    private boolean ShooterRunning;
+    private boolean IntakeRunning;
 
     public BallManager2()
     {
+	IntakeRunning = false;
+	ShooterRunning = false;
 	ShooterEncoder = new Encoder(Constants.SHOOTER_ENCODER_CHANNEL_A, Constants.SHOOTER_ENCODER_CHANNEL_B);
 	ShooterEncoder.setDistancePerPulse(1 / Constants.SHOOTER_PULSE_PER_REV);
 	FlapSolenoidA = new Solenoid(Constants.INTAKE_SOLENOID_A_CHANNEL);
@@ -30,7 +33,7 @@ public class BallManager2
 	double speed = .7;
 	if (Constants.REAL_ROBOT)
 	{
-	    IntakeMotor = new CANTalon(Constants.INTAKE_1_POWER_CHANNEL);
+	    IntakeMotor = new CANTalon(Constants.INTAKE_CHANNEL);
 
 	    ShooterLeft = new CANTalon(Constants.SHOOTER_1_CHANNEL);
 	    ShooterRight = new CANTalon(Constants.SHOOTER_2_CHANNEL);
@@ -39,7 +42,7 @@ public class BallManager2
 	}
 	else
 	{
-	    IntakeMotor = new Victor(Constants.INTAKE_1_POWER_CHANNEL);
+	    IntakeMotor = new Victor(Constants.INTAKE_CHANNEL);
 
 	    ShooterLeft = new Victor(Constants.SHOOTER_1_CHANNEL);
 	    ShooterRight = new Victor(Constants.SHOOTER_2_CHANNEL);
@@ -56,33 +59,42 @@ public class BallManager2
 	{
 	    ElevatorMotor.set(Constants.ELEVATOR_SHOOT_SPEED);
 	}
-	else
+	else if(!IntakeRunning)
 	{
 	    ElevatorMotor.set(0);
 	}
     }
 
-    public void SpinUpShooter()
+    public void SpinUpShooter(boolean spin)
     {
-	new Thread( new Runnable()
+	Speed = .5;
+	ShooterRunning = spin;
+	if(spin){
+	    	    new Thread( new Runnable()
+	    	    {
+	    		public void run()
+	    		{
+	    		    while(ShooterRunning){
+	    			if(ShooterEncoder.getRate() < Constants.SHOOTER_TARGET_SPEED)
+	    			{
+	    			    Speed += .05;
+	    			}
+	    			else if(ShooterEncoder.getRate() > Constants.SHOOTER_TARGET_SPEED)
+	    			{
+	    			    Speed -= .05;
+	    			}
+	    			ShooterLeft.set(Speed);
+	    			ShooterRight.set(Speed);
+	    		    }
+	    		}
+	    	    }).start();
+	}
+
+	if(!ShooterRunning && !IntakeRunning)
 	{
-	    public void run()
-	    {
-		while(!Thread.interrupted()){
-		    
-		    if(ShooterEncoder.getRate() < Constants.SHOOTER_TARGET_SPEED)
-		    {
-			Speed += .05;
-		    }
-		    else if(ShooterEncoder.getRate() > Constants.SHOOTER_TARGET_SPEED)
-		    {
-			Speed -= .05;
-		    }
-		    ShooterLeft.set(Speed);
-		    ShooterRight.set(Speed);
-		}
-	    }
-	}).start();
+	    ShooterLeft.set(0);
+	    ShooterRight.set(0);
+	}
 
     }
 
@@ -97,14 +109,25 @@ public class BallManager2
     {
 	FlapSolenoidA.set(isIntaking);
 	FlapSolenoidB.set(!isIntaking);
+	IntakeRunning = isIntaking;
 	if (isIntaking)
 	{
-	    this.IntakeMotor.set(Constants.INTAKE_SPEED);
-	} 
-	else
-	{
-	    this.IntakeMotor.set(0);
+	    IntakeMotor.set(Constants.INTAKE_SPEED);
+	    ElevatorMotor.set(Constants.ELEVATOR_INTAKE_SPEED);
+	    ShooterRight.set(Constants.SHOOTER_FOR_INTAKE_SPEED);
+	    ShooterLeft.set(Constants.SHOOTER_FOR_INTAKE_SPEED);
 	}
+	else
+	{ 
+	    IntakeMotor.set(0);
+	}
+	if(!ShooterRunning && !IntakeRunning)
+	{
+	    ElevatorMotor.set(0);
+	    ShooterRight.set(0);
+	    ShooterLeft.set(0);
+	}
+
     } 
 
 

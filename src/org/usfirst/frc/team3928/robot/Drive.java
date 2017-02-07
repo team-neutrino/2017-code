@@ -13,14 +13,14 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  * 
  * @author JamesBeetham
  */
-public class Drive extends PIDSubsystem
+public class Drive
 {
 	// TODO overload threaded functions - true if threaded, false if not.
 
-	private SpeedController DriveRight1;
-	private SpeedController DriveRight2;
 	private SpeedController DriveLeft1;
 	private SpeedController DriveLeft2;
+	private SpeedController DriveRight1;
+	private SpeedController DriveRight2;
 
 	private double GyroStartingLoc;
 
@@ -38,9 +38,7 @@ public class Drive extends PIDSubsystem
 	 */
 	public Drive()
 	{
-		super(Constants.DRIVE_PID_P, Constants.DRIVE_PID_I, Constants.DRIVE_PID_D);
-		super.setAbsoluteTolerance(.05);
-		super.disable();
+		
 		ThreadRunning = false;
 		try
 		{
@@ -89,10 +87,10 @@ public class Drive extends PIDSubsystem
 		else
 		{
 			// t = new CANTalon(Constants.DRIVE_RIGHT_1_CHANNEL);
-			DriveRight1 = new Victor(Constants.DRIVE_RIGHT_1_CHANNEL);
-			DriveRight2 = new Victor(Constants.DRIVE_RIGHT_2_CHANNEL);
 			DriveLeft1 = new Victor(Constants.DRIVE_LEFT_1_CHANNEL);
 			DriveLeft2 = new Victor(Constants.DRIVE_LEFT_2_CHANNEL);
+			DriveRight1 = new Victor(Constants.DRIVE_RIGHT_1_CHANNEL);
+			DriveRight2 = new Victor(Constants.DRIVE_RIGHT_2_CHANNEL);
 		}
 	}
 
@@ -103,10 +101,10 @@ public class Drive extends PIDSubsystem
 	 *            percent power this motor should be given (-1 to 1) TODO:
 	 *            correct? these bounds (and setRight correct?)
 	 */
-	public void setRight(double speed)
+	public void setLeft(double speed)
 	{
-		DriveRight1.set(speed);
-		DriveRight2.set(speed);
+		DriveLeft1.set(speed);
+		DriveLeft2.set(speed);
 	}
 
 	/**
@@ -116,10 +114,10 @@ public class Drive extends PIDSubsystem
 	 *            percent power this motor should be given (-1 to 1) TODO:
 	 *            correct?
 	 */
-	public void setLeft(double speed)
+	public void setRight(double speed)
 	{
-		DriveLeft1.set(speed);
-		DriveLeft2.set(speed);
+		DriveRight1.set(speed);
+		DriveRight2.set(speed);
 	}
 
 	/**
@@ -135,7 +133,6 @@ public class Drive extends PIDSubsystem
 	{
 		if (!ThreadRunning)
 		{
-			ThreadRunning = true;
 			new Thread(new Runnable()
 			{
 				public void run()
@@ -148,7 +145,6 @@ public class Drive extends PIDSubsystem
 		{
 			System.out.println("Drive distance thread is aready running.");
 		}
-
 	}
 
 	/**
@@ -160,9 +156,24 @@ public class Drive extends PIDSubsystem
 	 */
 	public void TurnDegrees(double degrees)
 	{
-		GyroStartingLoc = Gyro.getAngle();
-		super.enable();
-		super.setSetpoint(degrees);
+	    	ThreadRunning = true;
+		GyroStartingLoc = Gyro.getAngle()%360;
+		while(Gyro.getAngle()%360 > GyroStartingLoc + degrees + 5 || GyroStartingLoc + Gyro.getAngle()%360 < degrees - 5)
+		{
+		    if(Gyro.getAngle()%360 < GyroStartingLoc + degrees)
+		    {
+			this.setLeft(Constants.AUTON_TURN_SPEED);
+			this.setRight(-Constants.AUTON_TURN_SPEED);
+		    }
+		    else
+		    {
+			this.setLeft(-Constants.AUTON_TURN_SPEED);
+			this.setRight(Constants.AUTON_TURN_SPEED);
+		    }
+		}
+		ThreadRunning = false;
+		this.setLeft(0);
+		this.setRight(0);
 	}
 
 	/**
@@ -177,9 +188,9 @@ public class Drive extends PIDSubsystem
 	{
 		EncoderRight.reset();
 		EncoderLeft.reset();
-
+		ThreadRunning = true;
 		setRight(speed);
-		setLeft(speed);
+		setLeft(-speed);
 
 		long startTime = System.currentTimeMillis();
 		while (EncoderRight.getDistance() < distance || EncoderLeft.getDistance() < distance)
@@ -211,7 +222,7 @@ public class Drive extends PIDSubsystem
 	 */
 	public void BlockUntilComplete()
 	{
-		while (ThreadRunning || !super.onTarget())
+		while (ThreadRunning)
 		{
 			try
 			{
@@ -222,28 +233,6 @@ public class Drive extends PIDSubsystem
 				e.printStackTrace();
 			}
 		}
-		super.disable();
-	}
-
-	@Override
-	protected double returnPIDInput()
-	{
-		return Gyro.getAngle() - GyroStartingLoc;
-	}
-
-	@Override
-	protected void usePIDOutput(double output)
-	{
-		DriveLeft1.set(output);
-		DriveRight1.set(output);
-		DriveLeft2.set(output);
-		DriveRight2.set(output);
-	}
-
-	@Override
-	protected void initDefaultCommand()
-	{
-
 	}
 
 }
