@@ -13,88 +13,88 @@ import edu.wpi.first.wpilibj.Victor;
  * 
  * @author JamesBeetham
  */
-public class Robot extends IterativeRobot {
-    private SpeedController Climber;
-    private Drive DriveInst;
-    private Joystick JoyRight;
-    private Joystick JoyLeft;
-    private Joystick Pad;
-    private BallManager2 Elevate;
-    private Camera Cam;
-    private GearManipulator BeCreative;
+public class Robot extends IterativeRobot
+{
+	private SpeedController Climber;
+	private Drive DriveInst;
+	private Joystick JoyRight;
+	private Joystick JoyLeft;
+	private Joystick Pad;
+	private BallManager BallManagerInst;
+	private GearManipulator GearManipulatorInst;
 
-    /**
-     * Initializes the robot.
-     */
-    @Override
-    public void robotInit() {
-	DriveInst = new Drive();
-	JoyRight = new Joystick(Constants.JOY_LEFT_CHANNEL);
-	JoyLeft = new Joystick(Constants.JOY_RIGHT_CHANNEL);
-	Pad = new Joystick(Constants.JOY_PAD_CHANNEL);
-	Cam = new Camera("cam0");
-
-	BeCreative = new GearManipulator();
-	Elevate = new BallManager2();
-	if(Constants.REAL_ROBOT)
+	/**
+	 * Initializes the robot.
+	 */
+	@Override
+	public void robotInit()
 	{
-	    Climber = new CANTalon(Constants.CLIMBER_CHANNEL);
+		DriveInst = new Drive();
+		JoyRight = new Joystick(Constants.JOY_LEFT_CHANNEL);
+		JoyLeft = new Joystick(Constants.JOY_RIGHT_CHANNEL);
+		Pad = new Joystick(Constants.JOY_PAD_CHANNEL);
+
+		GearManipulatorInst = new GearManipulator();
+		BallManagerInst = new BallManager();
+		if (Constants.REAL_ROBOT)
+		{
+			Climber = new CANTalon(Constants.CLIMBER_CHANNEL);
+		}
+		else
+		{
+			Climber = new Victor(Constants.CLIMBER_CHANNEL);
+		}
 	}
-	else
+
+	/**
+	 * Initializes the autonomous.
+	 */
+	@Override
+	public void autonomousInit()
 	{
-	    Climber = new Victor(Constants.CLIMBER_CHANNEL);
+		AutonModes mode = new GearLeft(DriveInst, GearManipulatorInst, BallManagerInst);
+		mode.execute();
 	}
-    }
 
-    /**
-     * Initializes the autonomous.
-     */
-    @Override
-    public void autonomousInit() {
-	AutonModes mode = new GearLeft(DriveInst, BeCreative, Elevate);
-	mode.execute();
-    }
+	/**
+	 * Calls periodically over autonomous
+	 */
+	@Override
+	public void autonomousPeriodic()
+	{
+	}
 
-    /**
-     * Calls periodically over autonomous
-     */
-    @Override
-    public void autonomousPeriodic() {
-    }
+	/**
+	 * Initializes the teleop.
+	 */
+	@Override
+	public void teleopInit()
+	{
+	}
 
-    /**
-     * Initializes the teleop.
-     */
-    @Override
-    public void teleopInit() {
-    }
+	@Override
+	public void teleopPeriodic()
+	{
+		double rightSpeed = Math.pow(JoyRight.getY(), 2);
+		double leftSpeed = Math.pow(JoyLeft.getY(), 2);
+		
+		if(JoyRight.getRawButton(Constants.BUTTON_HALF_SPEED))
+		{
+			rightSpeed = rightSpeed / 2;
+			leftSpeed = leftSpeed / 2;
+		}
+		
+		DriveInst.setRight(rightSpeed);
+		DriveInst.setLeft(leftSpeed);
 
-    @Override
-    public void teleopPeriodic() {
-	DriveInst.setRight((JoyRight.getRawButton(Constants.BUTTON_HALF_SPEED) || JoyRight.getRawButton(Constants.BUTTON_HALF_SPEED)) ? JoyRight.getY()/2 : JoyRight.getY());
-	DriveInst.setLeft((JoyLeft.getRawButton(Constants.BUTTON_HALF_SPEED) || JoyLeft.getRawButton(Constants.BUTTON_HALF_SPEED)) ? -JoyLeft.getY()/2 : -JoyLeft.getY());
-	
-	System.out.println(JoyLeft.getY());
-	System.out.println(JoyRight.getY());
-	
+		BallManagerInst.Intake(Pad.getRawButton(Constants.BUTTON_INTAKE));
+		BallManagerInst.Shoot(Pad.getRawButton(Constants.BUTTON_SHOOT));
+		BallManagerInst.SpinUpShooter(Pad.getRawButton(Constants.BUTTON_SHOOTER_SPIN_UP));
+	}
 
-	Elevate.Intake(Pad.getRawButton(Constants.BUTTON_INTAKE));
-	Elevate.Shoot(Pad.getRawButton(Constants.BUTTON_SHOOT));
-	//		BeCreative.Tilt(Pad.getTrigger());
-			Elevate.SpinUpShooter(Pad.getRawButton(Constants.BUTTON_SHOOTER_SPIN_UP));
+	@Override
+	public void testPeriodic()
+	{
 
-	//		if(Pad.getRawButton(Constants.BUTTON_CLIMBER))
-	//		{
-	//		    Climber.set(.5);
-	//		}
-	//		else
-	//		{
-	//		    Climber.set(0);
-	//		}
-    }
-
-    @Override
-    public void testPeriodic() {
-
-    }
+	}
 }
