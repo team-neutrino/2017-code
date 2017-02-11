@@ -58,12 +58,8 @@ public class Constants
     public static final int SHOOTER_2_POWER_CHANNEL = 0; // TODO
     public static final int SHOOTER_1_CHANNEL = 6; 
     public static final int SHOOTER_2_CHANNEL = 7; 
-    public static final int SHOOTER_ENCODER_CHANNEL_A = 4; // TODO
-    public static final int SHOOTER_ENCODER_CHANNEL_B = 5; // TODO
-    public static final int SHOOTER_TARGET_SPEED = 2000; 
-    public static final double SHOOTER_PID_P = 0; //TODO
-    public static final double SHOOTER_PID_I = 0; //TODO
-    public static final double SHOOTER_PID_D = 0; //TODO
+    public static final int SHOOTER_BEAM_BREAK_CHANNEL = 4; // TODO
+    public static final int SHOOTER_TARGET_SPEED = 10; 
     public static final int SHOOTER_CYCLES_PER_REV = 360; //TODO
     public static final int SHOOTER_PULSE_PER_REV = SHOOTER_CYCLES_PER_REV * 4;
 
