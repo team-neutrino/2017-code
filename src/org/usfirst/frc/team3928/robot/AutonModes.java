@@ -10,7 +10,7 @@ public abstract class AutonModes
 {
 	protected Drive DriveInst;
 	protected GearManipulator Gear;
-	protected BallManager2 Cannon;
+	protected BallManager Cannon;
 
 	/**
 	 * Constructs a new AutonMode with given parameters.
@@ -18,13 +18,13 @@ public abstract class AutonModes
 	 * @param gear GearManipulator to use
 	 * @param cannon Shooter to use
 	 */
-	public AutonModes(Drive driveInst, GearManipulator gear, BallManager2 cannon)
+	public AutonModes(Drive driveInst, GearManipulator gear, BallManager cannon)
 	{
 		DriveInst = driveInst;
 		Gear = gear;
 		Cannon = cannon;
-		Gear.Open(true);
-		Gear.Tilt(false);
+		Gear.GearFlapOpen(true);
+		Gear.GearHopperMove(false);
 	}
 
 	/**

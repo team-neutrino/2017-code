@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3928.robot;
 
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.GyroBase;
@@ -82,11 +84,13 @@ public class Drive
 
 		if (Constants.REAL_ROBOT)
 		{
-
+			DriveLeft1 = new CANTalon(Constants.DRIVE_LEFT_1_CHANNEL);
+			DriveLeft2 = new CANTalon(Constants.DRIVE_LEFT_2_CHANNEL);
+			DriveRight1 = new CANTalon(Constants.DRIVE_RIGHT_1_CHANNEL);
+			DriveRight2 = new CANTalon(Constants.DRIVE_RIGHT_2_CHANNEL);
 		}
 		else
 		{
-			// t = new CANTalon(Constants.DRIVE_RIGHT_1_CHANNEL);
 			DriveLeft1 = new Victor(Constants.DRIVE_LEFT_1_CHANNEL);
 			DriveLeft2 = new Victor(Constants.DRIVE_LEFT_2_CHANNEL);
 			DriveRight1 = new Victor(Constants.DRIVE_RIGHT_1_CHANNEL);

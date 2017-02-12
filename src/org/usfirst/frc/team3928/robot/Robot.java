@@ -75,8 +75,25 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic()
 	{
-		double rightSpeed = Math.pow(JoyRight.getY(), 2);
-		double leftSpeed = Math.pow(JoyLeft.getY(), 2);
+		double rightSpeed;
+		double leftSpeed;
+		
+		if(JoyRight.getY() > 0)
+		{
+			rightSpeed = Math.pow(JoyRight.getY(), 2);
+		}
+		else
+		{
+			rightSpeed = -Math.pow(JoyRight.getY(), 2);
+		}
+		if(JoyLeft.getY() > 0)
+		{
+			leftSpeed = -Math.pow(JoyLeft.getY(), 2);
+		}
+		else
+		{
+			leftSpeed = Math.pow(JoyLeft.getY(), 2);
+		}
 		
 		if(JoyRight.getRawButton(Constants.BUTTON_HALF_SPEED))
 		{
@@ -88,8 +105,12 @@ public class Robot extends IterativeRobot
 		DriveInst.setLeft(leftSpeed);
 
 		BallManagerInst.Intake(Pad.getRawButton(Constants.BUTTON_INTAKE));
-		BallManagerInst.Shoot(Pad.getRawButton(Constants.BUTTON_SHOOT));
+		BallManagerInst.Shoot(JoyRight.getRawButton(Constants.BUTTON_SHOOT) || JoyLeft.getRawButton(Constants.BUTTON_SHOOT));
 		BallManagerInst.SpinUpShooter(Pad.getRawButton(Constants.BUTTON_SHOOTER_SPIN_UP));
+		
+		GearManipulatorInst.GearHopperMove(Pad.getRawButton(Constants.BUTTON_GEAR_HOPPER));
+		GearManipulatorInst.GearFlapOpen(Pad.getRawButton(Constants.BUTTON_GEAR_FLAP));
+
 	}
 
 	@Override

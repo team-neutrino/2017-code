@@ -8,24 +8,25 @@ import edu.wpi.first.wpilibj.Solenoid;
  * 
  * @author JamesBeetham
  */
-public class GearManipulator {
+public class GearManipulator
+{
 
-	private Solenoid Sol1;
-	private Solenoid Sol2;
-	private Solenoid Flap1;
-	private Solenoid Flap2;
+	private Solenoid GearFlapA;
+	private Solenoid GearFlapB;
+	private Solenoid GearHopperA;
+	private Solenoid GearHopperB;
 
 	/**
 	 * Constructs new object.
 	 */
-	public GearManipulator() {
-		Sol1 = new Solenoid(Constants.GEAR_SOLENOID_A_CHANNEL);
-		Flap1 = new Solenoid(Constants.GEAR_SOLENOID_FLAP_A_CHANNEL);
-		Sol2 = new Solenoid(Constants.GEAR_SOLENOID_B_CHANNEL_1);
-		Flap2 = new Solenoid(Constants.GEAR_SOLENOID_FLAP_B_CHANNEL);
-		Open(true);
-		Tilt(false);
-		// set sol2 and flap2
+	public GearManipulator()
+	{
+		GearFlapA = new Solenoid(Constants.GEAR_FLAP_SOLENOID_A_CHANNEL);
+		GearFlapB = new Solenoid(Constants.GEAR_FLAP_SOLENOID_B_CHANNEL);
+		GearHopperA = new Solenoid(Constants.GEAR_HOPPER_SOLENOID_A_CHANNEL);
+		GearHopperB = new Solenoid(Constants.GEAR_HOPPER_SOLENOID_B_CHANNEL);
+		GearFlapOpen(true);
+		GearHopperMove(false);
 	}
 
 	/**
@@ -34,9 +35,10 @@ public class GearManipulator {
 	 * @param isOpen
 	 *            true to open, false to close
 	 */
-	public void Open(boolean isOpen) {
-		Flap1.set(isOpen);
-		Flap2.set(!isOpen);
+	public void GearFlapOpen(boolean isOpen)
+	{
+		GearFlapA.set(isOpen);
+		GearFlapB.set(!isOpen);
 	}
 
 	/**
@@ -45,9 +47,10 @@ public class GearManipulator {
 	 * @param isTilted
 	 *            true to tilt, false to untilt
 	 */
-	public void Tilt(boolean isTilted) {
-		Sol1.set(isTilted);
-		Sol2.set(!isTilted);
+	public void GearHopperMove(boolean isTilted)
+	{
+		GearHopperA.set(isTilted);
+		GearHopperB.set(!isTilted);
 	}
 
 }

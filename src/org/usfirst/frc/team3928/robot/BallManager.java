@@ -6,8 +6,9 @@ import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
-public class BallManager
+public class BallManager extends PIDSubsystem
 {
 	private SpeedController IntakeMotor;
 	private SpeedController ShooterLeft;
@@ -20,9 +21,12 @@ public class BallManager
 
 	private boolean ShooterRunning;
 	private boolean IntakeRunning;
+	
+	private long LastCheckTime;
 
 	public BallManager()
 	{
+		super(Constants.SHOOTER_P, Constants.SHOOTER_I, Constants.SHOOTER_D);
 		IntakeRunning = false;
 		ShooterRunning = false;
 		ShooterBeamBreak = new Counter(Constants.SHOOTER_BEAM_BREAK_CHANNEL);
@@ -53,11 +57,11 @@ public class BallManager
 
 	// Set flap to shoot, turns elevator on.
 	public void Shoot(boolean isShooting)
-	{
-		FlapSolenoidA.set(isShooting);
-		FlapSolenoidB.set(!isShooting);
+	{	
 		if (isShooting)
 		{
+			FlapSolenoidA.set(isShooting);
+			FlapSolenoidB.set(!isShooting);
 			ElevatorMotor.set(Constants.ELEVATOR_SHOOT_SPEED);
 		}
 		else if (!IntakeRunning)
@@ -68,11 +72,11 @@ public class BallManager
 
 	public void Intake(boolean isIntaking)
 	{
-		FlapSolenoidA.set(isIntaking);
-		FlapSolenoidB.set(!isIntaking);
 		IntakeRunning = isIntaking;
 		if (isIntaking)
 		{
+			FlapSolenoidA.set(!isIntaking);
+			FlapSolenoidB.set(isIntaking);
 			IntakeMotor.set(Constants.INTAKE_SPEED);
 			ElevatorMotor.set(Constants.ELEVATOR_INTAKE_SPEED);
 			ShooterRight.set(Constants.SHOOTER_FOR_INTAKE_SPEED);
@@ -91,33 +95,15 @@ public class BallManager
 			ShooterLeft.set(0);
 		}
 	}
+	
 
 	public void SpinUpShooter(boolean isRunning)
 	{
 		if (!ShooterRunning && isRunning)
 		{
 			ShooterRunning = isRunning;
-
-			new Thread(new Runnable()
-			{
-				public void run()
-				{
-					double speed = 1;
-					while (ShooterRunning)
-					{
-						if (ShooterBeamBreak.getRate() < Constants.SHOOTER_TARGET_SPEED)
-						{
-							speed += .05;
-						}
-						else if (ShooterBeamBreak.getRate() > Constants.SHOOTER_TARGET_SPEED)
-						{
-							speed -= .05;
-						}
-						ShooterLeft.set(speed);
-						ShooterRight.set(speed);
-					}
-				}
-			}).start();
+			super.setSetpoint(Constants.SHOOTER_TARGET_SPEED);
+			super.enable();
 		}
 		else if(!isRunning)
 		{
@@ -128,8 +114,48 @@ public class BallManager
 		{
 			ShooterLeft.set(0);
 			ShooterRight.set(0);
+			super.setSetpoint(0);
+			super.disable();
 		}
 
 	}
 
+	@Override
+	protected double returnPIDInput()
+	{
+		double rate = ShooterBeamBreak.getRate();
+		System.out.println(ShooterBeamBreak.getRate());
+		return rate;
+	}
+
+	@Override
+	protected void usePIDOutput(double output)
+	{
+		if(output < 0)
+		{
+			output = 0;
+		}
+		//Correction for wires that were soldered on with opposite polarity
+		if(Constants.REAL_ROBOT)
+		{
+			output = -output;
+		}
+		ShooterRight.set(output);
+		ShooterLeft.set(output);
+	}
+
+	@Override
+	protected void initDefaultCommand()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private double getShooterRate()
+	{
+		long time = System.currentTimeMillis() - LastCheckTime;
+		double rate = ShooterBeamBreak.getRate() / time;
+		LastCheckTime = System.currentTimeMillis();
+		return rate;
+	}
 }
