@@ -9,8 +9,8 @@ package org.usfirst.frc.team3928.robot;
 public abstract class AutonModes
 {
 	protected Drive DriveInst;
-	protected GearManipulator Gear;
-	protected BallManager Cannon;
+	protected GearManipulator GearManipulatorInst;
+	protected BallManager BallManagerInst;
 
 	/**
 	 * Constructs a new AutonMode with given parameters.
@@ -18,13 +18,13 @@ public abstract class AutonModes
 	 * @param gear GearManipulator to use
 	 * @param cannon Shooter to use
 	 */
-	public AutonModes(Drive driveInst, GearManipulator gear, BallManager cannon)
+	public AutonModes(Drive driveInst, GearManipulator gearManipulatorInst, BallManager ballManagerInst)
 	{
 		DriveInst = driveInst;
-		Gear = gear;
-		Cannon = cannon;
-		Gear.GearFlapOpen(true);
-		Gear.GearHopperMove(false);
+		GearManipulatorInst = gearManipulatorInst;
+		BallManagerInst = ballManagerInst;
+		GearManipulatorInst.GearFlapOpen(true);
+		GearManipulatorInst.GearHopperMove(false);
 	}
 
 	/**

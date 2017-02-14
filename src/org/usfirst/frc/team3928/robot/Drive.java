@@ -24,11 +24,8 @@ public class Drive
 	private SpeedController DriveRight1;
 	private SpeedController DriveRight2;
 
-	private double GyroStartingLoc;
-
 	private Encoder EncoderRight;
 	private Encoder EncoderLeft;
-	// private CANTalon t;
 
 	private boolean ThreadRunning;
 
@@ -40,47 +37,14 @@ public class Drive
 	 */
 	public Drive()
 	{
-		
-		ThreadRunning = false;
-		try
-		{
-			Gyro = new AnalogGyro(Constants.DRIVE_GYRO_CHANNEL);
-			Gyro.calibrate();
-		}
-		catch (Exception e)
-		{
-			System.out.println("[Problem level: fine] Gyroscope unplugged.");
-		}
-		try
-		{
-			EncoderRight = new Encoder(Constants.DRIVE_ENCODER_RIGHT_CHANNEL_A,
-					Constants.DRIVE_ENCODER_RIGHT_CHANNEL_B);
-		}
-		catch (Exception e)
-		{
-			System.out.println("[Problem level: unsure] Right encoder unplugged.");
-		}
-		try
-		{
-			EncoderLeft = new Encoder(Constants.DRIVE_ENCODER_LEFT_CHANNEL_A, Constants.DRIVE_ENCODER_LEFT_CHANNEL_B);
-		}
-		catch (Exception e)
-		{
-			System.out.println("[Problem level: unsure] Right encoder unplugged.");
-		}
-
 		double distPerRev = Math.PI * Constants.DRIVE_WHEEL_DIAMETER;
 		double distPerPulse = distPerRev / Constants.DRIVE_CYCLES_PER_REV;
 
-		try
-		{
-			EncoderRight.setDistancePerPulse(distPerPulse);
-			EncoderLeft.setDistancePerPulse(distPerPulse);
-		}
-		catch (Exception e)
-		{
-			System.out.println("[Problem level: unsure] Failed to set distance per pulse for 1 or more encoders.");
-		}
+		EncoderRight = new Encoder(Constants.DRIVE_ENCODER_RIGHT_CHANNEL_A, Constants.DRIVE_ENCODER_RIGHT_CHANNEL_B);
+		EncoderLeft = new Encoder(Constants.DRIVE_ENCODER_LEFT_CHANNEL_A, Constants.DRIVE_ENCODER_LEFT_CHANNEL_B);
+		
+		EncoderRight.setDistancePerPulse(distPerPulse);
+		EncoderLeft.setDistancePerPulse(distPerPulse);
 
 		if (Constants.REAL_ROBOT)
 		{
@@ -160,31 +124,18 @@ public class Drive
 	 */
 	public void TurnDegrees(double degrees)
 	{
-	    	ThreadRunning = true;
-		GyroStartingLoc = Gyro.getAngle()%360;
-		while(Gyro.getAngle()%360 > GyroStartingLoc + degrees + 5 || GyroStartingLoc + Gyro.getAngle()%360 < degrees - 5)
-		{
-		    if(Gyro.getAngle()%360 < GyroStartingLoc + degrees)
-		    {
-			this.setLeft(Constants.AUTON_TURN_SPEED);
-			this.setRight(-Constants.AUTON_TURN_SPEED);
-		    }
-		    else
-		    {
-			this.setLeft(-Constants.AUTON_TURN_SPEED);
-			this.setRight(Constants.AUTON_TURN_SPEED);
-		    }
-		}
-		ThreadRunning = false;
-		this.setLeft(0);
-		this.setRight(0);
+		
+	}
+	
+	public void TurnDegrees(double degrees, double distance) {
+		
 	}
 
 	/**
 	 * Drives the distance given.
 	 * 
 	 * @param distance
-	 *            inches to drive
+	 *            inches to drive positive
 	 * @param speed
 	 *            speed to go (-1 to 1) TODO: correct?
 	 */
@@ -193,25 +144,34 @@ public class Drive
 		EncoderRight.reset();
 		EncoderLeft.reset();
 		ThreadRunning = true;
-		setRight(speed);
-		setLeft(-speed);
+		double rightSpeed = speed;
+		double leftSpeed = speed;
+		setRight(-rightSpeed);
+		setLeft(leftSpeed);
 
-		long startTime = System.currentTimeMillis();
-		while (EncoderRight.getDistance() < distance || EncoderLeft.getDistance() < distance)
+		while (Math.abs(EncoderRight.getDistance()) < distance)
 		{
-			if (EncoderRight.getDistance() >= distance)
+			double rightDistance = Math.abs(EncoderRight.getDistance());
+			double leftDistance = Math.abs(EncoderLeft.getDistance());
+			double distanceDiff = rightDistance - leftDistance;
+			int speedSign = (int) (speed / Math.abs(speed));
+			
+			if (rightDistance > leftDistance)
 			{
-				setRight(0);
+				// move speed closer to 0
+				rightSpeed = speed - distanceDiff * 0.01 * speedSign;
+				setRight(-rightSpeed);
 			}
-			if (EncoderRight.getDistance() >= distance)
+			if (leftDistance > rightDistance)
 			{
-				setRight(0);
+				// move speed closer to 0
+				leftSpeed = speed - distanceDiff * 0.01 * speedSign;
+				setLeft(leftSpeed);
 			}
-			if (startTime + Constants.DRIVE_TIME_PER_INCH * distance < System.currentTimeMillis())
-			{
-				System.out.println("Encoder unplugged or slow robot");
-				break;
-			}
+			System.out.println(
+					"Right Distance: " + EncoderRight.getDistance() + ", Left Distance: " + EncoderLeft.getDistance());
+			System.out.println("Left Speed: " + leftSpeed + ", Right Speed: " + rightSpeed);
+
 		}
 
 		setRight(0);

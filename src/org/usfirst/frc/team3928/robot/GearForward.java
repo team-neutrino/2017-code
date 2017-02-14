@@ -21,9 +21,9 @@ public class GearForward extends AutonModes
 	 * @param shoot
 	 *            shooter
 	 */
-	public GearForward(Drive driveInst, GearManipulator gear, BallManager cannon)
+	public GearForward(Drive driveInst, GearManipulator gearManipulatorInst, BallManager ballManagerInst)
 	{
-		super(driveInst, gear, cannon);
+		super(driveInst, gearManipulatorInst, ballManagerInst);
 	}
 
 	/**
@@ -31,8 +31,10 @@ public class GearForward extends AutonModes
 	 */
 	public void execute()
 	{
-		DriveInst.DriveDist(84.3, 0.5);
-		DriveInst.BlockUntilComplete();
+		
+		
+		//DriveInst.DriveDist(36, -0.2);
+		//DriveInst.BlockUntilComplete();
 
 		try
 		{
@@ -43,16 +45,16 @@ public class GearForward extends AutonModes
 			e.printStackTrace();
 		}
 
-		// TODO use overloaded functions
-
-		DriveInst.DriveDist(-42.15, -0.5);
-		DriveInst.BlockUntilComplete();
-
-		DriveInst.TurnDegrees(45);
-		DriveInst.BlockUntilComplete();
-
-		DriveInst.DriveDist(100, .5);
-		DriveInst.BlockUntilComplete();
+//		// TODO use overloaded functions
+//
+//		DriveInst.DriveDist(-42.15, -0.5);
+//		DriveInst.BlockUntilComplete();
+//
+//		DriveInst.TurnDegrees(45);
+//		DriveInst.BlockUntilComplete();
+//
+//		DriveInst.DriveDist(100, .5);
+//		DriveInst.BlockUntilComplete();
 	}
 
 }

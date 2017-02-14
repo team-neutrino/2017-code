@@ -8,13 +8,13 @@ package org.usfirst.frc.team3928.robot;
  */
 public class Constants
 {
-    public static final boolean REAL_ROBOT = true;
+    public static final boolean REAL_ROBOT = false;
 
     //Drive
-    public static final int DRIVE_RIGHT_1_CHANNEL = 3;
-    public static final int DRIVE_RIGHT_2_CHANNEL = 4;
-    public static final int DRIVE_LEFT_1_CHANNEL = 1;
-    public static final int DRIVE_LEFT_2_CHANNEL = 2;
+    public static final int DRIVE_RIGHT_1_CHANNEL = 2;
+    public static final int DRIVE_RIGHT_2_CHANNEL = 3;
+    public static final int DRIVE_LEFT_1_CHANNEL = 0;
+    public static final int DRIVE_LEFT_2_CHANNEL = 1;
     public static final int DRIVE_RIGHT_1_POWER_CHANNEL = 13;
     public static final int DRIVE_RIGHT_2_POWER_CHANNEL = 12;
     public static final int DRIVE_LEFT_1_POWER_CHANNEL = 15;
@@ -29,9 +29,6 @@ public class Constants
     public static final int DRIVE_TIME_PER_DEGREE = 100; // in degrees
     public static final int DRIVE_CYCLES_PER_REV = 360;
     public static final int DRIVE_PULSE_PER_REV = DRIVE_CYCLES_PER_REV * 4;
-    public static final double DRIVE_PID_P = 0; //TODO
-    public static final double DRIVE_PID_I = 0; //TODO
-    public static final double DRIVE_PID_D = 0; //TODO
 
     //Gear Manipulator
     public static final int GEAR_FLAP_SOLENOID_A_CHANNEL = 4;
@@ -43,12 +40,12 @@ public class Constants
     public static final int INTAKE_SOLENOID_A_CHANNEL = 0;
     public static final int INTAKE_SOLENOID_B_CHANNEL = 1;
     public static final int INTAKE_POWER_CHANNEL = 9;
-    public static final int INTAKE_CHANNEL = 9;
-    public static final double INTAKE_SPEED = -0.5; //TODO
-    public static final double SHOOTER_FOR_INTAKE_SPEED = -.15; //Correction for wires that were soldered on with opposit polarity
+    public static final int INTAKE_CHANNEL = 4;
+    public static final double INTAKE_SPEED = -.5; // TODO
+    public static final double SHOOTER_FOR_INTAKE_SPEED = .15; 
     
     //Elevator
-    public static final int ELEVATOR_CHANNEL = 8;
+    public static final int ELEVATOR_CHANNEL = 5; //TODO
     public static final int ELEVATOR_POWER_CHANNEL = 10;
     public static final double ELEVATOR_SHOOT_SPEED = .85;
     public static final double ELEVATOR_INTAKE_SPEED = .5;
@@ -56,8 +53,8 @@ public class Constants
     //Shooter
     public static final int SHOOTER_1_POWER_CHANNEL = 1;
     public static final int SHOOTER_2_POWER_CHANNEL = 0;
-    public static final int SHOOTER_1_CHANNEL = 5; 
-    public static final int SHOOTER_2_CHANNEL = 6; 
+    public static final int SHOOTER_1_CHANNEL = 6; 
+    public static final int SHOOTER_2_CHANNEL = 7; 
     public static final int SHOOTER_BEAM_BREAK_CHANNEL = 9; // TODO
     public static final double SHOOTER_P = 0.5; //TODO
     public static final double SHOOTER_I = 0; //TODO
@@ -65,8 +62,8 @@ public class Constants
     public static final double SHOOTER_TARGET_SPEED = 23;
 
     //Climber
-    public static final int CLIMBER_POWER_CHANNEL = 11;
-    public static final int CLIMBER_CHANNEL = 7;
+    public static final int CLIMBER_CHANNEL = 8;
+    public static final int CLIMBER_POWER_CHANNEL = 11; //TODO
     
     //Camera
     public static final int CAMERA_GREEN_MAX = 255;

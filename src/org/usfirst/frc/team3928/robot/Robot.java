@@ -52,7 +52,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit()
 	{
-		AutonModes mode = new GearLeft(DriveInst, GearManipulatorInst, BallManagerInst);
+		AutonModes mode = new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
 		mode.execute();
 	}
 
@@ -100,6 +100,22 @@ public class Robot extends IterativeRobot
 			rightSpeed = rightSpeed / 2;
 			leftSpeed = leftSpeed / 2;
 		}
+		
+		if(JoyLeft.getRawButton(6))
+		{
+			Climber.set(-0.25);
+			System.out.println(Climber.get());
+		}
+		else if(JoyLeft.getRawButton(7))
+		{
+			Climber.set(1);
+			System.out.println(Climber.get());
+		}
+		else
+		{
+			Climber.set(0);
+		}
+		
 		
 		DriveInst.setRight(rightSpeed);
 		DriveInst.setLeft(leftSpeed);
