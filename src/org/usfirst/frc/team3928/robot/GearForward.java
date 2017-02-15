@@ -33,8 +33,10 @@ public class GearForward extends AutonModes
 	{
 		
 		
-		//DriveInst.DriveDist(36, -0.2);
-		//DriveInst.BlockUntilComplete();
+		DriveInst.DriveDistance(84, 0.5);
+		DriveInst.TurnDegrees(180, 0.5);
+		DriveInst.DriveDistance(84, 0.5);
+		DriveInst.TurnDegrees(180, 0.5);
 
 		try
 		{

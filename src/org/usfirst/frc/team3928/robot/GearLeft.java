@@ -35,7 +35,7 @@ public class GearLeft extends AutonModes
 		//DriveInst.DriveDist(10, .5);
 		//DriveInst.BlockUntilComplete();
 
-		DriveInst.TurnDegrees(90);
+		DriveInst.TurnDegrees(90, 0.2);
 		//DriveInst.BlockUntilComplete();
 
 //		DriveInst.DriveDist(2, .5);

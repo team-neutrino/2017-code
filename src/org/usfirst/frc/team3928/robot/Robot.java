@@ -80,11 +80,11 @@ public class Robot extends IterativeRobot
 		
 		if(JoyRight.getY() > 0)
 		{
-			rightSpeed = Math.pow(JoyRight.getY(), 2);
+			rightSpeed = -Math.pow(JoyRight.getY(), 2);
 		}
 		else
 		{
-			rightSpeed = -Math.pow(JoyRight.getY(), 2);
+			rightSpeed = Math.pow(JoyRight.getY(), 2);
 		}
 		if(JoyLeft.getY() > 0)
 		{
@@ -126,7 +126,6 @@ public class Robot extends IterativeRobot
 		
 		GearManipulatorInst.GearHopperMove(Pad.getRawButton(Constants.BUTTON_GEAR_HOPPER));
 		GearManipulatorInst.GearFlapOpen(Pad.getRawButton(Constants.BUTTON_GEAR_FLAP));
-
 	}
 
 	@Override

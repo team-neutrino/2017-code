@@ -1,13 +1,9 @@
 package org.usfirst.frc.team3928.robot;
 
 import com.ctre.CANTalon;
-
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.GyroBase;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 /**
  * Object which drives the robot. Compensation for creating these javadoc
@@ -16,9 +12,7 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  * @author JamesBeetham
  */
 public class Drive
-{
-	// TODO overload threaded functions - true if threaded, false if not.
-
+{	
 	private SpeedController DriveLeft1;
 	private SpeedController DriveLeft2;
 	private SpeedController DriveRight1;
@@ -26,10 +20,7 @@ public class Drive
 
 	private Encoder EncoderRight;
 	private Encoder EncoderLeft;
-
-	private boolean ThreadRunning;
-
-	private GyroBase Gyro;
+	
 
 	/**
 	 * Constructs a new Drive object. Sets ThreadRunning to false, sets other
@@ -84,119 +75,113 @@ public class Drive
 	 */
 	public void setRight(double speed)
 	{
-		DriveRight1.set(speed);
-		DriveRight2.set(speed);
+		DriveRight1.set(-speed);
+		DriveRight2.set(-speed);
+	}
+	
+	public void DriveDistance(double distance, double speed)
+	{
+		driveDist(distance, distance, speed);
 	}
 
-	/**
-	 * Makes the robot drive a certain distance at a given speed. Will not work
-	 * if ThreadRunning is currently true - see BlockUntilComplete().
-	 * 
-	 * @param distance
-	 *            how far to go (in inches) TODO: correct?
-	 * @param speed
-	 *            how fast to go (-1 to 1) TODO: correct?
-	 */
-	public void DriveDist(double distance, double speed)
-	{
-		if (!ThreadRunning)
-		{
-			new Thread(new Runnable()
-			{
-				public void run()
-				{
-					driveDistanceRunnable(distance, speed);
-				}
-			}).start();
-		}
-		else
-		{
-			System.out.println("Drive distance thread is aready running.");
-		}
-	}
 
 	/**
 	 * Makes robot turn given degrees. Will not work if ThreadRunning is true -
 	 * see BlockUntilComplete().
 	 * 
 	 * @param degrees
-	 *            degrees the robot should turn (360 = all the way around)
+	 *            	degrees the robot should turn (-180 to 180)
+	 * @param speed 
+	 * 				positive value
 	 */
-	public void TurnDegrees(double degrees)
+	public void TurnDegrees(double degrees, double speed)
 	{
+		EncoderRight.reset();
+		EncoderLeft.reset();
+		double turnDistance = degrees * Constants.DRIVE_DISTANCE_PER_TURN_DEGREE;
 		
-	}
-	
-	public void TurnDegrees(double degrees, double distance) {
-		
+		if(degrees > 0)
+		{
+			driveDist(turnDistance, -turnDistance, speed);
+		}
+		else
+		{
+			driveDist(-turnDistance, turnDistance, speed);
+		}
 	}
 
 	/**
 	 * Drives the distance given.
 	 * 
 	 * @param distance
-	 *            inches to drive positive
+	 *            inches to drive, positive or negative for direction
 	 * @param speed
-	 *            speed to go (-1 to 1) TODO: correct?
+	 *            speed, positive
 	 */
-	private void driveDistanceRunnable(double distance, double speed)
+	private void driveDist(double rightDistanceToDrive, double leftDistanceToDrive, double speed)
 	{
 		EncoderRight.reset();
 		EncoderLeft.reset();
-		ThreadRunning = true;
 		double rightSpeed = speed;
 		double leftSpeed = speed;
-		setRight(-rightSpeed);
-		setLeft(leftSpeed);
-
-		while (Math.abs(EncoderRight.getDistance()) < distance)
-		{
-			double rightDistance = Math.abs(EncoderRight.getDistance());
-			double leftDistance = Math.abs(EncoderLeft.getDistance());
-			double distanceDiff = rightDistance - leftDistance;
-			int speedSign = (int) (speed / Math.abs(speed));
-			
-			if (rightDistance > leftDistance)
+	
+		double rightDistancePercentCompleted = 0;
+		double leftDistancePercentCompleted = 0;
+		
+		while(rightDistancePercentCompleted < 1 && leftDistancePercentCompleted < 1)
+		{	
+			rightDistancePercentCompleted = Math.abs(EncoderRight.getDistance() / rightDistanceToDrive);
+			leftDistancePercentCompleted = Math.abs(EncoderLeft.getDistance() / leftDistanceToDrive);	
+			double distancePercentDiff = Math.abs(rightDistancePercentCompleted - leftDistancePercentCompleted);	
+			if(rightDistancePercentCompleted >= leftDistancePercentCompleted)
 			{
-				// move speed closer to 0
-				rightSpeed = speed - distanceDiff * 0.01 * speedSign;
-				setRight(-rightSpeed);
+				rightSpeed = speed - distancePercentDiff;
+				if(rightDistanceToDrive > 0)
+				{
+					setRight(rightSpeed);
+				}
+				else
+				{
+					setRight(-rightSpeed);
+				}
 			}
-			if (leftDistance > rightDistance)
+			if(leftDistancePercentCompleted >= rightDistancePercentCompleted)
 			{
-				// move speed closer to 0
-				leftSpeed = speed - distanceDiff * 0.01 * speedSign;
-				setLeft(leftSpeed);
+				leftSpeed = speed - distancePercentDiff;
+				if(leftDistanceToDrive > 0)
+				{
+					setLeft(leftSpeed);
+				}
+				else
+				{
+					setLeft(-leftSpeed);
+				}	
 			}
 			System.out.println(
-					"Right Distance: " + EncoderRight.getDistance() + ", Left Distance: " + EncoderLeft.getDistance());
+					"Right Distance Percent: " + rightDistancePercentCompleted + ", Left Distance Percent: " + leftDistancePercentCompleted);
 			System.out.println("Left Speed: " + leftSpeed + ", Right Speed: " + rightSpeed);
-
 		}
-
 		setRight(0);
 		setLeft(0);
-
-		ThreadRunning = false;
 	}
-
-	/**
-	 * Sleeps until ThreadRunning is false (when drive has completed previous
-	 * task).
-	 */
-	public void BlockUntilComplete()
-	{
-		while (ThreadRunning)
-		{
-			try
-			{
-				Thread.sleep(1);
-			}
-			catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
-		}
-	}
+//
+//	/**
+//	 * Sleeps until ThreadRunning is false (when drive has completed previous
+//	 * task).
+//	 */
+//	public void BlockUntilComplete()
+//	{
+//		while (ThreadRunning)
+//		{
+//			try
+//			{
+//				Thread.sleep(100);
+//			}
+//			catch (InterruptedException e)
+//			{
+//				e.printStackTrace();
+//			}
+//		}
+//	}
 
 }
