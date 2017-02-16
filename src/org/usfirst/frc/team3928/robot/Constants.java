@@ -60,7 +60,8 @@ public class Constants
     public static final int SHOOTER_2_POWER_CHANNEL = 0;
     public static final int SHOOTER_1_CHANNEL = 5; 
     public static final int SHOOTER_2_CHANNEL = 6; 
-    public static final int SHOOTER_BEAM_BREAK_CHANNEL = 9; // TODO
+    public static final int SHOOTER_BEAM_BREAK_POWER_CHANNEL = 6;
+    public static final int SHOOTER_BEAM_BREAK_CHANNEL = 9;
     public static final double SHOOTER_P = 0.5; //TODO
     public static final double SHOOTER_I = 0; //TODO
     public static final double SHOOTER_D = 0; //TODO
@@ -85,15 +86,16 @@ public class Constants
     public static final int JOY_LEFT_CHANNEL = 1;
     public static final int JOY_PAD_CHANNEL = 0;
 
-    //Button Mappers
-    public static final int BUTTON_HALF_SPEED = 1; //trigger
-    public static final int BUTTON_INTAKE = 5; //left bumper
-    public static final int BUTTON_SHOOT = 2; 
-    public static final int BUTTON_GEAR_HOPPER = 2; //b
-    public static final int BUTTON_CLIMBER = 0; //XBox button
-    public static final int BUTTON_GEAR_FLAP = 10; //right trigger
-    public static final int BUTTON_SHOOTER_SPIN_UP = 6; //R bumper
-    public static final int BUTTON_AIM_AT_GEAR = 0 ;
+    //Buttons
+    public static final int BUTTON_HALF_SPEED = 1; //joystick right trigger
+    public static final int BUTTON_INVERT_DIRECTION = 1; //joystick left trigger
+    public static final int BUTTON_SHOOT = 2; //joystick top
+    public static final int BUTTON_INTAKE = 5; //gamepad left bumper
+    public static final int BUTTON_SHOOTER_SPIN_UP = 6; //gamepad  right bumper
+    public static final int BUTTON_GEAR_HOPPER = 1; //gamepad a
+    public static final int BUTTON_GEAR_FLAP = 2; //gamepad b
+    public static final int BUTTON_CLIMB_UP = 8; //gamepad start
+    public static final int BUTTON_CLIMB_DOWN = 7; //gamepad select
 
     // Auton mode
     public static final int AUTON_GEAR_FORWARD_PICKUP_TIME = 2000; // in ms

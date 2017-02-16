@@ -77,7 +77,7 @@ public class Robot extends IterativeRobot
 	{
 		double rightSpeed;
 		double leftSpeed;
-		
+
 		if(JoyRight.getY() > 0)
 		{
 			rightSpeed = -Math.pow(JoyRight.getY(), 2);
@@ -94,36 +94,43 @@ public class Robot extends IterativeRobot
 		{
 			leftSpeed = Math.pow(JoyLeft.getY(), 2);
 		}
-		
+
 		if(JoyRight.getRawButton(Constants.BUTTON_HALF_SPEED))
 		{
 			rightSpeed = rightSpeed / 2;
 			leftSpeed = leftSpeed / 2;
 		}
-		
-		if(JoyLeft.getRawButton(6))
-		{
-			Climber.set(-0.25);
-			System.out.println(Climber.get());
-		}
-		else if(JoyLeft.getRawButton(7))
+
+		if(Pad.getRawButton(Constants.BUTTON_CLIMB_UP))
 		{
 			Climber.set(1);
+			System.out.println(Climber.get());
+		}
+		else if(Pad.getRawButton(Constants.BUTTON_CLIMB_DOWN))
+		{
+			Climber.set(-0.25);
 			System.out.println(Climber.get());
 		}
 		else
 		{
 			Climber.set(0);
+		}	
+
+		if(JoyLeft.getRawButton(Constants.BUTTON_INVERT_DIRECTION))
+		{
+			DriveInst.setLeft(-rightSpeed);
+			DriveInst.setRight(-leftSpeed);
 		}
-		
-		
-		DriveInst.setRight(rightSpeed);
-		DriveInst.setLeft(leftSpeed);
+		else
+		{
+			DriveInst.setRight(rightSpeed);
+			DriveInst.setLeft(leftSpeed);
+		}
 
 		BallManagerInst.Intake(Pad.getRawButton(Constants.BUTTON_INTAKE));
 		BallManagerInst.Shoot(JoyRight.getRawButton(Constants.BUTTON_SHOOT) || JoyLeft.getRawButton(Constants.BUTTON_SHOOT));
 		BallManagerInst.SpinUpShooter(Pad.getRawButton(Constants.BUTTON_SHOOTER_SPIN_UP));
-		
+
 		GearManipulatorInst.GearHopperMove(Pad.getRawButton(Constants.BUTTON_GEAR_HOPPER));
 		GearManipulatorInst.GearFlapOpen(Pad.getRawButton(Constants.BUTTON_GEAR_FLAP));
 	}

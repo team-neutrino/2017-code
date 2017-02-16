@@ -16,6 +16,7 @@ public class BallManager extends PIDSubsystem
 	private SpeedController ElevatorMotor;
 
 	private Counter ShooterBeamBreak;
+	private Solenoid ShooterBeamBreakPower;
 	private Solenoid FlapSolenoidA;
 	private Solenoid FlapSolenoidB;
 
@@ -29,12 +30,18 @@ public class BallManager extends PIDSubsystem
 		super(Constants.SHOOTER_P, Constants.SHOOTER_I, Constants.SHOOTER_D);
 		IntakeRunning = false;
 		ShooterRunning = false;
+		
+		ShooterBeamBreakPower = new Solenoid(Constants.SHOOTER_BEAM_BREAK_POWER_CHANNEL);
+		ShooterBeamBreakPower.set(true);
+		
 		ShooterBeamBreak = new Counter(Constants.SHOOTER_BEAM_BREAK_CHANNEL);
 		ShooterBeamBreak.setDistancePerPulse(1);
+		
 		FlapSolenoidA = new Solenoid(Constants.INTAKE_SOLENOID_A_CHANNEL);
 		FlapSolenoidB = new Solenoid(Constants.INTAKE_SOLENOID_B_CHANNEL);
 		FlapSolenoidA.set(false);
 		FlapSolenoidB.set(true);
+		
 		if (Constants.REAL_ROBOT)
 		{
 			IntakeMotor = new CANTalon(Constants.INTAKE_CHANNEL);
@@ -60,8 +67,8 @@ public class BallManager extends PIDSubsystem
 	{	
 		if (isShooting)
 		{
-			FlapSolenoidA.set(isShooting);
-			FlapSolenoidB.set(!isShooting);
+			FlapSolenoidA.set(!isShooting);
+			FlapSolenoidB.set(isShooting);
 			ElevatorMotor.set(Constants.ELEVATOR_SHOOT_SPEED);
 		}
 		else if (!IntakeRunning)
@@ -75,8 +82,8 @@ public class BallManager extends PIDSubsystem
 		IntakeRunning = isIntaking;
 		if (isIntaking)
 		{
-			FlapSolenoidA.set(!isIntaking);
-			FlapSolenoidB.set(isIntaking);
+			FlapSolenoidA.set(isIntaking);
+			FlapSolenoidB.set(!isIntaking);
 			IntakeMotor.set(Constants.INTAKE_SPEED);
 			ElevatorMotor.set(Constants.ELEVATOR_INTAKE_SPEED);
 			ShooterRight.set(Constants.SHOOTER_FOR_INTAKE_SPEED);

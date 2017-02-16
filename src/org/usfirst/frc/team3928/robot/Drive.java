@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3928.robot;
 
 import com.ctre.CANTalon;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
@@ -128,7 +130,10 @@ public class Drive
 		double rightDistancePercentCompleted = 0;
 		double leftDistancePercentCompleted = 0;
 		
-		while(rightDistancePercentCompleted < 1 && leftDistancePercentCompleted < 1)
+		while(rightDistancePercentCompleted < 1 &&
+			  leftDistancePercentCompleted < 1 &&
+			  DriverStation.getInstance().isAutonomous() &&
+			  !DriverStation.getInstance().isDisabled())
 		{	
 			rightDistancePercentCompleted = Math.abs(EncoderRight.getDistance() / rightDistanceToDrive);
 			leftDistancePercentCompleted = Math.abs(EncoderLeft.getDistance() / leftDistanceToDrive);	
@@ -157,31 +162,8 @@ public class Drive
 					setLeft(-leftSpeed);
 				}	
 			}
-			System.out.println(
-					"Right Distance Percent: " + rightDistancePercentCompleted + ", Left Distance Percent: " + leftDistancePercentCompleted);
-			System.out.println("Left Speed: " + leftSpeed + ", Right Speed: " + rightSpeed);
 		}
 		setRight(0);
 		setLeft(0);
 	}
-//
-//	/**
-//	 * Sleeps until ThreadRunning is false (when drive has completed previous
-//	 * task).
-//	 */
-//	public void BlockUntilComplete()
-//	{
-//		while (ThreadRunning)
-//		{
-//			try
-//			{
-//				Thread.sleep(100);
-//			}
-//			catch (InterruptedException e)
-//			{
-//				e.printStackTrace();
-//			}
-//		}
-//	}
-
 }
