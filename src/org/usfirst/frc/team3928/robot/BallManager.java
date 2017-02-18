@@ -3,6 +3,7 @@ package org.usfirst.frc.team3928.robot;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
@@ -15,6 +16,8 @@ public class BallManager extends PIDSubsystem
 	private SpeedController ShooterRight;
 	private SpeedController ElevatorMotor;
 
+	private Relay Agitator;
+
 	private Counter ShooterBeamBreak;
 	private Solenoid ShooterBeamBreakPower;
 	private Solenoid FlapSolenoidA;
@@ -22,7 +25,7 @@ public class BallManager extends PIDSubsystem
 
 	private boolean ShooterRunning;
 	private boolean IntakeRunning;
-	
+
 	private long LastCheckTime;
 
 	public BallManager()
@@ -30,18 +33,20 @@ public class BallManager extends PIDSubsystem
 		super(Constants.SHOOTER_P, Constants.SHOOTER_I, Constants.SHOOTER_D);
 		IntakeRunning = false;
 		ShooterRunning = false;
-		
+
 		ShooterBeamBreakPower = new Solenoid(Constants.SHOOTER_BEAM_BREAK_POWER_CHANNEL);
 		ShooterBeamBreakPower.set(true);
-		
+
 		ShooterBeamBreak = new Counter(Constants.SHOOTER_BEAM_BREAK_CHANNEL);
 		ShooterBeamBreak.setDistancePerPulse(1);
-		
+
+		Agitator = new Relay(Constants.AGITATOR_CHANNEL);
+
 		FlapSolenoidA = new Solenoid(Constants.INTAKE_SOLENOID_A_CHANNEL);
 		FlapSolenoidB = new Solenoid(Constants.INTAKE_SOLENOID_B_CHANNEL);
 		FlapSolenoidA.set(false);
 		FlapSolenoidB.set(true);
-		
+
 		if (Constants.REAL_ROBOT)
 		{
 			IntakeMotor = new CANTalon(Constants.INTAKE_CHANNEL);
@@ -62,18 +67,25 @@ public class BallManager extends PIDSubsystem
 		}
 	}
 
-	// Set flap to shoot, turns elevator on.
+	// Set flap to shoot, turns elevator on, turns on elevator
 	public void Shoot(boolean isShooting)
 	{	
 		if (isShooting)
 		{
-			FlapSolenoidA.set(!isShooting);
-			FlapSolenoidB.set(isShooting);
+			FlapSolenoidA.set(!isShooting); //true for practice
+			FlapSolenoidB.set(isShooting); //true for real
 			ElevatorMotor.set(Constants.ELEVATOR_SHOOT_SPEED);
+			Agitator.set(Relay.Value.kForward);
+			System.out.println(Agitator.get());
 		}
 		else if (!IntakeRunning)
 		{
 			ElevatorMotor.set(0);
+			Agitator.set(Relay.Value.kOff);
+		}
+		else
+		{
+			Agitator.set(Relay.Value.kOff);
 		}
 	}
 
@@ -82,19 +94,18 @@ public class BallManager extends PIDSubsystem
 		IntakeRunning = isIntaking;
 		if (isIntaking)
 		{
-			FlapSolenoidA.set(isIntaking);
-			FlapSolenoidB.set(!isIntaking);
+			FlapSolenoidA.set(isIntaking); //true for real
+			FlapSolenoidB.set(!isIntaking); //true for practice
 			IntakeMotor.set(Constants.INTAKE_SPEED);
 			ElevatorMotor.set(Constants.ELEVATOR_INTAKE_SPEED);
-			ShooterRight.set(Constants.SHOOTER_FOR_INTAKE_SPEED);
-			ShooterLeft.set(Constants.SHOOTER_FOR_INTAKE_SPEED);
+			ShooterRight.set(Constants.SHOOTER_FOR_INTAKE_SPEED); //- for practice
+			ShooterLeft.set(Constants.SHOOTER_FOR_INTAKE_SPEED); //- for practice
 		}
 		else
 		{
 			IntakeMotor.set(0);
 		}
-		// If shooter and intake are not running, shut off the elevator and
-		// shooter wheels
+		// If shooter and intake are not running, shut off the elevator and shooter wheels
 		if (!ShooterRunning && !IntakeRunning)
 		{
 			ElevatorMotor.set(0);
@@ -102,7 +113,7 @@ public class BallManager extends PIDSubsystem
 			ShooterLeft.set(0);
 		}
 	}
-	
+
 
 	public void SpinUpShooter(boolean isRunning)
 	{
@@ -155,7 +166,7 @@ public class BallManager extends PIDSubsystem
 	protected void initDefaultCommand()
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private double getShooterRate()

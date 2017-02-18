@@ -47,7 +47,7 @@ public class Constants
     public static final int INTAKE_POWER_CHANNEL = 9;
     public static final int INTAKE_CHANNEL = 9;
     public static final double INTAKE_SPEED = -0.5; //TODO
-    public static final double SHOOTER_FOR_INTAKE_SPEED = -.15; //Correction for wires that were soldered on with opposit polarity
+    public static final double SHOOTER_FOR_INTAKE_SPEED = -.17; //Correction for wires that were soldered on with opposit polarity
     
     //Elevator
     public static final int ELEVATOR_CHANNEL = 8;
@@ -66,6 +66,9 @@ public class Constants
     public static final double SHOOTER_I = 0; //TODO
     public static final double SHOOTER_D = 0; //TODO
     public static final double SHOOTER_TARGET_SPEED = 23;
+    
+    public static final int AGITATOR_CHANNEL = 0;
+    public static final int AGITATOR_POWER_CHANNEL = 9;
 
     //Climber
     public static final int CLIMBER_POWER_CHANNEL = 11;
@@ -96,6 +99,7 @@ public class Constants
     public static final int BUTTON_GEAR_FLAP = 2; //gamepad b
     public static final int BUTTON_CLIMB_UP = 8; //gamepad start
     public static final int BUTTON_CLIMB_DOWN = 7; //gamepad select
+    public static final int BUTTON_AGITATOR = 3;
 
     // Auton mode
     public static final int AUTON_GEAR_FORWARD_PICKUP_TIME = 2000; // in ms

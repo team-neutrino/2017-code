@@ -16,6 +16,8 @@ public class GearManipulator
 	private Solenoid GearHopperA;
 	private Solenoid GearHopperB;
 
+	private Boolean Tilted;
+
 	/**
 	 * Constructs new object.
 	 */
@@ -25,8 +27,8 @@ public class GearManipulator
 		GearFlapB = new Solenoid(Constants.GEAR_FLAP_SOLENOID_B_CHANNEL);
 		GearHopperA = new Solenoid(Constants.GEAR_HOPPER_SOLENOID_A_CHANNEL);
 		GearHopperB = new Solenoid(Constants.GEAR_HOPPER_SOLENOID_B_CHANNEL);
-		GearFlapOpen(true);
 		GearHopperMove(false);
+		GearFlapOpen(false);
 	}
 
 	/**
@@ -37,8 +39,16 @@ public class GearManipulator
 	 */
 	public void GearFlapOpen(boolean isOpen)
 	{
-		GearFlapA.set(isOpen);
-		GearFlapB.set(!isOpen);
+		if(!Tilted && isOpen)
+		{
+			GearFlapA.set(isOpen);
+			GearFlapB.set(!isOpen);
+		}
+		else
+		{
+			GearFlapA.set(!isOpen);
+			GearFlapB.set(isOpen);
+		}
 	}
 
 	/**
@@ -49,8 +59,22 @@ public class GearManipulator
 	 */
 	public void GearHopperMove(boolean isTilted)
 	{
+//		if(isTilted)
+//		{
+//			Tilted = true;
+//			GearHopperA.set(isTilted);
+//			GearHopperB.set(!isTilted);
+//		}
+//		else
+//		{
+//			Tilted = false;
+//		}
+		
+		Tilted = isTilted;
 		GearHopperA.set(isTilted);
 		GearHopperB.set(!isTilted);
+
+
 	}
 
 }

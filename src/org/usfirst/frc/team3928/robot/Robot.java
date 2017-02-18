@@ -95,12 +95,6 @@ public class Robot extends IterativeRobot
 			leftSpeed = Math.pow(JoyLeft.getY(), 2);
 		}
 
-		if(JoyRight.getRawButton(Constants.BUTTON_HALF_SPEED))
-		{
-			rightSpeed = rightSpeed / 2;
-			leftSpeed = leftSpeed / 2;
-		}
-
 		if(Pad.getRawButton(Constants.BUTTON_CLIMB_UP))
 		{
 			Climber.set(1);
@@ -120,6 +114,11 @@ public class Robot extends IterativeRobot
 		{
 			DriveInst.setLeft(-rightSpeed);
 			DriveInst.setRight(-leftSpeed);
+		}
+		else if(JoyRight.getRawButton(Constants.BUTTON_HALF_SPEED))
+		{
+			DriveInst.setRight(rightSpeed / 2);
+			DriveInst.setLeft(leftSpeed / 2);
 		}
 		else
 		{
