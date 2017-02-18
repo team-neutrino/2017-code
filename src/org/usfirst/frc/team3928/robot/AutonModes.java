@@ -14,9 +14,13 @@ public abstract class AutonModes
 
 	/**
 	 * Constructs a new AutonMode with given parameters.
-	 * @param driveInst Drive to use
-	 * @param gear GearManipulator to use
-	 * @param cannon Shooter to use
+	 * 
+	 * @param driveInst
+	 *            Drive to use
+	 * @param gearManipulatorInst
+	 *            GearManipulator to use
+	 * @param ballManagerInst
+	 *            ball manager to use
 	 */
 	public AutonModes(Drive driveInst, GearManipulator gearManipulatorInst, BallManager ballManagerInst)
 	{
@@ -31,5 +35,4 @@ public abstract class AutonModes
 	 * Method that runs after the auton mode after construction.
 	 */
 	public abstract void execute();
-	
 }

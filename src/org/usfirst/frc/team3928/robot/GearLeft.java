@@ -12,9 +12,13 @@ public class GearLeft extends AutonModes
 
 	/**
 	 * Constructs new object.
-	 * @param driveInst Drive object to use
-	 * @param gear GearManipulator to use
-	 * @param cannon Shooter to use
+	 * 
+	 * @param driveInst
+	 *            Drive object to use
+	 * @param gear
+	 *            GearManipulator to use
+	 * @param cannon
+	 *            Shooter to use
 	 */
 	public GearLeft(Drive driveInst, GearManipulator gear, BallManager ballManagerInst)
 	{
@@ -32,31 +36,31 @@ public class GearLeft extends AutonModes
 
 		// TODO use overloaded function
 
-		//DriveInst.DriveDist(10, .5);
-		//DriveInst.BlockUntilComplete();
+		// DriveInst.DriveDist(10, .5);
+		// DriveInst.BlockUntilComplete();
 
 		DriveInst.TurnDegrees(90, 0.2);
-		//DriveInst.BlockUntilComplete();
+		// DriveInst.BlockUntilComplete();
 
-//		DriveInst.DriveDist(2, .5);
-//		DriveInst.BlockUntilComplete();
-//		
-//		try
-//		{
-//			Thread.sleep(Constants.AUTON_GEAR_FORWARD_PICKUP_TIME);
-//		} catch (InterruptedException e)
-//		{
-//			e.printStackTrace();
-//		}
-//
-//		DriveInst.DriveDist(-2, -.5);
-//		DriveInst.BlockUntilComplete();
-//
-//		DriveInst.TurnDegrees(90);
-//		DriveInst.BlockUntilComplete();
-//
-//		DriveInst.DriveDist(10, .5);
-//		DriveInst.BlockUntilComplete();
+		// DriveInst.DriveDist(2, .5);
+		// DriveInst.BlockUntilComplete();
+		//
+		// try
+		// {
+		// Thread.sleep(Constants.AUTON_GEAR_FORWARD_PICKUP_TIME);
+		// } catch (InterruptedException e)
+		// {
+		// e.printStackTrace();
+		// }
+		//
+		// DriveInst.DriveDist(-2, -.5);
+		// DriveInst.BlockUntilComplete();
+		//
+		// DriveInst.TurnDegrees(90);
+		// DriveInst.BlockUntilComplete();
+		//
+		// DriveInst.DriveDist(10, .5);
+		// DriveInst.BlockUntilComplete();
 	}
 
 }

@@ -31,8 +31,6 @@ public class GearForward extends AutonModes
 	 */
 	public void execute()
 	{
-		
-		
 		DriveInst.DriveDistance(84, 0.5);
 		DriveInst.TurnDegrees(180, 0.5);
 		DriveInst.DriveDistance(84, 0.5);
@@ -47,16 +45,16 @@ public class GearForward extends AutonModes
 			e.printStackTrace();
 		}
 
-//		// TODO use overloaded functions
-//
-//		DriveInst.DriveDist(-42.15, -0.5);
-//		DriveInst.BlockUntilComplete();
-//
-//		DriveInst.TurnDegrees(45);
-//		DriveInst.BlockUntilComplete();
-//
-//		DriveInst.DriveDist(100, .5);
-//		DriveInst.BlockUntilComplete();
+		// // TODO use overloaded functions
+		//
+		// DriveInst.DriveDist(-42.15, -0.5);
+		// DriveInst.BlockUntilComplete();
+		//
+		// DriveInst.TurnDegrees(45);
+		// DriveInst.BlockUntilComplete();
+		//
+		// DriveInst.DriveDist(100, .5);
+		// DriveInst.BlockUntilComplete();
 	}
 
 }

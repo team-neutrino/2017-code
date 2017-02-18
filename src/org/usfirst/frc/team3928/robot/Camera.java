@@ -47,9 +47,11 @@ public class Camera
 			camera.setExposureManual(30);
 			// Access video
 			CvSink cvSink = CameraServer.getInstance().getVideo();
-			CvSource outputStream = CameraServer.getInstance().putVideo("Threshold", Constants.CAMERA_XRES, Constants.CAMERA_YRES);
-			CvSource outputStream2 = CameraServer.getInstance().putVideo("Rectangle", Constants.CAMERA_XRES, Constants.CAMERA_YRES);
-			
+			CvSource outputStream = CameraServer.getInstance().putVideo("Threshold", Constants.CAMERA_XRES,
+					Constants.CAMERA_YRES);
+			CvSource outputStream2 = CameraServer.getInstance().putVideo("Rectangle", Constants.CAMERA_XRES,
+					Constants.CAMERA_YRES);
+
 			Mat rectangle = new Mat();
 			MatOfPoint contour = new MatOfPoint(); // needed?
 			MatOfInt hull = new MatOfInt();
@@ -71,7 +73,7 @@ public class Camera
 						new Scalar(Constants.CAMERA_BLUE_MIN, Constants.CAMERA_GREEN_MIN, Constants.CAMERA_RED_MIN),
 						new Scalar(Constants.CAMERA_BLUE_MAX, Constants.CAMERA_GREEN_MAX, Constants.CAMERA_RED_MAX),
 						mat);
-				
+
 				contours.clear();
 				contour = new MatOfPoint();
 				// mat = threshold;

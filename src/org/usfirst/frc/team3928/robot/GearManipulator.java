@@ -39,7 +39,7 @@ public class GearManipulator
 	 */
 	public void GearFlapOpen(boolean isOpen)
 	{
-		if(!Tilted && isOpen)
+		if (!Tilted && isOpen)
 		{
 			GearFlapA.set(isOpen);
 			GearFlapB.set(!isOpen);
@@ -59,22 +59,20 @@ public class GearManipulator
 	 */
 	public void GearHopperMove(boolean isTilted)
 	{
-//		if(isTilted)
-//		{
-//			Tilted = true;
-//			GearHopperA.set(isTilted);
-//			GearHopperB.set(!isTilted);
-//		}
-//		else
-//		{
-//			Tilted = false;
-//		}
-		
+		// if(isTilted)
+		// {
+		// Tilted = true;
+		// GearHopperA.set(isTilted);
+		// GearHopperB.set(!isTilted);
+		// }
+		// else
+		// {
+		// Tilted = false;
+		// }
+
 		Tilted = isTilted;
 		GearHopperA.set(isTilted);
 		GearHopperB.set(!isTilted);
-
-
 	}
 
 }

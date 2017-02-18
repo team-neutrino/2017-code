@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.Victor;
  * @author JamesBeetham
  */
 public class Drive
-{	
+{
 	private SpeedController DriveLeft1;
 	private SpeedController DriveLeft2;
 	private SpeedController DriveRight1;
@@ -22,7 +22,6 @@ public class Drive
 
 	private Encoder EncoderRight;
 	private Encoder EncoderLeft;
-	
 
 	/**
 	 * Constructs a new Drive object. Sets ThreadRunning to false, sets other
@@ -35,7 +34,7 @@ public class Drive
 
 		EncoderRight = new Encoder(Constants.DRIVE_ENCODER_RIGHT_CHANNEL_A, Constants.DRIVE_ENCODER_RIGHT_CHANNEL_B);
 		EncoderLeft = new Encoder(Constants.DRIVE_ENCODER_LEFT_CHANNEL_A, Constants.DRIVE_ENCODER_LEFT_CHANNEL_B);
-		
+
 		EncoderRight.setDistancePerPulse(distPerPulse);
 		EncoderLeft.setDistancePerPulse(distPerPulse);
 
@@ -80,29 +79,36 @@ public class Drive
 		DriveRight1.set(-speed);
 		DriveRight2.set(-speed);
 	}
-	
+
+	/**
+	 * Drives specified distance.
+	 * 
+	 * @param distance
+	 *            distance to drive (in inches)
+	 * @param speed
+	 *            how fast, by percent
+	 */
 	public void DriveDistance(double distance, double speed)
 	{
 		driveDist(distance, distance, speed);
 	}
-
 
 	/**
 	 * Makes robot turn given degrees. Will not work if ThreadRunning is true -
 	 * see BlockUntilComplete().
 	 * 
 	 * @param degrees
-	 *            	degrees the robot should turn (-180 to 180)
-	 * @param speed 
-	 * 				positive value
+	 *            degrees the robot should turn (-180 to 180)
+	 * @param speed
+	 *            positive value
 	 */
 	public void TurnDegrees(double degrees, double speed)
 	{
 		EncoderRight.reset();
 		EncoderLeft.reset();
 		double turnDistance = degrees * Constants.DRIVE_DISTANCE_PER_TURN_DEGREE;
-		
-		if(degrees > 0)
+
+		if (degrees > 0)
 		{
 			driveDist(turnDistance, -turnDistance, speed);
 		}
@@ -126,22 +132,20 @@ public class Drive
 		EncoderLeft.reset();
 		double rightSpeed = speed;
 		double leftSpeed = speed;
-	
+
 		double rightDistancePercentCompleted = 0;
 		double leftDistancePercentCompleted = 0;
-		
-		while(rightDistancePercentCompleted < 1 &&
-			  leftDistancePercentCompleted < 1 &&
-			  DriverStation.getInstance().isAutonomous() &&
-			  !DriverStation.getInstance().isDisabled())
-		{	
+
+		while (rightDistancePercentCompleted < 1 && leftDistancePercentCompleted < 1
+				&& DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
+		{
 			rightDistancePercentCompleted = Math.abs(EncoderRight.getDistance() / rightDistanceToDrive);
-			leftDistancePercentCompleted = Math.abs(EncoderLeft.getDistance() / leftDistanceToDrive);	
-			double distancePercentDiff = Math.abs(rightDistancePercentCompleted - leftDistancePercentCompleted);	
-			if(rightDistancePercentCompleted >= leftDistancePercentCompleted)
+			leftDistancePercentCompleted = Math.abs(EncoderLeft.getDistance() / leftDistanceToDrive);
+			double distancePercentDiff = Math.abs(rightDistancePercentCompleted - leftDistancePercentCompleted);
+			if (rightDistancePercentCompleted >= leftDistancePercentCompleted)
 			{
 				rightSpeed = speed - distancePercentDiff;
-				if(rightDistanceToDrive > 0)
+				if (rightDistanceToDrive > 0)
 				{
 					setRight(rightSpeed);
 				}
@@ -150,17 +154,17 @@ public class Drive
 					setRight(-rightSpeed);
 				}
 			}
-			if(leftDistancePercentCompleted >= rightDistancePercentCompleted)
+			if (leftDistancePercentCompleted >= rightDistancePercentCompleted)
 			{
 				leftSpeed = speed - distancePercentDiff;
-				if(leftDistanceToDrive > 0)
+				if (leftDistanceToDrive > 0)
 				{
 					setLeft(leftSpeed);
 				}
 				else
 				{
 					setLeft(-leftSpeed);
-				}	
+				}
 			}
 		}
 		setRight(0);

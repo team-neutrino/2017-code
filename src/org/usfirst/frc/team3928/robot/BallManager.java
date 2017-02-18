@@ -9,6 +9,12 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
+/**
+ * Manages the balls. Compensation for creating these javadoc comments is the
+ * author tag.
+ * 
+ * @author JamesBeetham
+ */
 public class BallManager extends PIDSubsystem
 {
 	private SpeedController IntakeMotor;
@@ -28,6 +34,9 @@ public class BallManager extends PIDSubsystem
 
 	private long LastCheckTime;
 
+	/**
+	 * Constructs a new ball manager using values in the constants file.
+	 */
 	public BallManager()
 	{
 		super(Constants.SHOOTER_P, Constants.SHOOTER_I, Constants.SHOOTER_D);
@@ -67,13 +76,18 @@ public class BallManager extends PIDSubsystem
 		}
 	}
 
-	// Set flap to shoot, turns elevator on, turns on elevator
+	/**
+	 * Sets the flap to shooting position and turns elevator on.
+	 * 
+	 * @param isShooting
+	 *            true to start shooter
+	 */
 	public void Shoot(boolean isShooting)
-	{	
+	{
 		if (isShooting)
 		{
-			FlapSolenoidA.set(!isShooting); //true for practice
-			FlapSolenoidB.set(isShooting); //true for real
+			FlapSolenoidA.set(!isShooting); // true for practice
+			FlapSolenoidB.set(isShooting); // true for real
 			ElevatorMotor.set(Constants.ELEVATOR_SHOOT_SPEED);
 			Agitator.set(Relay.Value.kForward);
 			System.out.println(Agitator.get());
@@ -89,23 +103,32 @@ public class BallManager extends PIDSubsystem
 		}
 	}
 
+	/**
+	 * Controls the intake.
+	 * 
+	 * @param isIntaking
+	 *            true to start intake
+	 */
 	public void Intake(boolean isIntaking)
 	{
 		IntakeRunning = isIntaking;
 		if (isIntaking)
 		{
-			FlapSolenoidA.set(isIntaking); //true for real
-			FlapSolenoidB.set(!isIntaking); //true for practice
+			FlapSolenoidA.set(isIntaking); // true for real
+			FlapSolenoidB.set(!isIntaking); // true for practice
 			IntakeMotor.set(Constants.INTAKE_SPEED);
 			ElevatorMotor.set(Constants.ELEVATOR_INTAKE_SPEED);
-			ShooterRight.set(Constants.SHOOTER_FOR_INTAKE_SPEED); //- for practice
-			ShooterLeft.set(Constants.SHOOTER_FOR_INTAKE_SPEED); //- for practice
+			ShooterRight.set(Constants.SHOOTER_FOR_INTAKE_SPEED); // - for
+																	// practice
+			ShooterLeft.set(Constants.SHOOTER_FOR_INTAKE_SPEED); // - for
+																	// practice
 		}
 		else
 		{
 			IntakeMotor.set(0);
 		}
-		// If shooter and intake are not running, shut off the elevator and shooter wheels
+		// If shooter and intake are not running, shut off the elevator and
+		// shooter wheels
 		if (!ShooterRunning && !IntakeRunning)
 		{
 			ElevatorMotor.set(0);
@@ -114,7 +137,12 @@ public class BallManager extends PIDSubsystem
 		}
 	}
 
-
+	/**
+	 * Spins the shooter up.
+	 * 
+	 * @param isRunning
+	 *            true to start shooter up, false to stop it
+	 */
 	public void SpinUpShooter(boolean isRunning)
 	{
 		if (!ShooterRunning && isRunning)
@@ -123,7 +151,7 @@ public class BallManager extends PIDSubsystem
 			super.setSetpoint(Constants.SHOOTER_TARGET_SPEED);
 			super.enable();
 		}
-		else if(!isRunning)
+		else if (!isRunning)
 		{
 			ShooterRunning = false;
 		}
@@ -149,12 +177,12 @@ public class BallManager extends PIDSubsystem
 	@Override
 	protected void usePIDOutput(double output)
 	{
-		if(output < 0)
+		if (output < 0)
 		{
 			output = 0;
 		}
-		//Correction for wires that were soldered on with opposite polarity
-		if(Constants.REAL_ROBOT)
+		// Correction for wires that were soldered on with opposite polarity
+		if (Constants.REAL_ROBOT)
 		{
 			output = -output;
 		}
@@ -169,6 +197,7 @@ public class BallManager extends PIDSubsystem
 
 	}
 
+	// TODO can remove?
 	private double getShooterRate()
 	{
 		long time = System.currentTimeMillis() - LastCheckTime;
