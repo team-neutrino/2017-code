@@ -46,19 +46,14 @@ public class Constants
 	public static final int INTAKE_SOLENOID_B_CHANNEL = 1;
 	public static final int INTAKE_POWER_CHANNEL = 9;
 	public static final int INTAKE_CHANNEL = 9;
-	public static final double INTAKE_SPEED = -0.5; // TODO
-	public static final double SHOOTER_FOR_INTAKE_SPEED = -.17; // Correction
-																// for wires
-																// that were
-																// soldered on
-																// with opposite
-																// polarity
+	public static final double INTAKE_SPEED = -0.7; // TODO
+	public static final double SHOOTER_FOR_INTAKE_SPEED = -.13; // Correction for wires that were soldered on with opposite polarity
 
 	// Elevator
 	public static final int ELEVATOR_CHANNEL = 8;
 	public static final int ELEVATOR_POWER_CHANNEL = 10;
 	public static final double ELEVATOR_SHOOT_SPEED = .7;
-	public static final double ELEVATOR_INTAKE_SPEED = .5;
+	public static final double ELEVATOR_INTAKE_SPEED = .6;
 
 	// Shooter
 	public static final int SHOOTER_1_POWER_CHANNEL = 1;
