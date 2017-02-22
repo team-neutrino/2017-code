@@ -36,10 +36,10 @@ public class Constants
 	public static final double DRIVE_PID_D = 0; // TODO
 
 	// Gear Manipulator
-	public static final int GEAR_FLAP_SOLENOID_A_CHANNEL = 4;
-	public static final int GEAR_FLAP_SOLENOID_B_CHANNEL = 5;
-	public static final int GEAR_HOPPER_SOLENOID_A_CHANNEL = 2;
-	public static final int GEAR_HOPPER_SOLENOID_B_CHANNEL = 3;
+	public static final int GEAR_FLAP_SOLENOID_A_CHANNEL = 5;
+	public static final int GEAR_FLAP_SOLENOID_B_CHANNEL = 4;
+	public static final int GEAR_HOPPER_SOLENOID_A_CHANNEL = 3;
+	public static final int GEAR_HOPPER_SOLENOID_B_CHANNEL = 2;
 
 	// Intake
 	public static final int INTAKE_SOLENOID_A_CHANNEL = 0;
@@ -52,7 +52,7 @@ public class Constants
 	// Elevator
 	public static final int ELEVATOR_CHANNEL = 8;
 	public static final int ELEVATOR_POWER_CHANNEL = 10;
-	public static final double ELEVATOR_SHOOT_SPEED = .7;
+	public static final double ELEVATOR_SHOOT_SPEED = .75;
 	public static final double ELEVATOR_INTAKE_SPEED = .6;
 
 	// Shooter
@@ -62,10 +62,10 @@ public class Constants
 	public static final int SHOOTER_2_CHANNEL = 6;
 	public static final int SHOOTER_BEAM_BREAK_POWER_CHANNEL = 6;
 	public static final int SHOOTER_BEAM_BREAK_CHANNEL = 9;
-	public static final double SHOOTER_P = 0.5; // TODO
+	public static final double SHOOTER_P = 0.25; // TODO
 	public static final double SHOOTER_I = 0; // TODO
 	public static final double SHOOTER_D = 0; // TODO
-	public static final double SHOOTER_TARGET_SPEED = 28;
+	public static final double SHOOTER_TARGET_SPEED = 46;
 
 	public static final int AGITATOR_CHANNEL = 0;
 	public static final int AGITATOR_POWER_CHANNEL = 9;
