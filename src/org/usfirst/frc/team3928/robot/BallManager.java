@@ -118,10 +118,8 @@ public class BallManager extends PIDSubsystem
 			FlapSolenoidB.set(!isIntaking); // true for practice
 			IntakeMotor.set(Constants.INTAKE_SPEED);
 			ElevatorMotor.set(Constants.ELEVATOR_INTAKE_SPEED);
-			ShooterRight.set(Constants.SHOOTER_FOR_INTAKE_SPEED); // - for
-																	// practice
-			ShooterLeft.set(Constants.SHOOTER_FOR_INTAKE_SPEED); // - for
-																	// practice
+			ShooterRight.set(Constants.SHOOTER_FOR_INTAKE_SPEED); // - for practice
+			ShooterLeft.set(Constants.SHOOTER_FOR_INTAKE_SPEED); // - for practice
 		}
 		else
 		{

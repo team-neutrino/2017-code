@@ -107,15 +107,8 @@ public class Drive
 		EncoderRight.reset();
 		EncoderLeft.reset();
 		double turnDistance = degrees * Constants.DRIVE_DISTANCE_PER_TURN_DEGREE;
-
-		if (degrees > 0)
-		{
-			driveDist(turnDistance, -turnDistance, speed);
-		}
-		else
-		{
-			driveDist(-turnDistance, turnDistance, speed);
-		}
+		
+		driveDist(turnDistance, -turnDistance, speed);
 	}
 
 	/**
@@ -166,8 +159,12 @@ public class Drive
 					setLeft(-leftSpeed);
 				}
 			}
+			System.out.println("Right distance: " + EncoderRight.getDistance());
+			System.out.println("Left distance: " + EncoderLeft.getDistance());
+			
 		}
 		setRight(0);
 		setLeft(0);
+
 	}
 }

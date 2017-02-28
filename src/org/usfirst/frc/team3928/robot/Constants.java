@@ -8,7 +8,7 @@ package org.usfirst.frc.team3928.robot;
  */
 public class Constants
 {
-	public static final boolean REAL_ROBOT = true;
+	public static final boolean REAL_ROBOT = false;
 
 	// Drive
 	public static final int DRIVE_RIGHT_1_CHANNEL = 3;
@@ -65,7 +65,7 @@ public class Constants
 	public static final double SHOOTER_P = 0.25; // TODO
 	public static final double SHOOTER_I = 0; // TODO
 	public static final double SHOOTER_D = 0; // TODO
-	public static final double SHOOTER_TARGET_SPEED = 46;
+	public static final double SHOOTER_TARGET_SPEED = 53;
 
 	public static final int AGITATOR_CHANNEL = 0;
 	public static final int AGITATOR_POWER_CHANNEL = 9;
@@ -103,7 +103,7 @@ public class Constants
 	public static final int BUTTON_AGITATOR = 3;
 
 	// Auton mode
-	public static final int AUTON_GEAR_FORWARD_PICKUP_TIME = 2000; // in ms
+	public static final int AUTON_GEAR_FORWARD_PICKUP_TIME = 5000; // in ms
 	public static final double AUTON_DRIVE_SPEED = .5;
 	public static final double AUTON_TURN_SPEED = .2;
 }
