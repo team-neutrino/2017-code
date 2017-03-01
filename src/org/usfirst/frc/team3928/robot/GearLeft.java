@@ -33,34 +33,34 @@ public class GearLeft extends AutonModes
 	 */
 	public void execute()
 	{
-
-		// TODO use overloaded function
-
-		// DriveInst.DriveDist(10, .5);
-		// DriveInst.BlockUntilComplete();
-
-		DriveInst.TurnDegrees(90, 0.2);
-		// DriveInst.BlockUntilComplete();
-
-		// DriveInst.DriveDist(2, .5);
-		// DriveInst.BlockUntilComplete();
-		//
-		// try
-		// {
-		// Thread.sleep(Constants.AUTON_GEAR_FORWARD_PICKUP_TIME);
-		// } catch (InterruptedException e)
-		// {
-		// e.printStackTrace();
-		// }
-		//
-		// DriveInst.DriveDist(-2, -.5);
-		// DriveInst.BlockUntilComplete();
-		//
-		// DriveInst.TurnDegrees(90);
-		// DriveInst.BlockUntilComplete();
-		//
-		// DriveInst.DriveDist(10, .5);
-		// DriveInst.BlockUntilComplete();
+		DriveInst.DriveDistance(74, 0.5);
+		try
+		{
+			Thread.sleep(500);
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+		DriveInst.TurnDegrees(30, 0.5);
+		try
+		{
+			Thread.sleep(500);
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+		DriveInst.DriveDistance(30, 0.3);
+		try
+		{
+			Thread.sleep(Constants.AUTON_GEAR_FORWARD_PICKUP_TIME);
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+		DriveInst.DriveDistance(-30, 0.8);
 	}
 
 }
