@@ -23,6 +23,15 @@ public class Shoot extends AutonModes
 		}
 		DriveInst.TurnDegrees(-45, 0.5);
 		DriveInst.DriveDistance(36, 0.5);
+		try
+		{
+			Thread.sleep(500);
+		}
+		catch (InterruptedException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		BallManagerInst.Shoot(true);	
 	}
 
