@@ -30,7 +30,7 @@ public class GearRight extends AutonModes
 		DriveInst.DriveDistance(30, 0.3);
 		try
 		{
-			Thread.sleep(Constants.AUTON_GEAR_FORWARD_PICKUP_TIME);
+			Thread.sleep(Constants.AUTON_GEAR_FORWARD_WAIT_TIME);
 		}
 		catch (InterruptedException e)
 		{

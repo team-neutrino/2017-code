@@ -15,6 +15,8 @@ public class GearManipulator
 	private Solenoid GearFlapB;
 	private Solenoid GearHopperA;
 	private Solenoid GearHopperB;
+	private Solenoid GearDropA;
+	private Solenoid GearDropB;
 
 	private Boolean Tilted;
 
@@ -27,8 +29,11 @@ public class GearManipulator
 		GearFlapB = new Solenoid(Constants.GEAR_FLAP_SOLENOID_B_CHANNEL);
 		GearHopperA = new Solenoid(Constants.GEAR_HOPPER_SOLENOID_A_CHANNEL);
 		GearHopperB = new Solenoid(Constants.GEAR_HOPPER_SOLENOID_B_CHANNEL);
+		GearDropA = new Solenoid(Constants.GEAR_DROP_SOLENOID_A_CHANNEL);
+		GearDropB = new Solenoid(Constants.GEAR_DROP_SOLENOID_B_CHANNEL);
 		GearHopperMove(false);
 		GearFlapOpen(false);
+		GearDropMove(false);
 	}
 
 	/**
@@ -75,4 +80,15 @@ public class GearManipulator
 		GearHopperB.set(!isTilted);
 	}
 
+	/**
+	 * Controls the bottom of the gear manipulator 
+	 * 
+	 * @param isDroped
+	 * 			true to drop, false to not drop 
+	 */
+	public void GearDropMove(boolean isDroped)
+	{
+		GearDropA.set(!isDroped);
+		GearDropB.set(isDroped);
+	}
 }

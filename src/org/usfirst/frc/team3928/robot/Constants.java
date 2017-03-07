@@ -40,6 +40,8 @@ public class Constants
 	public static final int GEAR_FLAP_SOLENOID_B_CHANNEL = 4;
 	public static final int GEAR_HOPPER_SOLENOID_A_CHANNEL = 3;
 	public static final int GEAR_HOPPER_SOLENOID_B_CHANNEL = 2;
+	public static final int GEAR_DROP_SOLENOID_A_CHANNEL = 6;
+	public static final int GEAR_DROP_SOLENOID_B_CHANNEL = 7;
 
 	// Intake
 	public static final int INTAKE_SOLENOID_A_CHANNEL = 0;
@@ -47,7 +49,7 @@ public class Constants
 	public static final int INTAKE_POWER_CHANNEL = 9;
 	public static final int INTAKE_CHANNEL = 9;
 	public static final double INTAKE_SPEED = -0.7; // TODO
-	public static final double SHOOTER_FOR_INTAKE_SPEED = -.13; // Correction for wires that were soldered on with opposite polarity
+	public static final double SHOOTER_FOR_INTAKE_SPEED = .13; // Correction for wires that were soldered on with opposite polarity
 
 	// Elevator
 	public static final int ELEVATOR_CHANNEL = 8;
@@ -97,13 +99,13 @@ public class Constants
 	public static final int BUTTON_INTAKE = 5; // gamepad left bumper
 	public static final int BUTTON_SHOOTER_SPIN_UP = 6; // gamepad right bumper
 	public static final int BUTTON_GEAR_HOPPER = 1; // gamepad a
-	public static final int BUTTON_GEAR_FLAP = 2; // gamepad b
+	public static final int BUTTON_GEAR_DROP = 4; //gamepad y 
 	public static final int BUTTON_CLIMB_UP = 8; // gamepad start
 	public static final int BUTTON_CLIMB_DOWN = 7; // gamepad select
 	public static final int BUTTON_AGITATOR = 3;
 
 	// Auton mode
-	public static final int AUTON_GEAR_FORWARD_PICKUP_TIME = 5000; // in ms
+	public static final int AUTON_GEAR_FORWARD_WAIT_TIME = 500; // in ms
 	public static final double AUTON_DRIVE_SPEED = .5;
 	public static final double AUTON_TURN_SPEED = .2;
 }

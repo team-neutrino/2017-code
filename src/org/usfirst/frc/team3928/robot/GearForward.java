@@ -32,16 +32,47 @@ public class GearForward extends AutonModes
 	 */
 	public void execute()
 	{
-		DriveInst.DriveDistance(74, 0.3);
+		GearManipulatorInst.GearFlapOpen(false);
+		GearManipulatorInst.GearHopperMove(true);
+		GearManipulatorInst.GearDropMove(false);
+		DriveInst.DriveDistance(76, 0.5);
+		
 		try
 		{
-			Thread.sleep(Constants.AUTON_GEAR_FORWARD_PICKUP_TIME);
+//			Thread.sleep(500);
+//			DriveInst.DriveDistance(-4, 0.3);
+//			Thread.sleep(500);
+//			DriveInst.TurnDegrees(5, 0.5);
+//			Thread.sleep(500);
+//			DriveInst.DriveDistance(8, 0.3);
+//			
+//			Thread.sleep(500);
+//			DriveInst.DriveDistance(-4, 0.3);
+//			Thread.sleep(500);
+//			DriveInst.TurnDegrees(-5, 0.5);
+//			Thread.sleep(500);
+//			DriveInst.DriveDistance(8, 0.5);
+			
+			Thread.sleep(Constants.AUTON_GEAR_FORWARD_WAIT_TIME);
+			GearManipulatorInst.GearDropMove(true);
+			Thread.sleep(444);
+			GearManipulatorInst.GearDropMove(false);
+			Thread.sleep(444);
+			GearManipulatorInst.GearDropMove(true);
+			Thread.sleep(444);
+			GearManipulatorInst.GearDropMove(false);
+			Thread.sleep(444);
+			GearManipulatorInst.GearDropMove(true);
+			Thread.sleep(444);
 		}
 		catch (InterruptedException e)
 		{
 			e.printStackTrace();
 		}
-		DriveInst.DriveDistance(-48, 0.8);
+		
+		DriveInst.DriveDistance(-24, 0.25);
+		GearManipulatorInst.GearDropMove(false);
+		GearManipulatorInst.GearHopperMove(false);
 	}
 
 }

@@ -27,8 +27,8 @@ public abstract class AutonModes
 		DriveInst = driveInst;
 		GearManipulatorInst = gearManipulatorInst;
 		BallManagerInst = ballManagerInst;
-		GearManipulatorInst.GearFlapOpen(true);
-		GearManipulatorInst.GearHopperMove(false);
+//		GearManipulatorInst.GearFlapOpen(true);
+//		GearManipulatorInst.GearHopperMove(false);
 	}
 
 	/**

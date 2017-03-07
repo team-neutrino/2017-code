@@ -2,6 +2,8 @@ package org.usfirst.frc.team3928.robot;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -22,6 +24,7 @@ public class Robot extends IterativeRobot
 	private Joystick Pad;
 	private BallManager BallManagerInst;
 	private GearManipulator GearManipulatorInst;
+	private UsbCamera Camera;
 
 	/**
 	 * Initializes the robot.
@@ -44,6 +47,10 @@ public class Robot extends IterativeRobot
 		{
 			Climber = new Victor(Constants.CLIMBER_CHANNEL);
 		}
+		
+		UsbCamera Camera = CameraServer.getInstance().startAutomaticCapture(); 
+		Camera.setResolution(Constants.CAMERA_XRES, Constants.CAMERA_YRES);
+		Camera.setExposureManual(35);
 	}
 
 	/**
@@ -52,7 +59,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit()
 	{
-		AutonModes mode = new GearLeft(DriveInst, GearManipulatorInst, BallManagerInst);
+		AutonModes mode = new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
 		mode.execute();
 	}
 
@@ -99,12 +106,14 @@ public class Robot extends IterativeRobot
 		{
 			Climber.set(1);
 			System.out.println(Climber.get());
+			//GearManipulatorInst.GearHopperMove(true); will break stuff 
 		}
-		else if (Pad.getRawButton(Constants.BUTTON_CLIMB_DOWN))
-		{
-			Climber.set(-0.25);
-			System.out.println(Climber.get());
-		}
+		//not needed anymore 
+//		else if (Pad.getRawButton(Constants.BUTTON_CLIMB_DOWN))
+//		{
+//			Climber.set(-0.25);
+//			System.out.println(Climber.get());
+//		}
 		else
 		{
 			Climber.set(0);
@@ -127,12 +136,28 @@ public class Robot extends IterativeRobot
 		}
 
 		BallManagerInst.Intake(Pad.getRawButton(Constants.BUTTON_INTAKE));
-		BallManagerInst
-				.Shoot(JoyRight.getRawButton(Constants.BUTTON_SHOOT) || JoyLeft.getRawButton(Constants.BUTTON_SHOOT));
+		BallManagerInst.Shoot(JoyRight.getRawButton(Constants.BUTTON_SHOOT) || 
+							  JoyLeft.getRawButton(Constants.BUTTON_SHOOT));
 		BallManagerInst.SpinUpShooter(Pad.getRawButton(Constants.BUTTON_SHOOTER_SPIN_UP));
-
-		GearManipulatorInst.GearHopperMove(Pad.getRawButton(Constants.BUTTON_GEAR_HOPPER));
-		GearManipulatorInst.GearFlapOpen(Pad.getRawButton(Constants.BUTTON_GEAR_FLAP));
+		GearManipulatorInst.GearHopperMove(!Pad.getRawButton(Constants.BUTTON_GEAR_HOPPER));
+		
+		// converting the analog input from the trigger to a value we can use 
+		if (Pad.getRawAxis(3) > 0.5)
+		{
+			GearManipulatorInst.GearDropMove(true);
+		}
+		else
+		{
+			GearManipulatorInst.GearDropMove(false);
+		}
+		if (Pad.getZ() > 0.5)
+		{
+			GearManipulatorInst.GearFlapOpen(true);
+		}
+		else
+		{
+			GearManipulatorInst.GearFlapOpen(false);
+		}
 	}
 
 	@Override

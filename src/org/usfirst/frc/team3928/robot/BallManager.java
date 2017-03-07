@@ -43,8 +43,8 @@ public class BallManager extends PIDSubsystem
 		IntakeRunning = false;
 		ShooterRunning = false;
 
-		ShooterBeamBreakPower = new Solenoid(Constants.SHOOTER_BEAM_BREAK_POWER_CHANNEL);
-		ShooterBeamBreakPower.set(true);
+		//ShooterBeamBreakPower = new Solenoid(Constants.SHOOTER_BEAM_BREAK_POWER_CHANNEL);
+		//ShooterBeamBreakPower.set(true);
 
 		ShooterBeamBreak = new Counter(Constants.SHOOTER_BEAM_BREAK_CHANNEL);
 		ShooterBeamBreak.setDistancePerPulse(1);
