@@ -18,7 +18,7 @@ public class GearManipulator
 	private Solenoid GearDropA;
 	private Solenoid GearDropB;
 
-	private Boolean Tilted;
+	private Boolean Moved;
 
 	/**
 	 * Constructs new object.
@@ -31,20 +31,20 @@ public class GearManipulator
 		GearHopperB = new Solenoid(Constants.GEAR_HOPPER_SOLENOID_B_CHANNEL);
 		GearDropA = new Solenoid(Constants.GEAR_DROP_SOLENOID_A_CHANNEL);
 		GearDropB = new Solenoid(Constants.GEAR_DROP_SOLENOID_B_CHANNEL);
-		GearHopperMove(false);
-		GearFlapOpen(false);
-		GearDropMove(false);
+		GearMove(false);
+		GearFlap(false);
+		GearDrop(false);
 	}
 
 	/**
 	 * Controls whether or not the gear slot is open.
 	 * 
 	 * @param isOpen
-	 *            true to open, false to close
+	 *            true to open, false default to close
 	 */
-	public void GearFlapOpen(boolean isOpen)
+	public void GearFlap(boolean isOpen)
 	{
-		if (!Tilted && isOpen)
+		if (Moved && isOpen)
 		{
 			GearFlapA.set(isOpen);
 			GearFlapB.set(!isOpen);
@@ -60,35 +60,34 @@ public class GearManipulator
 	 * Controls whether or not the gear is tilted.
 	 * 
 	 * @param isTilted
-	 *            true to tilt, false to untilt
+	 *            true to move, false default to down
 	 */
-	public void GearHopperMove(boolean isTilted)
+	public void GearMove(boolean isMoved)
 	{
-		// if(isTilted)
-		// {
-		// Tilted = true;
-		// GearHopperA.set(isTilted);
-		// GearHopperB.set(!isTilted);
-		// }
-		// else
-		// {
-		// Tilted = false;
-		// }
-
-		Tilted = isTilted;
-		GearHopperA.set(isTilted);
-		GearHopperB.set(!isTilted);
+		Moved = isMoved;
+		GearHopperA.set(!isMoved);
+		GearHopperB.set(isMoved);
 	}
 
 	/**
 	 * Controls the bottom of the gear manipulator 
 	 * 
-	 * @param isDroped
-	 * 			true to drop, false to not drop 
+	 * @param isDropped
+	 * 			true to drop, false default to not drop 
 	 */
-	public void GearDropMove(boolean isDroped)
+	public void GearDrop(boolean isDropped)
 	{
-		GearDropA.set(!isDroped);
-		GearDropB.set(isDroped);
+		if(Moved && isDropped)
+		{
+			GearDropA.set(isDropped);
+			GearDropB.set(!isDropped);
+			
+		}
+		else
+		{
+			GearDropA.set(!isDropped);
+			GearDropB.set(isDropped);
+		}
+
 	}
 }

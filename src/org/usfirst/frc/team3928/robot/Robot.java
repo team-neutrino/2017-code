@@ -102,18 +102,12 @@ public class Robot extends IterativeRobot
 			leftSpeed = Math.pow(JoyLeft.getY(), 2);
 		}
 
-		if (Pad.getRawButton(Constants.BUTTON_CLIMB_UP))
+		if (Pad.getRawButton(Constants.BUTTON_CLIMB))
 		{
 			Climber.set(1);
 			System.out.println(Climber.get());
-			//GearManipulatorInst.GearHopperMove(true); will break stuff 
+			GearManipulatorInst.GearMove(true);
 		}
-		//not needed anymore 
-//		else if (Pad.getRawButton(Constants.BUTTON_CLIMB_DOWN))
-//		{
-//			Climber.set(-0.25);
-//			System.out.println(Climber.get());
-//		}
 		else
 		{
 			Climber.set(0);
@@ -136,28 +130,33 @@ public class Robot extends IterativeRobot
 		}
 
 		BallManagerInst.Intake(Pad.getRawButton(Constants.BUTTON_INTAKE));
-		BallManagerInst.Shoot(JoyRight.getRawButton(Constants.BUTTON_SHOOT) || 
-							  JoyLeft.getRawButton(Constants.BUTTON_SHOOT));
-		BallManagerInst.SpinUpShooter(Pad.getRawButton(Constants.BUTTON_SHOOTER_SPIN_UP));
-		GearManipulatorInst.GearHopperMove(!Pad.getRawButton(Constants.BUTTON_GEAR_HOPPER));
-		
 		// converting the analog input from the trigger to a value we can use 
-		if (Pad.getRawAxis(3) > 0.5)
+		if (Pad.getRawAxis(Constants.BUTTON_SHOOTER_SPIN_UP) > 0.5)
 		{
-			GearManipulatorInst.GearDropMove(true);
+			BallManagerInst.SpinUpShooter(true);
 		}
 		else
 		{
-			GearManipulatorInst.GearDropMove(false);
+			BallManagerInst.SpinUpShooter(false);
 		}
-		if (Pad.getZ() > 0.5)
+
+		BallManagerInst.Shoot(JoyRight.getRawButton(Constants.BUTTON_SHOOT) || 
+				  				JoyLeft.getRawButton(Constants.BUTTON_SHOOT));
+		
+		GearManipulatorInst.GearMove(Pad.getRawButton(Constants.BUTTON_CLIMB) || Pad.getRawButton(Constants.BUTTON_GEAR_MOVE));
+		GearManipulatorInst.GearFlap(Pad.getRawButton(Constants.BUTTON_GEAR_FLAP));
+		// converting the analog input from the trigger to a value we can use 
+		if (Pad.getRawAxis(Constants.BUTTON_GEAR_DROP) > 0.5)
 		{
-			GearManipulatorInst.GearFlapOpen(true);
+			GearManipulatorInst.GearDrop(true);
 		}
 		else
 		{
-			GearManipulatorInst.GearFlapOpen(false);
+			GearManipulatorInst.GearDrop(false);
 		}
+
+
+
 	}
 
 	@Override
