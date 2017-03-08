@@ -95,6 +95,7 @@ public class Constants
 	public static final int BUTTON_HALF_SPEED = 1; // joystick right trigger
 	public static final int BUTTON_INVERT_DIRECTION = 1; // joystick left trigger
 	public static final int BUTTON_SHOOT = 2; // joystick top
+	public static final int BUTTON_DRIVE_STRAIGHT = 3; //joystick top
 	public static final int BUTTON_SHOOTER_SPIN_UP = 2; // gamepad left trigger
 	public static final int BUTTON_INTAKE = 5; // gamepad left bumper
 	public static final int BUTTON_GEAR_DROP = 3; //gamepad right trigger

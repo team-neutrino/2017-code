@@ -84,7 +84,7 @@ public class Robot extends IterativeRobot
 	{
 		double rightSpeed;
 		double leftSpeed;
-
+		
 		if (JoyRight.getY() > 0)
 		{
 			rightSpeed = -Math.pow(JoyRight.getY(), 2);
@@ -105,7 +105,6 @@ public class Robot extends IterativeRobot
 		if (Pad.getRawButton(Constants.BUTTON_CLIMB))
 		{
 			Climber.set(1);
-			System.out.println(Climber.get());
 			GearManipulatorInst.GearMove(true);
 		}
 		else
@@ -115,19 +114,25 @@ public class Robot extends IterativeRobot
 
 		if (JoyLeft.getRawButton(Constants.BUTTON_INVERT_DIRECTION))
 		{
-			DriveInst.setLeft(-rightSpeed);
-			DriveInst.setRight(-leftSpeed);
+			leftSpeed = -rightSpeed;
+			rightSpeed = -leftSpeed;
 		}
 		else if (JoyRight.getRawButton(Constants.BUTTON_HALF_SPEED))
 		{
-			DriveInst.setRight(rightSpeed / 2);
-			DriveInst.setLeft(leftSpeed / 2);
+			rightSpeed = rightSpeed / 2;
+			leftSpeed = leftSpeed / 2;
+		}
+		
+		if (JoyRight.getRawButton(3))
+		{
+			DriveInst.driveStraight(rightSpeed);
 		}
 		else
 		{
 			DriveInst.setRight(rightSpeed);
 			DriveInst.setLeft(leftSpeed);
 		}
+
 
 		BallManagerInst.Intake(Pad.getRawButton(Constants.BUTTON_INTAKE));
 		// converting the analog input from the trigger to a value we can use 

@@ -22,6 +22,8 @@ public class Drive
 
 	private Encoder EncoderRight;
 	private Encoder EncoderLeft;
+	
+	private boolean driveStraightCalled;
 
 	/**
 	 * Constructs a new Drive object. Sets ThreadRunning to false, sets other
@@ -52,6 +54,8 @@ public class Drive
 			DriveRight1 = new Victor(Constants.DRIVE_RIGHT_1_CHANNEL);
 			DriveRight2 = new Victor(Constants.DRIVE_RIGHT_2_CHANNEL);
 		}
+		
+		driveStraightCalled = false;
 	}
 
 	/**
@@ -63,6 +67,7 @@ public class Drive
 	 */
 	public void setLeft(double speed)
 	{
+		driveStraightCalled = false;
 		DriveLeft1.set(speed);
 		DriveLeft2.set(speed);
 	}
@@ -76,6 +81,7 @@ public class Drive
 	 */
 	public void setRight(double speed)
 	{
+		driveStraightCalled = false;
 		DriveRight1.set(-speed);
 		DriveRight2.set(-speed);
 	}
@@ -109,6 +115,51 @@ public class Drive
 		double turnDistance = degrees * Constants.DRIVE_DISTANCE_PER_TURN_DEGREE;
 		
 		driveDist(turnDistance, -turnDistance, speed);
+	}
+	
+	public void driveStraight(double speed)
+	{
+		if(!driveStraightCalled)
+		{
+			EncoderRight.reset();
+			EncoderLeft.reset();
+		}
+		driveStraightCalled = true;
+		
+		if(EncoderRight.getDistance() >= EncoderLeft.getDistance())
+		{
+			double percentDifference = (EncoderRight.getDistance() - EncoderLeft.getDistance()) / EncoderRight.getDistance();
+			if(speed < 0)
+			{
+				DriveRight1.set(speed + speed*percentDifference);
+				DriveRight2.set(speed + speed*percentDifference);
+				System.out.println("right speed: " + speed + speed*percentDifference);
+			}
+			else
+			{ 
+				DriveRight1.set(speed + speed*percentDifference);
+				DriveRight2.set(speed + speed*percentDifference);
+				System.out.println("right speed: " + speed + speed*percentDifference);
+			}
+		}
+		if(EncoderLeft.getDistance() >= EncoderRight.getDistance())
+		{
+			double percentDifference = (EncoderLeft.getDistance() - EncoderRight.getDistance()) / EncoderLeft.getDistance();
+			if(speed < 0)
+			{
+				DriveLeft1.set(speed + speed*percentDifference);
+				DriveLeft2.set(speed + speed*percentDifference);
+				System.out.println("left speed: " + speed + speed*percentDifference);
+			}
+			else
+			{
+				DriveLeft1.set(speed + speed*percentDifference);
+				DriveLeft2.set(speed + speed*percentDifference);
+				System.out.println("left speed: " + speed + speed*percentDifference);
+			}
+		}
+
+		
 	}
 
 	/**
@@ -167,4 +218,6 @@ public class Drive
 		setLeft(0);
 
 	}
+	
+	
 }

@@ -90,7 +90,6 @@ public class BallManager extends PIDSubsystem
 			FlapSolenoidB.set(isShooting); // true for real
 			ElevatorMotor.set(Constants.ELEVATOR_SHOOT_SPEED);
 			Agitator.set(Relay.Value.kForward);
-			System.out.println(Agitator.get());
 		}
 		else if (!IntakeRunning)
 		{
