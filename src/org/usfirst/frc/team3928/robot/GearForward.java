@@ -34,24 +34,10 @@ public class GearForward extends AutonModes
 	{
 		GearManipulatorInst.GearFlap(false);
 		GearManipulatorInst.GearDrop(false);
-		DriveInst.DriveDistance(76, 0.5);
+		DriveInst.DriveDistance(76, 0.35);
 		
 		try
 		{
-//			Thread.sleep(500);
-//			DriveInst.DriveDistance(-4, 0.3);
-//			Thread.sleep(500);
-//			DriveInst.TurnDegrees(5, 0.5);
-//			Thread.sleep(500);
-//			DriveInst.DriveDistance(8, 0.3);
-//			
-//			Thread.sleep(500);
-//			DriveInst.DriveDistance(-4, 0.3);
-//			Thread.sleep(500);
-//			DriveInst.TurnDegrees(-5, 0.5);
-//			Thread.sleep(500);
-//			DriveInst.DriveDistance(8, 0.5);
-			
 			Thread.sleep(Constants.AUTON_GEAR_FORWARD_WAIT_TIME);
 			GearManipulatorInst.GearDrop(true);
 			Thread.sleep(444);
