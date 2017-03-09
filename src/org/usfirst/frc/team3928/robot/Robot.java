@@ -125,7 +125,8 @@ public class Robot extends IterativeRobot
 		
 		if (JoyRight.getRawButton(3))
 		{
-			DriveInst.driveStraight(rightSpeed);
+			DriveInst.setRight(rightSpeed);
+			DriveInst.setLeft(rightSpeed);
 		}
 		else
 		{
