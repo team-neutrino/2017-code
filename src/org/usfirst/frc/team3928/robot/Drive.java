@@ -22,6 +22,8 @@ public class Drive
 
 	private Encoder EncoderRight;
 	private Encoder EncoderLeft;
+	
+	private PixyCamera Pixy;
 
 	/**
 	 * Constructs a new Drive object. Sets ThreadRunning to false, sets other
@@ -53,6 +55,7 @@ public class Drive
 			DriveRight2 = new Victor(Constants.DRIVE_RIGHT_2_CHANNEL);
 		}
 
+		Pixy = new PixyCamera();
 	}
 
 	/**
@@ -112,6 +115,44 @@ public class Drive
 		driveDist(turnDistance, -turnDistance, speed);
 	}
 
+	public void DriveToTarget()
+	{
+		int target = 150;
+		int allowedError = 25;
+		
+		EncoderRight.reset();
+		EncoderLeft.reset();
+		
+		while(true)
+		{	
+			if(Pixy.getIsTracking())
+			{	
+				int currentError = target - Pixy.getX();
+				if (Math.abs(currentError) < allowedError)
+				{
+					setRight(0.2);
+					setLeft(0.2);
+				}
+				else if(currentError < 0)
+				{
+					setRight(0.1);
+					setLeft(0.3);
+				}
+				else if(currentError > 0)
+				{
+					setRight(0.3);
+					setLeft(0.1);
+				}
+			}
+			else
+			{
+				System.out.println("Encoder Right: " + EncoderRight.getDistance());
+				System.out.println("Encoder Left: " + EncoderLeft.getDistance());
+				setRight(0);
+				setLeft(0);
+			}	
+		}
+	}
 
 	/**
 	 * Drives the distance given.

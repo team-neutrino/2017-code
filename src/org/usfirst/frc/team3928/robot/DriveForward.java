@@ -9,6 +9,7 @@ public class DriveForward extends AutonModes
 
 	public void execute()
 	{
-		DriveInst.DriveDistance(120, 0.8);
+		//DriveInst.DriveDistance(120, 0.8);
+		DriveInst.DriveToTarget();
 	}
 }
