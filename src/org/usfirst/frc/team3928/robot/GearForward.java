@@ -32,8 +32,6 @@ public class GearForward extends AutonModes
 	 */
 	public void execute()
 	{
-		GearManipulatorInst.GearFlap(false);
-		GearManipulatorInst.GearDrop(false);
 		DriveInst.DriveDistance(76, 0.35);
 		
 		try

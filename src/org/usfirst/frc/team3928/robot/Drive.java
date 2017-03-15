@@ -117,7 +117,7 @@ public class Drive
 
 	public void DriveToTarget()
 	{
-		int target = 150;
+		int target = 200;
 		int allowedError = 25;
 		
 		EncoderRight.reset();
@@ -130,18 +130,18 @@ public class Drive
 				int currentError = target - Pixy.getX();
 				if (Math.abs(currentError) < allowedError)
 				{
-					setRight(0.2);
-					setLeft(0.2);
+					setRight(0.3);
+					setLeft(0.3);
 				}
 				else if(currentError < 0)
 				{
-					setRight(0.1);
-					setLeft(0.3);
+					setRight(0.3);
+					setLeft(0.4);
 				}
 				else if(currentError > 0)
 				{
-					setRight(0.3);
-					setLeft(0.1);
+					setRight(0.4);
+					setLeft(0.3);
 				}
 			}
 			else
@@ -150,6 +150,7 @@ public class Drive
 				System.out.println("Encoder Left: " + EncoderLeft.getDistance());
 				setRight(0);
 				setLeft(0);
+				break;
 			}	
 		}
 	}
