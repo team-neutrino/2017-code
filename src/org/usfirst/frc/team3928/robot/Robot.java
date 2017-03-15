@@ -67,12 +67,13 @@ public class Robot extends IterativeRobot
 	public void autonomousInit()
 	{
 	    AutonModes mode;
-	    if(DriveInst.getCamera().getIsTracking()){
-		mode = new CameraGearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	    if(DriveInst.getCamera().getIsTracking())
+	    {
+	    	mode = new CameraGearForward(DriveInst, GearManipulatorInst, BallManagerInst);
 	    }
 	    else
 	    {
-		mode = new EncoderGearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	    	mode = new EncoderGearForward(DriveInst, GearManipulatorInst, BallManagerInst);
 	    }
 		mode.execute();
 	}

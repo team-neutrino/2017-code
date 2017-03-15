@@ -135,7 +135,7 @@ public class Drive
 		EncoderRight.reset();
 		EncoderLeft.reset();
 		
-		while(true)
+		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{	
 			if(Pixy.getIsTracking())
 			{	
