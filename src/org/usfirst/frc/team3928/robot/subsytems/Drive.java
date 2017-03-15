@@ -1,4 +1,6 @@
-package org.usfirst.frc.team3928.robot;
+package org.usfirst.frc.team3928.robot.subsytems;
+
+import org.usfirst.frc.team3928.robot.Constants;
 
 import com.ctre.CANTalon;
 
@@ -58,6 +60,16 @@ public class Drive
 		Pixy = new PixyCamera();
 	}
 
+	/**
+	 *Returns the Camera used to aim at the gear drop off.
+	 * 
+	 * @return 
+	 *            Instance of Pixy Camera used by drive.
+	 */
+	public PixyCamera getCamera()
+	{
+	    return Pixy;
+	}
 	/**
 	 * Sets speed for right side of the robot.
 	 * 

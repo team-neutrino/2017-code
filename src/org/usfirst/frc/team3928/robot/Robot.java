@@ -1,5 +1,12 @@
 package org.usfirst.frc.team3928.robot;
 
+import org.usfirst.frc.team3928.robot.autonomous.AutonModes;
+import org.usfirst.frc.team3928.robot.autonomous.CameraGearForward;
+import org.usfirst.frc.team3928.robot.autonomous.EncoderGearForward;
+import org.usfirst.frc.team3928.robot.subsytems.BallManager;
+import org.usfirst.frc.team3928.robot.subsytems.Drive;
+import org.usfirst.frc.team3928.robot.subsytems.GearManipulator;
+
 import com.ctre.CANTalon;
 
 import edu.wpi.cscore.UsbCamera;
@@ -59,7 +66,14 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit()
 	{
-		AutonModes mode = new DriveForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	    AutonModes mode;
+	    if(DriveInst.getCamera().getIsTracking()){
+		mode = new CameraGearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	    }
+	    else
+	    {
+		mode = new EncoderGearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	    }
 		mode.execute();
 	}
 

@@ -1,4 +1,8 @@
-package org.usfirst.frc.team3928.robot;
+package org.usfirst.frc.team3928.robot.autonomous;
+
+import org.usfirst.frc.team3928.robot.subsytems.BallManager;
+import org.usfirst.frc.team3928.robot.subsytems.Drive;
+import org.usfirst.frc.team3928.robot.subsytems.GearManipulator;
 
 /**
  * Abstract object for autonomous modes. Compensation for creating these javadoc

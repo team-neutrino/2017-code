@@ -1,8 +1,13 @@
-package org.usfirst.frc.team3928.robot;
+package org.usfirst.frc.team3928.robot.autonomous;
 
-public class GearRight extends AutonModes
+import org.usfirst.frc.team3928.robot.Constants;
+import org.usfirst.frc.team3928.robot.subsytems.BallManager;
+import org.usfirst.frc.team3928.robot.subsytems.Drive;
+import org.usfirst.frc.team3928.robot.subsytems.GearManipulator;
+
+public class EncoderGearRight extends AutonModes
 {
-	public GearRight(Drive driveInst, GearManipulator gearManipulatorInst, BallManager ballManagerInst)
+	public EncoderGearRight(Drive driveInst, GearManipulator gearManipulatorInst, BallManager ballManagerInst)
 	{
 		super(driveInst, gearManipulatorInst, ballManagerInst);
 	}

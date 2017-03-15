@@ -1,4 +1,6 @@
-package org.usfirst.frc.team3928.robot;
+package org.usfirst.frc.team3928.robot.subsytems;
+
+import org.usfirst.frc.team3928.robot.Constants;
 
 import edu.wpi.first.wpilibj.Solenoid;
 

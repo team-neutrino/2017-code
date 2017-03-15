@@ -1,4 +1,9 @@
-package org.usfirst.frc.team3928.robot;
+package org.usfirst.frc.team3928.robot.autonomous;
+
+import org.usfirst.frc.team3928.robot.Constants;
+import org.usfirst.frc.team3928.robot.subsytems.BallManager;
+import org.usfirst.frc.team3928.robot.subsytems.Drive;
+import org.usfirst.frc.team3928.robot.subsytems.GearManipulator;
 
 /**
  * This subclass of AutonModes drops off a gear and gets across the line. To be
@@ -7,7 +12,7 @@ package org.usfirst.frc.team3928.robot;
  * 
  * @author James Beetham
  */
-public class GearForward extends AutonModes
+public class EncoderGearForward extends AutonModes
 {
 
 	/**
@@ -21,7 +26,7 @@ public class GearForward extends AutonModes
 	 * @param shoot
 	 *            shooter
 	 */
-	public GearForward(Drive driveInst, GearManipulator gearManipulatorInst, BallManager ballManagerInst)
+	public EncoderGearForward(Drive driveInst, GearManipulator gearManipulatorInst, BallManager ballManagerInst)
 	{
 		super(driveInst, gearManipulatorInst, ballManagerInst);
 	}
