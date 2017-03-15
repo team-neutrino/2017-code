@@ -1,8 +1,8 @@
 package org.usfirst.frc.team3928.robot;
 
 import org.usfirst.frc.team3928.robot.autonomous.AutonModes;
-import org.usfirst.frc.team3928.robot.autonomous.CameraGearForward;
-import org.usfirst.frc.team3928.robot.autonomous.EncoderGearForward;
+import org.usfirst.frc.team3928.robot.autonomous.GearForward;
+import org.usfirst.frc.team3928.robot.autonomous.RotarySwitch;
 import org.usfirst.frc.team3928.robot.subsytems.BallManager;
 import org.usfirst.frc.team3928.robot.subsytems.Drive;
 import org.usfirst.frc.team3928.robot.subsytems.GearManipulator;
@@ -31,7 +31,7 @@ public class Robot extends IterativeRobot
 	private Joystick Pad;
 	private BallManager BallManagerInst;
 	private GearManipulator GearManipulatorInst;
-
+	private RotarySwitch AutonSwitch;
 	/**
 	 * Initializes the robot.
 	 */
@@ -67,15 +67,9 @@ public class Robot extends IterativeRobot
 	public void autonomousInit()
 	{
 	    AutonModes mode;
-	    if(DriveInst.getCamera().getIsTracking())
-	    {
-	    	mode = new CameraGearForward(DriveInst, GearManipulatorInst, BallManagerInst);
-	    }
-	    else
-	    {
-	    	mode = new EncoderGearForward(DriveInst, GearManipulatorInst, BallManagerInst);
-	    }
-		mode.execute();
+	    AutonSwitch = new RotarySwitch();
+	    mode = getAutonModes();
+	    mode.execute();
 	}
 
 	/**
@@ -175,9 +169,6 @@ public class Robot extends IterativeRobot
 		{
 			GearManipulatorInst.GearDrop(false);
 		}
-
-
-
 	}
 
 	@Override
@@ -185,4 +176,17 @@ public class Robot extends IterativeRobot
 	{
 
 	}
+	
+	public AutonModes getAutonModes()
+	{
+	    switch(AutonSwitch.getValue())
+	    {
+	    case 0: return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	    case 1: return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	    case 2: return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	    case 3: return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	    }
+	    return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	}
 }
+

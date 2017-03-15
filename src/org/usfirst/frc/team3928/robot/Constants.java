@@ -107,4 +107,7 @@ public class Constants
 	public static final int AUTON_GEAR_FORWARD_WAIT_TIME = 500; // in ms
 	public static final double AUTON_DRIVE_SPEED = .5;
 	public static final double AUTON_TURN_SPEED = .2;
+	public static final int AUTON_SWITCH_CHANNEL_1 = 1;
+	public static final int AUTON_SWITCH_CHANNEL_2 = 2;
+	public static final int AUTON_SWITCH_CHANNEL_3 = 3;
 }

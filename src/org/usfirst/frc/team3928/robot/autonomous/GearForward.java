@@ -4,9 +4,9 @@ import org.usfirst.frc.team3928.robot.subsytems.BallManager;
 import org.usfirst.frc.team3928.robot.subsytems.Drive;
 import org.usfirst.frc.team3928.robot.subsytems.GearManipulator;
 
-public class CameraGearForward extends AutonModes
+public class GearForward extends AutonModes
 {
-	public CameraGearForward(Drive driveInst, GearManipulator gearManipulatorInst, BallManager ballManagerInst)
+	public GearForward(Drive driveInst, GearManipulator gearManipulatorInst, BallManager ballManagerInst)
 	{
 		super(driveInst, gearManipulatorInst, ballManagerInst);
 	}
@@ -14,7 +14,14 @@ public class CameraGearForward extends AutonModes
 	public void execute()
 	{
 		//DriveInst.DriveDistance(120, 0.8);
+	    if(DriveInst.getCamera().getIsTracking())
+	    {
 		DriveInst.DriveToTarget();
+	    }
+	    else
+	    {
+		DriveInst.DriveDistance(76, 0.35);
+	    }
 		GearManipulatorInst.GearDrop(true);
 		
 		try
