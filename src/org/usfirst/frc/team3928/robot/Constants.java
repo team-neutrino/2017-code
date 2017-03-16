@@ -54,7 +54,7 @@ public class Constants
 	// Elevator
 	public static final int ELEVATOR_CHANNEL = 8;
 	public static final int ELEVATOR_POWER_CHANNEL = 10;
-	public static final double ELEVATOR_SHOOT_SPEED = .75;
+	public static final double ELEVATOR_SHOOT_SPEED = .8;
 	public static final double ELEVATOR_INTAKE_SPEED = .6;
 
 	// Shooter
@@ -64,7 +64,7 @@ public class Constants
 	public static final int SHOOTER_2_CHANNEL = 6;
 	public static final int SHOOTER_BEAM_BREAK_POWER_CHANNEL = 6;
 	public static final int SHOOTER_BEAM_BREAK_CHANNEL = 9;
-	public static final double SHOOTER_P = 0.25; // TODO
+	public static final double SHOOTER_P = 0.05; // TODO
 	public static final double SHOOTER_I = 0; // TODO
 	public static final double SHOOTER_D = 0; // TODO
 	public static final double SHOOTER_TARGET_SPEED = 53;

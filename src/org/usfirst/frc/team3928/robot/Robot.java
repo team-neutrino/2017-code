@@ -66,8 +66,8 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit()
 	{
-	    AutonModes mode;
 	    AutonSwitch = new RotarySwitch();
+	    AutonModes mode;
 	    mode = getAutonModes();
 	    mode.execute();
 	}
@@ -181,12 +181,18 @@ public class Robot extends IterativeRobot
 	{
 	    switch(AutonSwitch.getValue())
 	    {
-	    case 0: return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
-	    case 1: return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
-	    case 2: return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
-	    case 3: return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	    case 0: 
+	    	return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	    case 1: 
+	    	return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	    case 2: 
+	    	return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	    case 3: 
+	    	return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	    default:
+	    	System.out.println("Wedk what this mode means");
+	    	return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
 	    }
-	    return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
 	}
 }
 
