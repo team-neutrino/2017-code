@@ -132,9 +132,6 @@ public class Drive
 		int target = 200;
 		int allowedError = 25;
 		
-		EncoderRight.reset();
-		EncoderLeft.reset();
-		
 		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{	
 			if(Pixy.getIsTracking())
@@ -142,8 +139,8 @@ public class Drive
 				int currentError = target - Pixy.getX();
 				if (Math.abs(currentError) < allowedError)
 				{
-					setRight(0.3);
-					setLeft(0.3);
+					setRight(0.35);
+					setLeft(0.35);
 				}
 				else if(currentError < 0)
 				{
@@ -158,8 +155,6 @@ public class Drive
 			}
 			else
 			{
-				System.out.println("Encoder Right: " + EncoderRight.getDistance());
-				System.out.println("Encoder Left: " + EncoderLeft.getDistance());
 				setRight(0);
 				setLeft(0);
 				break;
@@ -215,8 +210,6 @@ public class Drive
 					setLeft(-leftSpeed);
 				}
 			}
-			System.out.println("Right distance: " + EncoderRight.getDistance());
-			System.out.println("Left distance: " + EncoderLeft.getDistance());
 			
 		}
 		setRight(0);

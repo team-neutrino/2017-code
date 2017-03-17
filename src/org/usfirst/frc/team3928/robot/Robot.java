@@ -1,8 +1,6 @@
 package org.usfirst.frc.team3928.robot;
 
-import org.usfirst.frc.team3928.robot.autonomous.AutonModes;
-import org.usfirst.frc.team3928.robot.autonomous.GearForward;
-import org.usfirst.frc.team3928.robot.autonomous.RotarySwitch;
+import org.usfirst.frc.team3928.robot.autonomous.*;
 import org.usfirst.frc.team3928.robot.subsytems.BallManager;
 import org.usfirst.frc.team3928.robot.subsytems.Drive;
 import org.usfirst.frc.team3928.robot.subsytems.GearManipulator;
@@ -42,6 +40,7 @@ public class Robot extends IterativeRobot
 		JoyRight = new Joystick(Constants.JOY_LEFT_CHANNEL);
 		JoyLeft = new Joystick(Constants.JOY_RIGHT_CHANNEL);
 		Pad = new Joystick(Constants.JOY_PAD_CHANNEL);
+		AutonSwitch = new RotarySwitch();
 
 		GearManipulatorInst = new GearManipulator();
 		BallManagerInst = new BallManager();
@@ -66,10 +65,9 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit()
 	{
-	    AutonSwitch = new RotarySwitch();
-	    AutonModes mode;
-	    mode = getAutonModes();
+	    AutonModes mode = getAutonModes();
 	    mode.execute();
+		
 	}
 
 	/**
@@ -179,16 +177,17 @@ public class Robot extends IterativeRobot
 	
 	public AutonModes getAutonModes()
 	{
+		System.out.println(AutonSwitch.getValue());
 	    switch(AutonSwitch.getValue())
 	    {
 	    case 0: 
-	    	return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	    	return new GearRight(DriveInst, GearManipulatorInst, BallManagerInst);
 	    case 1: 
-	    	return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	    	return new GearLeft(DriveInst, GearManipulatorInst, BallManagerInst);
 	    case 2: 
-	    	return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	    	return new GearRight(DriveInst, GearManipulatorInst, BallManagerInst);
 	    case 3: 
-	    	return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+	    	return new GearHopperShoot(DriveInst, GearManipulatorInst, BallManagerInst);
 	    default:
 	    	System.out.println("Wedk what this mode means");
 	    	return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);

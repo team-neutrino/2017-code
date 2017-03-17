@@ -9,47 +9,38 @@ public class GearRight extends AutonModes
 {
     public GearRight(Drive driveInst, GearManipulator gearManipulatorInst, BallManager ballManagerInst)
     {
-	super(driveInst, gearManipulatorInst, ballManagerInst);
+    	super(driveInst, gearManipulatorInst, ballManagerInst);
     }
 
     public void execute()
     {
-	DriveInst.DriveDistance(74, 0.5);
-	try
-	{
-	    Thread.sleep(500);
-	}
-	catch (InterruptedException e)
-	{
-	    e.printStackTrace();
-	}
-	DriveInst.TurnDegrees(30, 0.5);
-	try
-	{
-	    Thread.sleep(500);
-	}
-	catch (InterruptedException e)
-	{
-	    e.printStackTrace();
-	}
-	if (DriveInst.getCamera().getIsTracking())
-	{
-	    DriveInst.DriveToTarget();
-	}
-	else
-	{
-	    DriveInst.DriveDistance(30, 0.3);
-	}
-	GearManipulatorInst.GearDrop(true);
-	try
-	{
-	    Thread.sleep(Constants.AUTON_GEAR_FORWARD_WAIT_TIME);
-	}
-	catch (InterruptedException e)
-	{
-	    e.printStackTrace();
-	}
-	DriveInst.DriveDistance(-30, 0.8);
-	GearManipulatorInst.GearDrop(false);
+    	System.out.println("Gear Right!");
+	    try
+		{
+	    	DriveInst.DriveDistance(65, 0.5);
+		    Thread.sleep(500);
+		    DriveInst.TurnDegrees(-50, 0.6);
+		    Thread.sleep(2000);
+		    if (DriveInst.getCamera().getIsTracking())
+			{
+		    	System.out.println("Tracking");
+			    DriveInst.DriveToTarget();
+			}
+			else
+			{
+				System.out.println("we ain't got no tracin' foo");
+			    DriveInst.DriveDistance(30, 0.3);
+			}
+		    Thread.sleep(100);
+			GearManipulatorInst.GearDrop(true);
+			Thread.sleep(Constants.AUTON_GEAR_FORWARD_WAIT_TIME);
+			DriveInst.DriveDistance(-30, 0.8);
+			GearManipulatorInst.GearDrop(false);
+		}
+		catch (InterruptedException e)
+		{
+		    e.printStackTrace();
+		}
+		
     }
 }
