@@ -31,9 +31,6 @@ public class Constants
 	public static final int DRIVE_TIME_PER_DEGREE = 100; // in degrees
 	public static final int DRIVE_CYCLES_PER_REV = 360;
 	public static final int DRIVE_PULSE_PER_REV = DRIVE_CYCLES_PER_REV * 4;
-	public static final double DRIVE_PID_P = 0; // TODO
-	public static final double DRIVE_PID_I = 0; // TODO
-	public static final double DRIVE_PID_D = 0; // TODO
 
 	// Gear Manipulator
 	public static final int GEAR_FLAP_SOLENOID_A_CHANNEL = 5;
@@ -46,15 +43,14 @@ public class Constants
 	// Floor Gear Manipulator 
 	public static final int FLOOR_GEAR_INTAKE_POWER_CHANNEL = 9; //old intake power channel
 	public static final int FLOOR_GEAR_INTAKE_CHANNEL = 9; //old intake channel
-	public static final double FLOOR_GEAR_INTAKE_SPEED = 1; //TODO
+	public static final double FLOOR_GEAR_INTAKE_SPEED = 1;
 	public static final int FLOOR_GEAR_INTAKE_BEAM_BREAK_POWER_CHANNEL = 0; //TODO
 	public static final int FLOOR_GEAR_INTAKE_BEAM_BREAK_CHANNEL = 0; //TODO
 	
 	// Elevator
 	public static final int ELEVATOR_CHANNEL = 8;
 	public static final int ELEVATOR_POWER_CHANNEL = 10;
-	public static final double ELEVATOR_SHOOT_SPEED = .8;
-	public static final double ELEVATOR_INTAKE_SPEED = .6;
+	public static final double ELEVATOR_SHOOT_SPEED = 1;
 
 	// Shooter
 	public static final int SHOOTER_1_POWER_CHANNEL = 1;
@@ -66,7 +62,7 @@ public class Constants
 	public static final double SHOOTER_P = 0.05; // TODO
 	public static final double SHOOTER_I = 0; // TODO
 	public static final double SHOOTER_D = 0; // TODO
-	public static final double SHOOTER_TARGET_SPEED = 53;
+	public static final double SHOOTER_TARGET_SPEED = 26.5;
 
 	public static final int AGITATOR_CHANNEL = 0;
 	public static final int AGITATOR_POWER_CHANNEL = 9;
@@ -74,14 +70,8 @@ public class Constants
 	// Climber
 	public static final int CLIMBER_POWER_CHANNEL = 11;
 	public static final int CLIMBER_CHANNEL = 7;
-
-	// Camera
-	public static final int CAMERA_GREEN_MAX = 255;
-	public static final int CAMERA_GREEN_MIN = 0;
-	public static final int CAMERA_BLUE_MAX = 255;
-	public static final int CAMERA_BLUE_MIN = 100;
-	public static final int CAMERA_RED_MAX = 73;
-	public static final int CAMERA_RED_MIN = 30;
+	
+	//Camera
 	public static final int CAMERA_XRES = 640;
 	public static final int CAMERA_YRES = 480;
 
@@ -96,8 +86,7 @@ public class Constants
 	public static final int BUTTON_SHOOT = 2; // joystick top
 	public static final int BUTTON_DRIVE_STRAIGHT = 3; //joystick top
 	public static final int BUTTON_SHOOTER_SPIN_UP = 2; // gamepad left trigger
-	//public static final int BUTTON_INTAKE = 5; // gamepad left bumper old intake button 
-	public static final int BUTTON_FLOOR_GEAR_INTAKE = 5;
+	public static final int BUTTON_FLOOR_GEAR_INTAKE = 5; // gamepad left bumper, old intake button
 	public static final int BUTTON_GEAR_DROP = 3; //gamepad right trigger
 	public static final int BUTTON_GEAR_FLAP = 6; //gamepad right bumper
 	public static final int BUTTON_GEAR_MOVE = 2; // gamepad b

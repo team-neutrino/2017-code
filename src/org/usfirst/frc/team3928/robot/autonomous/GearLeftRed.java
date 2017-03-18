@@ -11,7 +11,7 @@ import org.usfirst.frc.team3928.robot.subsytems.GearManipulator;
  * 
  * @author JamesBeetham
  */
-public class GearLeft extends AutonModes
+public class GearLeftRed extends AutonModes
 {
 
     /**
@@ -24,7 +24,7 @@ public class GearLeft extends AutonModes
      * @param cannon
      *            Shooter to use
      */
-    public GearLeft(Drive driveInst, GearManipulator gear, BallManager ballManagerInst)
+    public GearLeftRed(Drive driveInst, GearManipulator gear, BallManager ballManagerInst)
     {
     	super(driveInst, gear, ballManagerInst);
     }

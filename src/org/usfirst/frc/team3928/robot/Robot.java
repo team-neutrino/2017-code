@@ -188,11 +188,11 @@ public class Robot extends IterativeRobot
 		}
 		case 1:
 		{
-			return new GearLeft(DriveInst, GearManipulatorInst, BallManagerInst);
+			return new GearLeftBlue(DriveInst, GearManipulatorInst, BallManagerInst);
 		}
 		case 2:
 		{
-			return new GearRight(DriveInst, GearManipulatorInst, BallManagerInst);
+			return new GearRightBlue(DriveInst, GearManipulatorInst, BallManagerInst);
 		}
 		case 3:
 		{
