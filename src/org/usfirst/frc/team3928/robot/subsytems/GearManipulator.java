@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3928.robot.subsytems;
+22package org.usfirst.frc.team3928.robot.subsytems;
 
 import org.usfirst.frc.team3928.robot.Constants;
 
@@ -114,7 +114,7 @@ public class GearManipulator
 	 * floor gear manipulator
 	 * 
 	 * @param isIntaking
-	 * 		true to turn motor
+	 * 		true to turn motor, false to do nothing 
 	 * 
 	 */
 	public void FloorGearIntake(boolean isIntaking)
@@ -122,6 +122,25 @@ public class GearManipulator
 		if(isIntaking)
 		{
 			FloorGearMotor.set(Constants.FLOOR_GEAR_INTAKE_SPEED);
+		}
+		else
+		{
+			FloorGearMotor.set(0);
+		}
+	}
+	
+	/**
+	 * Makes the floor gear manipulator outtake the 
+	 * gear
+	 * 
+	 * @param isOuttaking
+	 * 		true to outtake, false to do nothing 
+	 */
+	public void FloorGearOuttake(boolean isOuttaking)
+	{
+		if (isOuttaking)
+		{
+			FloorGearMotor.set(Constants.FLOOR_GEAR_OUTTAKE_SPEED);
 		}
 		else
 		{

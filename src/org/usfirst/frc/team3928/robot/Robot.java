@@ -159,6 +159,7 @@ public class Robot extends IterativeRobot
 				.GearMove(Pad.getRawButton(Constants.BUTTON_CLIMB) || Pad.getRawButton(Constants.BUTTON_GEAR_MOVE));
 		GearManipulatorInst.GearFlap(Pad.getRawButton(Constants.BUTTON_GEAR_FLAP));
 		GearManipulatorInst.FloorGearIntake(Pad.getRawButton(Constants.BUTTON_FLOOR_GEAR_INTAKE));
+		GearManipulatorInst.FloorGearOuttake(Pad.getRawButton(Constants.BUTTON_FLOOR_GEAR_OUTTAKE));
 		
 		// converting the analog input from the trigger to a value we can use
 		if (Pad.getRawAxis(Constants.BUTTON_GEAR_DROP) > 0.5)
@@ -196,13 +197,9 @@ public class Robot extends IterativeRobot
 			}
 			case 3:
 			{
-				return new GearHopperShoot(DriveInst, GearManipulatorInst, BallManagerInst);
-			}
-			case 4:
-			{
 				return new GearRightRed(DriveInst, GearManipulatorInst, BallManagerInst);
 			}
-			case 5:
+			case 4:
 			{
 				return new GearLeftRed(DriveInst, GearManipulatorInst, BallManagerInst);
 			}

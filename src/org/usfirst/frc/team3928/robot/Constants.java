@@ -44,6 +44,7 @@ public class Constants
 	public static final int FLOOR_GEAR_INTAKE_POWER_CHANNEL = 9; //old intake power channel
 	public static final int FLOOR_GEAR_INTAKE_CHANNEL = 9; //old intake channel
 	public static final double FLOOR_GEAR_INTAKE_SPEED = 1;
+	public static final double FLOOR_GEAR_OUTTAKE_SPEED = -1;
 	public static final int FLOOR_GEAR_INTAKE_BEAM_BREAK_POWER_CHANNEL = 0; //TODO
 	public static final int FLOOR_GEAR_INTAKE_BEAM_BREAK_CHANNEL = 0; //TODO
 	
@@ -87,6 +88,7 @@ public class Constants
 	public static final int BUTTON_DRIVE_STRAIGHT = 3; //joystick top
 	public static final int BUTTON_SHOOTER_SPIN_UP = 2; // gamepad left trigger
 	public static final int BUTTON_FLOOR_GEAR_INTAKE = 5; // gamepad left bumper, old intake button
+	public static final int BUTTON_FLOOR_GEAR_OUTTAKE = 1; //TODO gamepad a 
 	public static final int BUTTON_GEAR_DROP = 3; //gamepad right trigger
 	public static final int BUTTON_GEAR_FLAP = 6; //gamepad right bumper
 	public static final int BUTTON_GEAR_MOVE = 2; // gamepad b
