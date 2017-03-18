@@ -36,11 +36,13 @@ public class GearRightRed extends AutonModes
      */
     public void execute()
     {
+    	System.out.println("GearRightRed");
     	try
     	{
-    		DriveInst.DriveDistance(45, 0.5);
-    		DriveInst.TurnDegrees(-30, 0.5);
-    		Thread.sleep(500);
+    		DriveInst.DriveDistance(85, 0.5);
+    		Thread.sleep(1000);
+    		DriveInst.TurnDegrees(50, 0.5);
+    		Thread.sleep(1000);
     		
     		if (DriveInst.getCamera().getIsTracking())
         	{
@@ -49,12 +51,14 @@ public class GearRightRed extends AutonModes
         	}
         	else
         	{
-        		DriveInst.DriveDistance(30, 0.3);
+        		System.out.println("not tracking");
+        		DriveInst.DriveDistance(12, 0.3);
         	}
     		
     		GearManipulatorInst.FloorGearUpAndGearDrop(true);
     		Thread.sleep(Constants.AUTON_GEAR_FORWARD_WAIT_TIME);
-    		DriveInst.DriveDistance(-30, 0.8);
+    		DriveInst.DriveDistance(-10, 0.4);
+    		DriveInst.DriveDistance(-20, 0.8);
         	GearManipulatorInst.FloorGearUpAndGearDrop(false);
     	}
     	catch (InterruptedException e)

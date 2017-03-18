@@ -182,26 +182,34 @@ public class Robot extends IterativeRobot
 		System.out.println(AutonSwitch.getValue());
 		switch (AutonSwitch.getValue())
 		{
-		case 0:
-		{
-			return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
-		}
-		case 1:
-		{
-			return new GearLeftBlue(DriveInst, GearManipulatorInst, BallManagerInst);
-		}
-		case 2:
-		{
-			return new GearRightBlue(DriveInst, GearManipulatorInst, BallManagerInst);
-		}
-		case 3:
-		{
-			return new GearHopperShoot(DriveInst, GearManipulatorInst, BallManagerInst);
-		}
-		default:
-		{
-			return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
-		}
+			case 0:
+			{
+				return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+			}
+			case 1:
+			{
+				return new GearLeftBlue(DriveInst, GearManipulatorInst, BallManagerInst);
+			}
+			case 2:
+			{
+				return new GearRightBlue(DriveInst, GearManipulatorInst, BallManagerInst);
+			}
+			case 3:
+			{
+				return new GearHopperShoot(DriveInst, GearManipulatorInst, BallManagerInst);
+			}
+			case 4:
+			{
+				return new GearRightRed(DriveInst, GearManipulatorInst, BallManagerInst);
+			}
+			case 5:
+			{
+				return new GearLeftRed(DriveInst, GearManipulatorInst, BallManagerInst);
+			}
+			default:
+			{
+				return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+			}
 		}
 	}
 }
