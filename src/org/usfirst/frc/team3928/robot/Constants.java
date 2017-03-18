@@ -40,17 +40,16 @@ public class Constants
 	public static final int GEAR_FLAP_SOLENOID_B_CHANNEL = 4;
 	public static final int GEAR_HOPPER_SOLENOID_A_CHANNEL = 3;
 	public static final int GEAR_HOPPER_SOLENOID_B_CHANNEL = 2;
-	public static final int GEAR_DROP_SOLENOID_A_CHANNEL = 6;
-	public static final int GEAR_DROP_SOLENOID_B_CHANNEL = 7;
-
-	// Intake
-	public static final int INTAKE_SOLENOID_A_CHANNEL = 0;
-	public static final int INTAKE_SOLENOID_B_CHANNEL = 1;
-	public static final int INTAKE_POWER_CHANNEL = 9;
-	public static final int INTAKE_CHANNEL = 9;
-	public static final double INTAKE_SPEED = -0.7; // TODO
-	public static final double SHOOTER_FOR_INTAKE_SPEED = .13; // Correction for wires that were soldered on with opposite polarity
-
+	public static final int FLOOR_GEAR_UP_AND_GEAR_DROP_SOLENOID_A_CHANNEL = 1; //old intake solenoid
+	public static final int FLOOR_GEAR_UP_AND_GEAR_DROP_SOLENOID_B_CHANNEL = 0; //old intake solenoid
+	
+	// Floor Gear Manipulator 
+	public static final int FLOOR_GEAR_INTAKE_POWER_CHANNEL = 9; //old intake power channel
+	public static final int FLOOR_GEAR_INTAKE_CHANNEL = 9; //old intake channel
+	public static final double FLOOR_GEAR_INTAKE_SPEED = 1; //TODO
+	public static final int FLOOR_GEAR_INTAKE_BEAM_BREAK_POWER_CHANNEL = 0; //TODO
+	public static final int FLOOR_GEAR_INTAKE_BEAM_BREAK_CHANNEL = 0; //TODO
+	
 	// Elevator
 	public static final int ELEVATOR_CHANNEL = 8;
 	public static final int ELEVATOR_POWER_CHANNEL = 10;
@@ -97,17 +96,19 @@ public class Constants
 	public static final int BUTTON_SHOOT = 2; // joystick top
 	public static final int BUTTON_DRIVE_STRAIGHT = 3; //joystick top
 	public static final int BUTTON_SHOOTER_SPIN_UP = 2; // gamepad left trigger
-	public static final int BUTTON_INTAKE = 5; // gamepad left bumper
+	//public static final int BUTTON_INTAKE = 5; // gamepad left bumper old intake button 
+	public static final int BUTTON_FLOOR_GEAR_INTAKE = 5;
 	public static final int BUTTON_GEAR_DROP = 3; //gamepad right trigger
 	public static final int BUTTON_GEAR_FLAP = 6; //gamepad right bumper
 	public static final int BUTTON_GEAR_MOVE = 2; // gamepad b
 	public static final int BUTTON_CLIMB = 4; //gamepad y
 
 	// Auton mode
-	public static final int AUTON_GEAR_FORWARD_WAIT_TIME = 500; // in ms
+	public static final int AUTON_GEAR_FORWARD_WAIT_TIME = 1000; // in ms
 	public static final double AUTON_DRIVE_SPEED = .5;
 	public static final double AUTON_TURN_SPEED = .2;
 	public static final int AUTON_SWITCH_CHANNEL_1 = 4;
 	public static final int AUTON_SWITCH_CHANNEL_2 = 5;
 	public static final int AUTON_SWITCH_CHANNEL_3 = 6;
+	public static final int AUTON_SWITCH_CHANNEL_4 = 7;
 }

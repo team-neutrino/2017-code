@@ -19,7 +19,6 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  */
 public class BallManager extends PIDSubsystem
 {
-	private SpeedController IntakeMotor;
 	private SpeedController ShooterLeft;
 	private SpeedController ShooterRight;
 	private SpeedController ElevatorMotor;
@@ -28,8 +27,6 @@ public class BallManager extends PIDSubsystem
 
 	private Counter ShooterBeamBreak;
 	private Solenoid ShooterBeamBreakPower;
-	private Solenoid FlapSolenoidA;
-	private Solenoid FlapSolenoidB;
 
 	private boolean ShooterRunning;
 	private boolean IntakeRunning;
@@ -53,15 +50,8 @@ public class BallManager extends PIDSubsystem
 
 		Agitator = new Relay(Constants.AGITATOR_CHANNEL);
 
-		FlapSolenoidA = new Solenoid(Constants.INTAKE_SOLENOID_A_CHANNEL);
-		FlapSolenoidB = new Solenoid(Constants.INTAKE_SOLENOID_B_CHANNEL);
-		FlapSolenoidA.set(false);
-		FlapSolenoidB.set(true);
-
 		if (Constants.REAL_ROBOT)
 		{
-			IntakeMotor = new CANTalon(Constants.INTAKE_CHANNEL);
-
 			ShooterLeft = new CANTalon(Constants.SHOOTER_1_CHANNEL);
 			ShooterRight = new CANTalon(Constants.SHOOTER_2_CHANNEL);
 
@@ -69,8 +59,6 @@ public class BallManager extends PIDSubsystem
 		}
 		else
 		{
-			IntakeMotor = new Victor(Constants.INTAKE_CHANNEL);
-
 			ShooterLeft = new Victor(Constants.SHOOTER_1_CHANNEL);
 			ShooterRight = new Victor(Constants.SHOOTER_2_CHANNEL);
 
@@ -88,8 +76,6 @@ public class BallManager extends PIDSubsystem
 	{
 		if (isShooting)
 		{
-			FlapSolenoidA.set(!isShooting); // true for practice
-			FlapSolenoidB.set(isShooting); // true for real
 			ElevatorMotor.set(Constants.ELEVATOR_SHOOT_SPEED);
 			Agitator.set(Relay.Value.kForward);
 		}
@@ -104,37 +90,6 @@ public class BallManager extends PIDSubsystem
 		}
 	}
 
-	/**
-	 * Controls the intake.
-	 * 
-	 * @param isIntaking
-	 *            true to start intake
-	 */
-	public void Intake(boolean isIntaking)
-	{
-		IntakeRunning = isIntaking;
-		if (isIntaking)
-		{
-			FlapSolenoidA.set(isIntaking); // true for real
-			FlapSolenoidB.set(!isIntaking); // true for practice
-			IntakeMotor.set(Constants.INTAKE_SPEED);
-			ElevatorMotor.set(Constants.ELEVATOR_INTAKE_SPEED);
-			ShooterRight.set(Constants.SHOOTER_FOR_INTAKE_SPEED); // - for practice
-			ShooterLeft.set(Constants.SHOOTER_FOR_INTAKE_SPEED); // - for practice
-		}
-		else
-		{
-			IntakeMotor.set(0);
-		}
-		// If shooter and intake are not running, shut off the elevator and
-		// shooter wheels
-		if (!ShooterRunning && !IntakeRunning)
-		{
-			ElevatorMotor.set(0);
-			ShooterRight.set(0);
-			ShooterLeft.set(0);
-		}
-	}
 
 	/**
 	 * Spins the shooter up.

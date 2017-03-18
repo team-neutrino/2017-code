@@ -2,7 +2,11 @@ package org.usfirst.frc.team3928.robot.subsytems;
 
 import org.usfirst.frc.team3928.robot.Constants;
 
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Victor;
 
 /**
  * Controls how the gear is positioned. Either open or closed, tilted or not
@@ -17,9 +21,11 @@ public class GearManipulator
 	private Solenoid GearFlapB;
 	private Solenoid GearHopperA;
 	private Solenoid GearHopperB;
-	private Solenoid GearDropA;
-	private Solenoid GearDropB;
+	private Solenoid FloorAndGearDropA;
+	private Solenoid FloorAndGearDropB;
 
+	private SpeedController FloorGearMotor;
+	
 	private Boolean Moved;
 
 	/**
@@ -31,11 +37,21 @@ public class GearManipulator
 		GearFlapB = new Solenoid(Constants.GEAR_FLAP_SOLENOID_B_CHANNEL);
 		GearHopperA = new Solenoid(Constants.GEAR_HOPPER_SOLENOID_A_CHANNEL);
 		GearHopperB = new Solenoid(Constants.GEAR_HOPPER_SOLENOID_B_CHANNEL);
-		GearDropA = new Solenoid(Constants.GEAR_DROP_SOLENOID_A_CHANNEL);
-		GearDropB = new Solenoid(Constants.GEAR_DROP_SOLENOID_B_CHANNEL);
+		FloorAndGearDropA = new Solenoid(Constants.FLOOR_GEAR_UP_AND_GEAR_DROP_SOLENOID_A_CHANNEL);
+		FloorAndGearDropB = new Solenoid(Constants.FLOOR_GEAR_UP_AND_GEAR_DROP_SOLENOID_B_CHANNEL);
+		
+		if (Constants.REAL_ROBOT)
+		{
+			FloorGearMotor = new CANTalon(Constants.FLOOR_GEAR_INTAKE_CHANNEL);
+		}
+		else
+		{
+			FloorGearMotor = new Victor(Constants.FLOOR_GEAR_INTAKE_CHANNEL);
+		}
+		
 		GearMove(false);
 		GearFlap(false);
-		GearDrop(false);
+		FloorGearUpAndGearDrop(false);
 	}
 
 	/**
@@ -77,19 +93,39 @@ public class GearManipulator
 	 * @param isDropped
 	 * 			true to drop, false default to not drop 
 	 */
-	public void GearDrop(boolean isDropped)
+	public void FloorGearUpAndGearDrop(boolean isUpAndDropped)
 	{
-		if(Moved && isDropped)
+		if(Moved && isUpAndDropped)
 		{
-			GearDropA.set(isDropped);
-			GearDropB.set(!isDropped);
+			FloorAndGearDropA.set(isUpAndDropped);
+			FloorAndGearDropB.set(!isUpAndDropped);
 			
 		}
 		else
 		{
-			GearDropA.set(!isDropped);
-			GearDropB.set(isDropped);
+			FloorAndGearDropA.set(!isUpAndDropped);
+			FloorAndGearDropB.set(isUpAndDropped);
 		}
 
+	}
+	
+	/**
+	 * Controls the motor on the intake of the 
+	 * floor gear manipulator
+	 * 
+	 * @param isIntaking
+	 * 		true to turn motor
+	 * 
+	 */
+	public void FloorGearIntake(boolean isIntaking)
+	{
+		if(isIntaking)
+		{
+			FloorGearMotor.set(Constants.FLOOR_GEAR_INTAKE_SPEED);
+		}
+		else
+		{
+			FloorGearMotor.set(0);
+		}
 	}
 }

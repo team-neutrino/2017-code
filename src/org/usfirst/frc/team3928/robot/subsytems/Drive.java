@@ -24,7 +24,7 @@ public class Drive
 
 	private Encoder EncoderRight;
 	private Encoder EncoderLeft;
-	
+
 	private PixyCamera Pixy;
 
 	/**
@@ -61,15 +61,15 @@ public class Drive
 	}
 
 	/**
-	 *Returns the Camera used to aim at the gear drop off.
+	 * Returns the Camera used to aim at the gear drop off.
 	 * 
-	 * @return 
-	 *            Instance of Pixy Camera used by drive.
+	 * @return Instance of Pixy Camera used by drive.
 	 */
 	public PixyCamera getCamera()
 	{
-	    return Pixy;
+		return Pixy;
 	}
+
 	/**
 	 * Sets speed for right side of the robot.
 	 * 
@@ -123,7 +123,7 @@ public class Drive
 		EncoderRight.reset();
 		EncoderLeft.reset();
 		double turnDistance = degrees * Constants.DRIVE_DISTANCE_PER_TURN_DEGREE;
-		
+
 		driveDist(turnDistance, -turnDistance, speed);
 	}
 
@@ -131,23 +131,23 @@ public class Drive
 	{
 		int target = 200;
 		int allowedError = 25;
-		
-		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
-		{	
-			if(Pixy.getIsTracking())
-			{	
+
+		while (DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
+		{
+			if (Pixy.getIsTracking())
+			{
 				int currentError = target - Pixy.getX();
 				if (Math.abs(currentError) < allowedError)
 				{
 					setRight(0.35);
 					setLeft(0.35);
 				}
-				else if(currentError < 0)
+				else if (currentError < 0)
 				{
 					setRight(0.3);
 					setLeft(0.4);
 				}
-				else if(currentError > 0)
+				else if (currentError > 0)
 				{
 					setRight(0.4);
 					setLeft(0.3);
@@ -158,7 +158,7 @@ public class Drive
 				setRight(0);
 				setLeft(0);
 				break;
-			}	
+			}
 		}
 	}
 
@@ -210,12 +210,11 @@ public class Drive
 					setLeft(-leftSpeed);
 				}
 			}
-			
+
 		}
 		setRight(0);
 		setLeft(0);
 
 	}
-	
-	
+
 }

@@ -30,6 +30,7 @@ public class Robot extends IterativeRobot
 	private BallManager BallManagerInst;
 	private GearManipulator GearManipulatorInst;
 	private RotarySwitch AutonSwitch;
+
 	/**
 	 * Initializes the robot.
 	 */
@@ -52,11 +53,11 @@ public class Robot extends IterativeRobot
 		{
 			Climber = new Victor(Constants.CLIMBER_CHANNEL);
 		}
-		
-		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(); 
+
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(Constants.CAMERA_XRES, Constants.CAMERA_YRES);
 		camera.setExposureManual(35);
-		
+
 	}
 
 	/**
@@ -65,9 +66,9 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit()
 	{
-	    AutonModes mode = getAutonModes();
-	    mode.execute();
-		
+		AutonModes mode = getAutonModes();
+		mode.execute();
+
 	}
 
 	/**
@@ -91,7 +92,7 @@ public class Robot extends IterativeRobot
 	{
 		double rightSpeed;
 		double leftSpeed;
-		
+
 		if (JoyRight.getY() > 0)
 		{
 			rightSpeed = -Math.pow(JoyRight.getY(), 2);
@@ -129,7 +130,7 @@ public class Robot extends IterativeRobot
 			rightSpeed = rightSpeed / 2;
 			leftSpeed = leftSpeed / 2;
 		}
-		
+
 		if (JoyRight.getRawButton(3))
 		{
 			DriveInst.setRight(rightSpeed);
@@ -141,9 +142,7 @@ public class Robot extends IterativeRobot
 			DriveInst.setLeft(leftSpeed);
 		}
 
-
-		BallManagerInst.Intake(Pad.getRawButton(Constants.BUTTON_INTAKE));
-		// converting the analog input from the trigger to a value we can use 
+		// converting the analog input from the trigger to a value we can use
 		if (Pad.getRawAxis(Constants.BUTTON_SHOOTER_SPIN_UP) > 0.5)
 		{
 			BallManagerInst.SpinUpShooter(true);
@@ -153,19 +152,22 @@ public class Robot extends IterativeRobot
 			BallManagerInst.SpinUpShooter(false);
 		}
 
-		BallManagerInst.Shoot(JoyRight.getRawButton(Constants.BUTTON_SHOOT) || 
-				  				JoyLeft.getRawButton(Constants.BUTTON_SHOOT));
-		
-		GearManipulatorInst.GearMove(Pad.getRawButton(Constants.BUTTON_CLIMB) || Pad.getRawButton(Constants.BUTTON_GEAR_MOVE));
+		BallManagerInst
+				.Shoot(JoyRight.getRawButton(Constants.BUTTON_SHOOT) || JoyLeft.getRawButton(Constants.BUTTON_SHOOT));
+
+		GearManipulatorInst
+				.GearMove(Pad.getRawButton(Constants.BUTTON_CLIMB) || Pad.getRawButton(Constants.BUTTON_GEAR_MOVE));
 		GearManipulatorInst.GearFlap(Pad.getRawButton(Constants.BUTTON_GEAR_FLAP));
-		// converting the analog input from the trigger to a value we can use 
+		GearManipulatorInst.FloorGearIntake(Pad.getRawButton(Constants.BUTTON_FLOOR_GEAR_INTAKE));
+		
+		// converting the analog input from the trigger to a value we can use
 		if (Pad.getRawAxis(Constants.BUTTON_GEAR_DROP) > 0.5)
 		{
-			GearManipulatorInst.GearDrop(true);
+			GearManipulatorInst.FloorGearUpAndGearDrop(true);
 		}
 		else
 		{
-			GearManipulatorInst.GearDrop(false);
+			GearManipulatorInst.FloorGearUpAndGearDrop(false);
 		}
 	}
 
@@ -174,24 +176,32 @@ public class Robot extends IterativeRobot
 	{
 
 	}
-	
+
 	public AutonModes getAutonModes()
 	{
 		System.out.println(AutonSwitch.getValue());
-	    switch(AutonSwitch.getValue())
-	    {
-	    case 0: 
-	    	return new GearRight(DriveInst, GearManipulatorInst, BallManagerInst);
-	    case 1: 
-	    	return new GearLeft(DriveInst, GearManipulatorInst, BallManagerInst);
-	    case 2: 
-	    	return new GearRight(DriveInst, GearManipulatorInst, BallManagerInst);
-	    case 3: 
-	    	return new GearHopperShoot(DriveInst, GearManipulatorInst, BallManagerInst);
-	    default:
-	    	System.out.println("Wedk what this mode means");
-	    	return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
-	    }
+		switch (AutonSwitch.getValue())
+		{
+		case 0:
+		{
+			return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+		}
+		case 1:
+		{
+			return new GearLeft(DriveInst, GearManipulatorInst, BallManagerInst);
+		}
+		case 2:
+		{
+			return new GearRight(DriveInst, GearManipulatorInst, BallManagerInst);
+		}
+		case 3:
+		{
+			return new GearHopperShoot(DriveInst, GearManipulatorInst, BallManagerInst);
+		}
+		default:
+		{
+			return new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
+		}
+		}
 	}
 }
-

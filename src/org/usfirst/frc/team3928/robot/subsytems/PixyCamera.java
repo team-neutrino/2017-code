@@ -2,6 +2,12 @@ package org.usfirst.frc.team3928.robot.subsytems;
 
 import edu.wpi.first.wpilibj.SerialPort;
 
+/**
+ * Handles the raw data from the pixy camera
+ * 
+ * @author YouKnowWho
+ *
+ */
 public class PixyCamera implements Runnable{
 
 	private SerialPort CameraConnection;
@@ -12,6 +18,9 @@ public class PixyCamera implements Runnable{
 	private boolean IsTracking;
 	private long LastTargetTrackTime;
 
+	/**
+	 * Constructs a pixy camera 
+	 */
 	public PixyCamera()
 	{
 		CameraConnection = new SerialPort(115200, SerialPort.Port.kMXP);
@@ -20,31 +29,68 @@ public class PixyCamera implements Runnable{
 		new Thread(this).start();
 	}
 
+	/**
+	 * The x value of the object being tracked 
+	 * 
+	 * @return
+	 * 		said x value as int  
+	 */
 	public int getX()
 	{
 		return X;
 	}
 
+	/**
+	 * The y value of the object being tracked 
+	 * 
+	 * @return
+	 * 		said y value as int  
+	 */
 	public int getY()
 	{
 		return Y;
 	}
 
+	/**
+	 * The width of the object being tracked
+	 * 
+	 * @return
+	 * 		the width as int 
+	 */
 	public int getWidth()
 	{
 		return Width;
 	}
 
+	/**
+	 * The height of the object being tracked
+	 * 
+	 * @return
+	 * 		the height as int 
+	 */
 	public int getHeight()
 	{
 		return Height;
 	}
 
+	/**
+	 * Returns weather the camera is seeing the object 
+	 * or not 
+	 * 
+	 * @return
+	 * 		boolean value of weather camera is tracking 
+	 */
 	public boolean getIsTracking()
 	{
 		return IsTracking;
 	}
 
+	/**
+	 * Finds if the data is being received correctly 
+	 * 
+	 * @return
+	 * 		boolean of value of weather the sink frame was received 
+	 */
 	private boolean checkForSinkFrame()
 	{
 		byte[] dataReceived = CameraConnection.read(1);
@@ -69,9 +115,12 @@ public class PixyCamera implements Runnable{
 		}
 
 		return true;
-
 	}
 
+	/**
+	 * Converts the binary input of the camera to the data 
+	 * that is held in the instance varibles 
+	 */
 	private void parsePackage()
 	{
 		byte[] data1 = CameraConnection.read(12);
@@ -104,6 +153,10 @@ public class PixyCamera implements Runnable{
 		
 	}
 
+	/**
+	 * Runs the camera and corrected gets the data 
+	 * from it 
+	 */
 	public void run() 
 	{
 		while (true)
