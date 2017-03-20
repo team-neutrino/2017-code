@@ -14,29 +14,21 @@ public class Shoot extends AutonModes
 	@Override
 	public void execute()
 	{
-		BallManagerInst.SpinUpShooter(true);
-		DriveInst.DriveDistance(-36, 0.5);
 		try
 		{
+			BallManagerInst.SpinUpShooter(true);
+			DriveInst.DriveDistance(-36, 0.5);
 			Thread.sleep(500);
+			DriveInst.TurnDegrees(-45, 0.5);
+			DriveInst.DriveDistance(36, 0.5);
+			Thread.sleep(500);
+			BallManagerInst.Shoot(true);
 		}
 		catch (InterruptedException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DriveInst.TurnDegrees(-45, 0.5);
-		DriveInst.DriveDistance(36, 0.5);
-		try
-		{
-			Thread.sleep(500);
-		}
-		catch (InterruptedException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		BallManagerInst.Shoot(true);	
+			
 	}
 
 }

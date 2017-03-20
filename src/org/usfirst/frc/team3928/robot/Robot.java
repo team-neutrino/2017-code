@@ -158,8 +158,14 @@ public class Robot extends IterativeRobot
 		GearManipulatorInst
 				.GearMove(Pad.getRawButton(Constants.BUTTON_CLIMB) || Pad.getRawButton(Constants.BUTTON_GEAR_MOVE));
 		GearManipulatorInst.GearFlap(Pad.getRawButton(Constants.BUTTON_GEAR_FLAP));
-		GearManipulatorInst.FloorGearIntake(Pad.getRawButton(Constants.BUTTON_FLOOR_GEAR_INTAKE));
-		GearManipulatorInst.FloorGearOuttake(Pad.getRawButton(Constants.BUTTON_FLOOR_GEAR_OUTTAKE));
+		if (Pad.getRawButton(Constants.BUTTON_FLOOR_GEAR_INTAKE))
+		{
+			GearManipulatorInst.FloorGearIntake(true);
+		}
+		else
+		{
+			GearManipulatorInst.FloorGearOuttake(Pad.getRawButton(Constants.BUTTON_FLOOR_GEAR_OUTTAKE));
+		}
 		
 		// converting the analog input from the trigger to a value we can use
 		if (Pad.getRawAxis(Constants.BUTTON_GEAR_DROP) > 0.5)

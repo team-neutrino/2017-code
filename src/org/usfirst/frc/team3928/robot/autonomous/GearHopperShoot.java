@@ -12,21 +12,22 @@ public class GearHopperShoot extends AutonModes {
 	}
 	public void execute()
 	{
-		DriveInst.DriveDistance(74, 1);
-
-		DriveInst.TurnDegrees(30, 1);
-
-		DriveInst.DriveDistance(30, 1);
-
-		DriveInst.DriveDistance(-30, 1);
 		
-		DriveInst.TurnDegrees(-150, 1);
-		
-		DriveInst.DriveDistance(30,1);
 		
 		try
 		{
-			Thread.sleep(500);
+			DriveInst.DriveDistance(74, 1);
+			Thread.sleep(1000);
+			DriveInst.TurnDegrees(30, 1);
+			Thread.sleep(1000);
+			DriveInst.DriveDistance(30, 1);
+			Thread.sleep(1000);
+			DriveInst.DriveDistance(-30, 1);
+			Thread.sleep(1000);
+			DriveInst.TurnDegrees(-150, 1);
+			Thread.sleep(1000);
+			DriveInst.DriveDistance(30,1);
+			Thread.sleep(1000);
 		}
 		catch (InterruptedException e)
 		{
@@ -34,9 +35,7 @@ public class GearHopperShoot extends AutonModes {
 		}
 
 		DriveInst.DriveDistance(-30,1);
-
 		DriveInst.TurnDegrees(-45,1);
-		
 		DriveInst.DriveDistance(74,1);
 
 	}

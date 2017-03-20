@@ -1,4 +1,4 @@
-22package org.usfirst.frc.team3928.robot.subsytems;
+package org.usfirst.frc.team3928.robot.subsytems;
 
 import org.usfirst.frc.team3928.robot.Constants;
 
@@ -26,7 +26,9 @@ public class GearManipulator
 
 	private SpeedController FloorGearMotor;
 	
-	private Boolean Moved;
+	private boolean Moved;
+	private boolean LastFloorGearManipulatorState;
+	
 
 	/**
 	 * Constructs new object.
@@ -106,6 +108,53 @@ public class GearManipulator
 			FloorAndGearDropA.set(!isUpAndDropped);
 			FloorAndGearDropB.set(isUpAndDropped);
 		}
+		
+		boolean didStateJustChange = false;
+		if(isUpAndDropped && !LastFloorGearManipulatorState)
+		{
+			LastFloorGearManipulatorState = true;
+			didStateJustChange = true;
+		}
+		
+		if(!isUpAndDropped && LastFloorGearManipulatorState)
+		{
+			LastFloorGearManipulatorState = false;
+			didStateJustChange = true;
+		}
+		
+		if(didStateJustChange)
+		{
+			
+			new Thread( new Runnable() {
+			    public void run() {
+			    	long startTime = System.currentTimeMillis();
+			    	while(System.currentTimeMillis() - startTime < 1000)
+			    	{
+			    		if (LastFloorGearManipulatorState)
+			    		{
+			    			FloorGearIntake(true);
+			    		}
+			    		else
+			    		{
+			    			FloorGearOuttake(true);
+			    			
+			    		}
+			    		try
+						{
+							Thread.sleep(1);
+						}
+						catch (InterruptedException e)
+						{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+			    	}
+			    	
+			    	FloorGearIntake(false);
+			    }
+			}).start();
+		}
+		
 
 	}
 	
