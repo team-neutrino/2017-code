@@ -132,12 +132,11 @@ public class GearManipulator
 					{
 						if (LastFloorGearManipulatorState)
 						{
-							FloorGearIntake(true);
+							FloorGearOuttake(true);
 						}
 						else
 						{
-							FloorGearOuttake(true);
-
+							FloorGearIntake(true);
 						}
 						try
 						{

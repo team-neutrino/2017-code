@@ -86,13 +86,14 @@ public class Constants
 	public static final int BUTTON_INVERT_DIRECTION = 1; // joystick left trigger
 	public static final int BUTTON_SHOOT = 2; // joystick top
 	public static final int BUTTON_DRIVE_STRAIGHT = 3; //joystick top
-	public static final int BUTTON_SHOOTER_SPIN_UP = 2; // gamepad left trigger
-	public static final int BUTTON_FLOOR_GEAR_INTAKE = 5; // gamepad left bumper, old intake button
-	public static final int BUTTON_FLOOR_GEAR_OUTTAKE = 1; //TODO gamepad a 
+	public static final int BUTTON_CLIMB = 8; //gamepad start
+	public static final int BUTTON_SHOOTER_SPIN_UP = 4; // gamepad y
+	public static final int BUTTON_GEAR_MOVE = 2; // gamepad b
 	public static final int BUTTON_GEAR_DROP = 3; //gamepad right trigger
 	public static final int BUTTON_GEAR_FLAP = 6; //gamepad right bumper
-	public static final int BUTTON_GEAR_MOVE = 2; // gamepad b
-	public static final int BUTTON_CLIMB = 4; //gamepad y
+	public static final int BUTTON_FLOOR_GEAR_INTAKE = 5; // gamepad left bumper
+	public static final int BUTTON_FLOOR_GEAR_OUTTAKE = 1; //TODO gamepad a -- we want gamepad left trigger
+	public static final int BUTTON_FLOOR_GEAR_OUTTAKE_2 = 2; //gamepad left trigger
 
 	// Auton mode
 	public static final int AUTON_GEAR_FORWARD_WAIT_TIME = 1000; // in ms
