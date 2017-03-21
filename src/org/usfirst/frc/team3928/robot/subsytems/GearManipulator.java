@@ -25,10 +25,9 @@ public class GearManipulator
 	private Solenoid FloorAndGearDropB;
 
 	private SpeedController FloorGearMotor;
-	
+
 	private boolean Moved;
 	private boolean LastFloorGearManipulatorState;
-	
 
 	/**
 	 * Constructs new object.
@@ -41,7 +40,7 @@ public class GearManipulator
 		GearHopperB = new Solenoid(Constants.GEAR_HOPPER_SOLENOID_B_CHANNEL);
 		FloorAndGearDropA = new Solenoid(Constants.FLOOR_GEAR_UP_AND_GEAR_DROP_SOLENOID_A_CHANNEL);
 		FloorAndGearDropB = new Solenoid(Constants.FLOOR_GEAR_UP_AND_GEAR_DROP_SOLENOID_B_CHANNEL);
-		
+
 		if (Constants.REAL_ROBOT)
 		{
 			FloorGearMotor = new CANTalon(Constants.FLOOR_GEAR_INTAKE_CHANNEL);
@@ -50,10 +49,10 @@ public class GearManipulator
 		{
 			FloorGearMotor = new Victor(Constants.FLOOR_GEAR_INTAKE_CHANNEL);
 		}
-		
+
 		GearMove(false);
 		GearFlap(false);
-		FloorGearUpAndGearDrop(false);
+		FloorGearDownAndGearDrop(false);
 	}
 
 	/**
@@ -90,56 +89,57 @@ public class GearManipulator
 	}
 
 	/**
-	 * Controls the bottom of the gear manipulator 
+	 * Controls the bottom of the gear manipulator
 	 * 
 	 * @param isDropped
-	 * 			true to drop, false default to not drop 
+	 *            true to drop, false default to not drop
 	 */
-	public void FloorGearUpAndGearDrop(boolean isUpAndDropped)
+	public void FloorGearDownAndGearDrop(boolean isUpAndDropped)
 	{
-		if(Moved && isUpAndDropped)
+		if (Moved && isUpAndDropped)
 		{
 			FloorAndGearDropA.set(isUpAndDropped);
 			FloorAndGearDropB.set(!isUpAndDropped);
-			
+
 		}
 		else
 		{
 			FloorAndGearDropA.set(!isUpAndDropped);
 			FloorAndGearDropB.set(isUpAndDropped);
 		}
-		
+
 		boolean didStateJustChange = false;
-		if(isUpAndDropped && !LastFloorGearManipulatorState)
+		if (isUpAndDropped && !LastFloorGearManipulatorState)
 		{
 			LastFloorGearManipulatorState = true;
 			didStateJustChange = true;
 		}
-		
-		if(!isUpAndDropped && LastFloorGearManipulatorState)
+
+		if (!isUpAndDropped && LastFloorGearManipulatorState)
 		{
 			LastFloorGearManipulatorState = false;
 			didStateJustChange = true;
 		}
-		
-		if(didStateJustChange)
+
+		if (didStateJustChange)
 		{
-			
-			new Thread( new Runnable() {
-			    public void run() {
-			    	long startTime = System.currentTimeMillis();
-			    	while(System.currentTimeMillis() - startTime < 1000)
-			    	{
-			    		if (LastFloorGearManipulatorState)
-			    		{
-			    			FloorGearIntake(true);
-			    		}
-			    		else
-			    		{
-			    			FloorGearOuttake(true);
-			    			
-			    		}
-			    		try
+			new Thread(new Runnable()
+			{
+				public void run()
+				{
+					long startTime = System.currentTimeMillis();
+					while (System.currentTimeMillis() - startTime < 1000)
+					{
+						if (LastFloorGearManipulatorState)
+						{
+							FloorGearIntake(true);
+						}
+						else
+						{
+							FloorGearOuttake(true);
+
+						}
+						try
 						{
 							Thread.sleep(1);
 						}
@@ -148,27 +148,25 @@ public class GearManipulator
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-			    	}
-			    	
-			    	FloorGearIntake(false);
-			    }
+					}
+
+					FloorGearIntake(false);
+				}
 			}).start();
 		}
-		
 
 	}
-	
+
 	/**
-	 * Controls the motor on the intake of the 
-	 * floor gear manipulator
+	 * Controls the motor on the intake of the floor gear manipulator
 	 * 
 	 * @param isIntaking
-	 * 		true to turn motor, false to do nothing 
+	 *            true to turn motor, false to do nothing
 	 * 
 	 */
 	public void FloorGearIntake(boolean isIntaking)
 	{
-		if(isIntaking)
+		if (isIntaking)
 		{
 			FloorGearMotor.set(Constants.FLOOR_GEAR_INTAKE_SPEED);
 		}
@@ -177,13 +175,12 @@ public class GearManipulator
 			FloorGearMotor.set(0);
 		}
 	}
-	
+
 	/**
-	 * Makes the floor gear manipulator outtake the 
-	 * gear
+	 * Makes the floor gear manipulator outtake the gear
 	 * 
 	 * @param isOuttaking
-	 * 		true to outtake, false to do nothing 
+	 *            true to outtake, false to do nothing
 	 */
 	public void FloorGearOuttake(boolean isOuttaking)
 	{

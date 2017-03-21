@@ -55,11 +55,11 @@ public class GearLeftBlue extends AutonModes
         		DriveInst.DriveDistance(12, 0.3);
         	}
     		
-    		GearManipulatorInst.FloorGearUpAndGearDrop(true);
+    		GearManipulatorInst.FloorGearDownAndGearDrop(true);
     		Thread.sleep(Constants.AUTON_GEAR_FORWARD_WAIT_TIME);
     		DriveInst.DriveDistance(-10, 0.4);
     		DriveInst.DriveDistance(-20, 0.8);
-        	GearManipulatorInst.FloorGearUpAndGearDrop(false);
+        	GearManipulatorInst.FloorGearDownAndGearDrop(false);
     	}
     	catch (InterruptedException e)
     	{

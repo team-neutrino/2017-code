@@ -170,11 +170,11 @@ public class Robot extends IterativeRobot
 		// converting the analog input from the trigger to a value we can use
 		if (Pad.getRawAxis(Constants.BUTTON_GEAR_DROP) > 0.5)
 		{
-			GearManipulatorInst.FloorGearUpAndGearDrop(true);
+			GearManipulatorInst.FloorGearDownAndGearDrop(true);
 		}
 		else
 		{
-			GearManipulatorInst.FloorGearUpAndGearDrop(false);
+			GearManipulatorInst.FloorGearDownAndGearDrop(false);
 		}
 	}
 
