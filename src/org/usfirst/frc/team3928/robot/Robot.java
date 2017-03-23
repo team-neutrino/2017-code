@@ -66,8 +66,11 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit()
 	{
-		AutonModes mode = getAutonModes();
+//		AutonModes mode = getAutonModes();
+//		mode.execute();
+		AutonModes mode = new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
 		mode.execute();
+		
 
 	}
 
@@ -152,30 +155,29 @@ public class Robot extends IterativeRobot
 		// converting the analog input from the trigger to a value we can use
 		if (Pad.getRawAxis(Constants.BUTTON_GEAR_DROP) > 0.5)
 		{
-			GearManipulatorInst.FloorGearDownAndGearDrop(true);
+			GearManipulatorInst.GearDrop(true);
 		}
 		else
 		{
-			GearManipulatorInst.FloorGearDownAndGearDrop(false);
+			GearManipulatorInst.GearDrop(false);
+			
 		}
 		
 		if (Pad.getRawButton(Constants.BUTTON_FLOOR_GEAR_INTAKE))
 		{
+			GearManipulatorInst.FloorGearDown(true);
 			GearManipulatorInst.FloorGearIntake(true);
+		}
+		else if(Pad.getRawAxis(Constants.BUTTON_FLOOR_GEAR_OUTTAKE) > 0.5)
+		{
+			GearManipulatorInst.FloorGearDown(true);
+			GearManipulatorInst.FloorGearOuttake(true);
 		}
 		else
 		{
-			if(Pad.getRawAxis(Constants.BUTTON_FLOOR_GEAR_OUTTAKE_2) > 0.5)
-			{
-				GearManipulatorInst.FloorGearOuttake(true);
-			}
-			else
-			{
-				GearManipulatorInst.FloorGearOuttake(false);
-			}
-			//GearManipulatorInst.FloorGearOuttake(Pad.getRawButton(Constants.BUTTON_FLOOR_GEAR_OUTTAKE));
+			GearManipulatorInst.FloorGearOuttake(false) ;
+			GearManipulatorInst.FloorGearDown(false);
 		}
-
 	}
 
 	@Override

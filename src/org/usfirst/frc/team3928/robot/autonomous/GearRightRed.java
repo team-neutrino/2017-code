@@ -55,11 +55,11 @@ public class GearRightRed extends AutonModes
         		DriveInst.DriveDistance(12, 0.3);
         	}
     		
-    		GearManipulatorInst.FloorGearDownAndGearDrop(true);
+    		GearManipulatorInst.GearDrop(true);
     		Thread.sleep(Constants.AUTON_GEAR_FORWARD_WAIT_TIME);
     		DriveInst.DriveDistance(-10, 0.4);
     		DriveInst.DriveDistance(-20, 0.8);
-        	GearManipulatorInst.FloorGearDownAndGearDrop(false);
+        	GearManipulatorInst.GearDrop(false);
     	}
     	catch (InterruptedException e)
     	{

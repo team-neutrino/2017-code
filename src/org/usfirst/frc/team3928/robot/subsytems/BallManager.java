@@ -26,7 +26,6 @@ public class BallManager extends PIDSubsystem
 	private Relay Agitator;
 
 	private Counter ShooterBeamBreak;
-	private Solenoid ShooterBeamBreakPower;
 
 	private boolean ShooterRunning;
 	private boolean IntakeRunning;
@@ -41,10 +40,6 @@ public class BallManager extends PIDSubsystem
 		super(Constants.SHOOTER_P, Constants.SHOOTER_I, Constants.SHOOTER_D);
 		IntakeRunning = false;
 		ShooterRunning = false;
-
-		//ShooterBeamBreakPower = new Solenoid(Constants.SHOOTER_BEAM_BREAK_POWER_CHANNEL);
-		//ShooterBeamBreakPower.set(true);
-
 		ShooterBeamBreak = new Counter(Constants.SHOOTER_BEAM_BREAK_CHANNEL);
 		ShooterBeamBreak.setDistancePerPulse(1);
 

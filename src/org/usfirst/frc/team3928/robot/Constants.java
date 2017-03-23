@@ -37,8 +37,8 @@ public class Constants
 	public static final int GEAR_FLAP_SOLENOID_B_CHANNEL = 4;
 	public static final int GEAR_HOPPER_SOLENOID_A_CHANNEL = 3;
 	public static final int GEAR_HOPPER_SOLENOID_B_CHANNEL = 2;
-	public static final int FLOOR_GEAR_UP_AND_GEAR_DROP_SOLENOID_A_CHANNEL = 1; //old intake solenoid
-	public static final int FLOOR_GEAR_UP_AND_GEAR_DROP_SOLENOID_B_CHANNEL = 0; //old intake solenoid
+	public static final int GEAR_DROP_SOLENOID_A_CHANNEL = 6;
+	public static final int GEAR_DROP_SOLENOID_B_CHANNEL = 7;
 	
 	// Floor Gear Manipulator 
 	public static final int FLOOR_GEAR_INTAKE_POWER_CHANNEL = 9; //old intake power channel
@@ -47,6 +47,8 @@ public class Constants
 	public static final double FLOOR_GEAR_OUTTAKE_SPEED = -1;
 	public static final int FLOOR_GEAR_INTAKE_BEAM_BREAK_POWER_CHANNEL = 0; //TODO
 	public static final int FLOOR_GEAR_INTAKE_BEAM_BREAK_CHANNEL = 0; //TODO
+	public static final int FLOOR_GEAR_DOWN_SOLENOID_A_CHANNEL = 1; //old intake solenoid
+	public static final int FLOOR_GEAR_DOWN_SOLENOID_B_CHANNEL = 0; //old intake solenoid
 	
 	// Elevator
 	public static final int ELEVATOR_CHANNEL = 8;
@@ -92,8 +94,7 @@ public class Constants
 	public static final int BUTTON_GEAR_DROP = 3; //gamepad right trigger
 	public static final int BUTTON_GEAR_FLAP = 6; //gamepad right bumper
 	public static final int BUTTON_FLOOR_GEAR_INTAKE = 5; // gamepad left bumper
-	public static final int BUTTON_FLOOR_GEAR_OUTTAKE = 1; //TODO gamepad a -- we want gamepad left trigger
-	public static final int BUTTON_FLOOR_GEAR_OUTTAKE_2 = 2; //gamepad left trigger
+	public static final int BUTTON_FLOOR_GEAR_OUTTAKE = 2; //gamepad left trigger
 
 	// Auton mode
 	public static final int AUTON_GEAR_FORWARD_WAIT_TIME = 1000; // in ms

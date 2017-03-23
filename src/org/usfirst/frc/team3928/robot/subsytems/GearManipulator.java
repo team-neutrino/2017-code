@@ -21,8 +21,10 @@ public class GearManipulator
 	private Solenoid GearFlapB;
 	private Solenoid GearHopperA;
 	private Solenoid GearHopperB;
-	private Solenoid FloorAndGearDropA;
-	private Solenoid FloorAndGearDropB;
+	private Solenoid GearDropA;
+	private Solenoid GearDropB;
+	private Solenoid FloorGearDownA;
+	private Solenoid FloorGearDownB;
 
 	private SpeedController FloorGearMotor;
 
@@ -38,8 +40,10 @@ public class GearManipulator
 		GearFlapB = new Solenoid(Constants.GEAR_FLAP_SOLENOID_B_CHANNEL);
 		GearHopperA = new Solenoid(Constants.GEAR_HOPPER_SOLENOID_A_CHANNEL);
 		GearHopperB = new Solenoid(Constants.GEAR_HOPPER_SOLENOID_B_CHANNEL);
-		FloorAndGearDropA = new Solenoid(Constants.FLOOR_GEAR_UP_AND_GEAR_DROP_SOLENOID_A_CHANNEL);
-		FloorAndGearDropB = new Solenoid(Constants.FLOOR_GEAR_UP_AND_GEAR_DROP_SOLENOID_B_CHANNEL);
+		GearDropA = new Solenoid(Constants.GEAR_DROP_SOLENOID_A_CHANNEL);
+		GearDropB = new Solenoid(Constants.GEAR_DROP_SOLENOID_B_CHANNEL);
+		FloorGearDownA = new Solenoid(Constants.FLOOR_GEAR_DOWN_SOLENOID_A_CHANNEL);
+		FloorGearDownB = new Solenoid(Constants.FLOOR_GEAR_DOWN_SOLENOID_B_CHANNEL);
 
 		if (Constants.REAL_ROBOT)
 		{
@@ -52,7 +56,8 @@ public class GearManipulator
 
 		GearMove(false);
 		GearFlap(false);
-		FloorGearDownAndGearDrop(false);
+		GearDrop(false);
+		FloorGearDown(false);
 	}
 
 	/**
@@ -87,35 +92,34 @@ public class GearManipulator
 		GearHopperA.set(!isMoved);
 		GearHopperB.set(isMoved);
 	}
-
-	/**
-	 * Controls the bottom of the gear manipulator
-	 * 
-	 * @param isDropped
-	 *            true to drop, false default to not drop
-	 */
-	public void FloorGearDownAndGearDrop(boolean isUpAndDropped)
+	
+	public void GearDrop(boolean isDropped)
 	{
-		if (Moved && isUpAndDropped)
+		if(Moved && isDropped)
 		{
-			FloorAndGearDropA.set(isUpAndDropped);
-			FloorAndGearDropB.set(!isUpAndDropped);
-
+			GearDropA.set(!isDropped);
+			GearDropB.set(isDropped);
 		}
 		else
 		{
-			FloorAndGearDropA.set(!isUpAndDropped);
-			FloorAndGearDropB.set(isUpAndDropped);
+			GearDropA.set(isDropped);
+			GearDropB.set(!isDropped);
 		}
-
+	}
+	
+	public void FloorGearDown(boolean isDown)
+	{
+		FloorGearDownA.set(!isDown);
+		FloorGearDownB.set(isDown);
+		
 		boolean didStateJustChange = false;
-		if (isUpAndDropped && !LastFloorGearManipulatorState)
+		if (isDown && !LastFloorGearManipulatorState)
 		{
 			LastFloorGearManipulatorState = true;
 			didStateJustChange = true;
 		}
 
-		if (!isUpAndDropped && LastFloorGearManipulatorState)
+		if (!isDown && LastFloorGearManipulatorState)
 		{
 			LastFloorGearManipulatorState = false;
 			didStateJustChange = true;
@@ -130,11 +134,7 @@ public class GearManipulator
 					long startTime = System.currentTimeMillis();
 					while (System.currentTimeMillis() - startTime < 1000)
 					{
-						if (LastFloorGearManipulatorState)
-						{
-							FloorGearOuttake(true);
-						}
-						else
+						if (!LastFloorGearManipulatorState)
 						{
 							FloorGearIntake(true);
 						}
@@ -144,7 +144,6 @@ public class GearManipulator
 						}
 						catch (InterruptedException e)
 						{
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
@@ -153,7 +152,6 @@ public class GearManipulator
 				}
 			}).start();
 		}
-
 	}
 
 	/**

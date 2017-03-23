@@ -56,10 +56,10 @@ public class GearForward extends AutonModes
 			}
 			
 			Thread.sleep(1000);
-			GearManipulatorInst.FloorGearDownAndGearDrop(true);
+			GearManipulatorInst.GearDrop(true);
 			Thread.sleep(1000);
 			DriveInst.DriveDistance(-20, 0.35);
-			GearManipulatorInst.FloorGearDownAndGearDrop(false);
+			GearManipulatorInst.GearDrop(false);
 		}
 		catch (InterruptedException e)
 		{
