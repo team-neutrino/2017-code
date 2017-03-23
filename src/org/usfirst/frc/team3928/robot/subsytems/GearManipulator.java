@@ -6,6 +6,7 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 
 /**
@@ -138,14 +139,8 @@ public class GearManipulator
 						{
 							FloorGearIntake(true);
 						}
-						try
-						{
-							Thread.sleep(1);
-						}
-						catch (InterruptedException e)
-						{
-							e.printStackTrace();
-						}
+						
+						Timer.delay(0.005);
 					}
 
 					FloorGearIntake(false);

@@ -7,6 +7,7 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 
 /**
@@ -159,6 +160,8 @@ public class Drive
 				setLeft(0);
 				break;
 			}
+
+			Timer.delay(0.005);
 		}
 	}
 
@@ -210,7 +213,8 @@ public class Drive
 					setLeft(-leftSpeed);
 				}
 			}
-
+			
+			Timer.delay(0.005);
 		}
 		setRight(0);
 		setLeft(0);

@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 
 /**
@@ -54,9 +55,10 @@ public class Robot extends IterativeRobot
 			Climber = new Victor(Constants.CLIMBER_CHANNEL);
 		}
 
-		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-		camera.setResolution(Constants.CAMERA_XRES, Constants.CAMERA_YRES);
-		camera.setExposureManual(35);
+//		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+//		camera.setFPS(10);
+//		camera.setResolution(Constants.CAMERA_XRES, Constants.CAMERA_YRES);
+//		camera.setExposureManual(35);
 
 	}
 
@@ -68,10 +70,8 @@ public class Robot extends IterativeRobot
 	{
 //		AutonModes mode = getAutonModes();
 //		mode.execute();
-		AutonModes mode = new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
-		mode.execute();
-		
-
+		AutonModes mode = new GearRightRed(DriveInst, GearManipulatorInst, BallManagerInst);
+		mode.execute();	
 	}
 
 	/**
@@ -178,6 +178,8 @@ public class Robot extends IterativeRobot
 			GearManipulatorInst.FloorGearOuttake(false) ;
 			GearManipulatorInst.FloorGearDown(false);
 		}
+		
+		Timer.delay(0.005);
 	}
 
 	@Override
