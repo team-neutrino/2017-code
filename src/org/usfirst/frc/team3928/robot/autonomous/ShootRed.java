@@ -18,12 +18,19 @@ public class ShootRed extends AutonModes
 		{
 			BallManagerInst.SpinUpShooter(true);
 			DriveInst.DriveDistance(-36, 0.5);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			DriveInst.TurnDegrees(45, 0.5);
-			Thread.sleep(1000);
-			DriveInst.DriveDistance(36, 0.5);
-			Thread.sleep(1000);
+			Thread.sleep(100);
+			DriveInst.DriveDistance(42, 0.5);
+			Thread.sleep(100);
 			BallManagerInst.Shoot(true);
+			Thread.sleep(8000);
+			DriveInst.DriveDistance(-42, 0.5);
+			Thread.sleep(100);
+			DriveInst.TurnDegrees(-45, 0.5);
+			Thread.sleep(100);
+			DriveInst.DriveDistance(-50, 0.5);
+			Thread.sleep(100);
 		}
 		catch (InterruptedException e)
 		{

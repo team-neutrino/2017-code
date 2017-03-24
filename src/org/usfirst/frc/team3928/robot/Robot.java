@@ -70,7 +70,7 @@ public class Robot extends IterativeRobot
 	{
 //		AutonModes mode = getAutonModes();
 //		mode.execute();
-		AutonModes mode = new ShootBlue(DriveInst, GearManipulatorInst, BallManagerInst);
+		AutonModes mode = new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
 		mode.execute();	
 	}
 
