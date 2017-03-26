@@ -139,6 +139,7 @@ public class Robot extends IterativeRobot
 		{
 			Climber.set(1);
 			GearManipulatorInst.GearMove(true);
+			GearManipulatorInst.GearDrop(true);
 		}
 		else
 		{
@@ -157,7 +158,7 @@ public class Robot extends IterativeRobot
 		{
 			GearManipulatorInst.GearDrop(true);
 		}
-		else
+		else if (!Pad.getRawButton(Constants.BUTTON_CLIMB))
 		{
 			GearManipulatorInst.GearDrop(false);
 			
