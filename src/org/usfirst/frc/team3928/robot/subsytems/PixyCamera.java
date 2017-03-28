@@ -2,7 +2,6 @@
 package org.usfirst.frc.team3928.robot.subsytems;
 
 import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.Timer;
 
 /**
  * Handles the raw data from the pixy camera
@@ -151,6 +150,7 @@ public class PixyCamera implements Runnable{
 		{
 			LastTargetTrackTime = System.currentTimeMillis();
 			X = (x1 + x2) / 2;
+			Y = (y1 + y1) / 2;
 		}
 		
 	}
@@ -172,7 +172,15 @@ public class PixyCamera implements Runnable{
 			}
 			else
 			{
-				Timer.delay(0.005);
+				try
+				{
+					Thread.sleep(1);
+				}
+				catch (InterruptedException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			if (System.currentTimeMillis() - LastTargetTrackTime < 100)

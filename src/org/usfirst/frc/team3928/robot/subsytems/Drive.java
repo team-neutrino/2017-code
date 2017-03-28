@@ -137,21 +137,22 @@ public class Drive
 		{
 			if (Pixy.getIsTracking())
 			{
+				System.out.println(Pixy.getX());
 				int currentError = target - Pixy.getX();
 				if (Math.abs(currentError) < allowedError)
 				{
-					setRight(0.35);
-					setLeft(0.35);
+//					setRight(0.25);
+//					setLeft(0.25);
 				}
 				else if (currentError < 0)
 				{
-					setRight(0.3);
-					setLeft(0.4);
+//					setRight(0.2);
+//					setLeft(0.3);
 				}
 				else if (currentError > 0)
 				{
-					setRight(0.4);
-					setLeft(0.3);
+//					setRight(0.3);
+//					setLeft(0.2);
 				}
 			}
 			else
@@ -161,7 +162,15 @@ public class Drive
 				break;
 			}
 
-			Timer.delay(0.005);
+			try
+			{
+				Thread.sleep(1);
+			}
+			catch (InterruptedException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

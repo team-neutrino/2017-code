@@ -46,7 +46,7 @@ public class GearForward extends AutonModes
 				System.out.println("Tracking");
 				DriveInst.DriveToTarget();
 				Thread.sleep(1000);
-				DriveInst.DriveDistance(4, 0.3);
+				//DriveInst.DriveDistance(4, 0.3);
 				Thread.sleep(Constants.AUTON_GEAR_FORWARD_WAIT_TIME);
 			}
 			else
