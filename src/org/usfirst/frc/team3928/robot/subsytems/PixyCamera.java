@@ -26,7 +26,8 @@ public class PixyCamera implements Runnable{
 	{
 		CameraConnection = new SerialPort(115200, SerialPort.Port.kMXP);
 		CameraConnection.setReadBufferSize(100);
-
+		
+		IsTracking = true;
 		new Thread(this).start();
 	}
 
@@ -154,6 +155,33 @@ public class PixyCamera implements Runnable{
 		}
 		
 	}
+	
+	public double GetTargetX()
+	{
+		double xStart = 180;
+		double yStart = 62;
+		double xTarget = 250;
+		double yTarget = 21;
+		
+		double m = (yStart - yTarget) / (xStart - xTarget);
+		
+		//System.out.println("m: " + m);
+		
+		//y = mx + b
+		// y - mx = b
+		double b = yStart - xStart * m;
+		
+		//System.out.println("b: " + b);
+		
+		//y = mx + b
+		//y - b = mx
+		//(y-b)/m = x
+		double y = getY();
+		//System.out.println("getY: " + y);
+		
+		double xNew = (y - b) / m;
+		return xNew;
+	}
 
 	/**
 	 * Runs the camera and corrected gets the data 
@@ -185,10 +213,18 @@ public class PixyCamera implements Runnable{
 			
 			if (System.currentTimeMillis() - LastTargetTrackTime < 100)
 			{
+				if(IsTracking == false)
+				{
+					System.out.println("pixy tracking");
+				}
 				IsTracking = true;
 			}
 			else
 			{
+				if(IsTracking == true)
+				{
+					System.out.println("pixy no track :(");
+				}
 				IsTracking = false;
 			}
 

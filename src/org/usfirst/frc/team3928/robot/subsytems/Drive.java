@@ -130,29 +130,53 @@ public class Drive
 
 	public void DriveToTarget()
 	{
-		int target = 200;
-		int allowedError = 25;
+//		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
+//		{
+//			if(Pixy.getIsTracking())
+//			{
+//				System.out.println("Y: " + Pixy.getY());
+//				System.out.println("X: " + Pixy.getX());
+//				System.out.println("C: " + Pixy.GetTargetX());
+//			}
+//			else
+//			{
+//				System.out.println("not tracking :(");
+//			}
+//			try
+//			{
+//				Thread.sleep(500);
+//			}
+//			catch (InterruptedException e)
+//			{
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+		
 
 		while (DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{
+			int target = (int) Pixy.GetTargetX();
+			int allowedError = 25;
+			
 			if (Pixy.getIsTracking())
 			{
 				System.out.println(Pixy.getX());
 				int currentError = target - Pixy.getX();
 				if (Math.abs(currentError) < allowedError)
 				{
-//					setRight(0.25);
-//					setLeft(0.25);
+					setRight(0.25);
+					setLeft(0.25);
 				}
 				else if (currentError < 0)
 				{
-//					setRight(0.2);
-//					setLeft(0.3);
+					setRight(0.2);
+					setLeft(0.35);
 				}
 				else if (currentError > 0)
 				{
-//					setRight(0.3);
-//					setLeft(0.2);
+					setRight(0.35);
+					setLeft(0.2);
 				}
 			}
 			else
