@@ -102,7 +102,7 @@ public class Constants
 	public static final double AUTON_TURN_SPEED = .2;
 	public static final double AUTON_GEAR_START_X = 180;
 	public static final double AUTON_GEAR_START_Y = 62;
-	public static final double AUTON_GEAR_TARGET_X = 250;
+	public static final double AUTON_GEAR_TARGET_X = 310; //250
 	public static final double AUTON_GEAR_TARGET_Y = 21;
 	public static final double AUTON_SHOOT_START_X = 163;
 	public static final double AUTON_SHOOT_START_Y = 105;

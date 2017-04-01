@@ -7,7 +7,8 @@ import org.usfirst.frc.team3928.robot.autonomous.GearLeftRed;
 import org.usfirst.frc.team3928.robot.autonomous.GearRightBlue;
 import org.usfirst.frc.team3928.robot.autonomous.GearRightRed;
 import org.usfirst.frc.team3928.robot.autonomous.RotarySwitch;
-import org.usfirst.frc.team3928.robot.autonomous.ShootForty;
+import org.usfirst.frc.team3928.robot.autonomous.ShootFortyBlue;
+import org.usfirst.frc.team3928.robot.autonomous.ShootFortyRed;
 import org.usfirst.frc.team3928.robot.subsytems.BallManager;
 import org.usfirst.frc.team3928.robot.subsytems.Drive;
 import org.usfirst.frc.team3928.robot.subsytems.GearManipulator;
@@ -75,7 +76,7 @@ public class Robot extends IterativeRobot
 	{
 //		AutonModes mode = getAutonModes();
 //		mode.execute();
-		AutonModes mode = new ShootForty(DriveInst, GearManipulatorInst, BallManagerInst);
+		AutonModes mode = new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
 		mode.execute();	
 	}
 

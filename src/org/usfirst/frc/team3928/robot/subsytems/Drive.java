@@ -121,11 +121,14 @@ public class Drive
 	 */
 	public void TurnDegrees(double degrees, double speed)
 	{
-		EncoderRight.reset();
-		EncoderLeft.reset();
 		double turnDistance = degrees * Constants.DRIVE_DISTANCE_PER_TURN_DEGREE;
 
 		driveDist(turnDistance, -turnDistance, speed);
+	}
+	
+	public void DriveArc(double rightDist, double leftDist, double speed)
+	{
+		driveDist(rightDist, leftDist, speed);
 	}
 
 	public void DriveToTarget(double xStart, double yStart, double xTarget, double yTarget)
@@ -137,6 +140,7 @@ public class Drive
 			
 			if (Pixy.getIsTracking())
 			{
+				System.out.println("Y: " + Pixy.getY());
 				int currentError = target - Pixy.getX();
 				if (Math.abs(currentError) < allowedError)
 				{
@@ -146,11 +150,11 @@ public class Drive
 				else if (currentError < 0)
 				{
 					setRight(0.2);
-					setLeft(0.35);
+					setLeft(0.45);
 				}
 				else if (currentError > 0)
 				{
-					setRight(0.35);
+					setRight(0.45);
 					setLeft(0.2);
 				}
 			}

@@ -41,27 +41,19 @@ public class GearForward extends AutonModes
 		System.out.println("GearForward");
 		try
 		{
-//			if(DriveInst.getCamera().getIsTracking())
-//			{
-				//GearManipulatorInst.GearMove(true);
-				System.out.println("Tracking");
-				DriveInst.DriveToTarget(Constants.AUTON_GEAR_START_X, Constants.AUTON_GEAR_START_Y, Constants.AUTON_GEAR_TARGET_X, Constants.AUTON_GEAR_TARGET_Y);
-				//GearManipulatorInst.GearMove(false);
-				Thread.sleep(1000);
-				DriveInst.DriveDistance(8, 0.6);
-				Thread.sleep(Constants.AUTON_GEAR_FORWARD_WAIT_TIME);
-//			}
-//			else
-//			{
-//				System.out.println("not tracking");
-//				DriveInst.DriveDistance(76, 0.35);
-//			}
-			
+			DriveInst.DriveDistance(76, 0.35);
 			Thread.sleep(1000);
+    		DriveInst.setLeft(1);
+    		DriveInst.setRight(1);
+    		Thread.sleep(350);
+    		DriveInst.setLeft(0);
+    		DriveInst.setRight(0);
+			Thread.sleep(500);
 			GearManipulatorInst.GearDrop(true);
-			Thread.sleep(1000);
-			DriveInst.DriveDistance(-20, 0.35);
-			GearManipulatorInst.GearDrop(false);
+			Thread.sleep(Constants.AUTON_GEAR_FORWARD_WAIT_TIME);
+    		DriveInst.DriveDistance(-10, 0.25);
+    		DriveInst.DriveDistance(-20, 1);
+        	GearManipulatorInst.GearDrop(false);
 		}
 		catch (InterruptedException e)
 		{

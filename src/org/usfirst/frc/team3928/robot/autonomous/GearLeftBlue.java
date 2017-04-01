@@ -36,30 +36,37 @@ public class GearLeftBlue extends AutonModes
      */
     public void execute()
     {
-    	System.out.println("GearLeftBlue");
+       	System.out.println("GearLeftBlue");
     	try
     	{
-    		DriveInst.DriveDistance(85, 0.5);
+    		DriveInst.DriveDistance(78, 0.5);
+    		Thread.sleep(500);
+    		DriveInst.TurnDegrees(-40, 0.8);
+    		Thread.sleep(500);
+    		DriveInst.DriveDistance(-12, 0.5);
     		Thread.sleep(1000);
-    		DriveInst.TurnDegrees(-50, 0.5);
-    		Thread.sleep(1000);
-    		
     		if (DriveInst.getCamera().getIsTracking())
         	{
         		System.out.println("tracking");
-        		DriveInst.DriveToTarget(Constants.AUTON_GEAR_START_X, Constants.AUTON_GEAR_START_Y, Constants.AUTON_GEAR_TARGET_X, Constants.AUTON_GEAR_TARGET_Y);
+        		DriveInst.DriveToTarget(Constants.AUTON_GEAR_START_X, Constants.AUTON_GEAR_START_Y, Constants.AUTON_GEAR_TARGET_X, Constants.AUTON_GEAR_TARGET_Y);       		
         	}
         	else
         	{
         		System.out.println("not tracking");
-        		DriveInst.DriveDistance(12, 0.3);
+        		DriveInst.DriveDistance(52, 0.3);
         	}
-    		
-//    		GearManipulatorInst.GearDrop(true)
-//    		Thread.sleep(Constants.AUTON_GEAR_FORWARD_WAIT_TIME);
-//    		DriveInst.DriveDistance(-10, 0.4);
-//    		DriveInst.DriveDistance(-20, 0.8);
-//        	GearManipulatorInst.GearDrop(false);
+    		Thread.sleep(1000);
+    		DriveInst.setLeft(1);
+    		DriveInst.setRight(1);
+    		Thread.sleep(350);
+    		DriveInst.setLeft(0);
+    		DriveInst.setRight(0);
+    		Thread.sleep(500);
+    		GearManipulatorInst.GearDrop(true);
+    		Thread.sleep(Constants.AUTON_GEAR_FORWARD_WAIT_TIME);
+    		DriveInst.DriveDistance(-10, 0.25);
+    		DriveInst.DriveDistance(-20, 1);
+        	GearManipulatorInst.GearDrop(false);
     	}
     	catch (InterruptedException e)
     	{
