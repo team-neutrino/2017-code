@@ -47,7 +47,7 @@ public class GearLeftBlue extends AutonModes
     		if (DriveInst.getCamera().getIsTracking())
         	{
         		System.out.println("tracking");
-        		DriveInst.DriveToTarget();
+        		DriveInst.DriveToTarget(Constants.AUTON_GEAR_START_X, Constants.AUTON_GEAR_START_Y, Constants.AUTON_GEAR_TARGET_X, Constants.AUTON_GEAR_TARGET_Y);
         	}
         	else
         	{

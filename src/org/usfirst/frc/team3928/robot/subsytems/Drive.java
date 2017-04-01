@@ -128,40 +128,15 @@ public class Drive
 		driveDist(turnDistance, -turnDistance, speed);
 	}
 
-	public void DriveToTarget()
+	public void DriveToTarget(double xStart, double yStart, double xTarget, double yTarget)
 	{
-//		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
-//		{
-//			if(Pixy.getIsTracking())
-//			{
-//				System.out.println("Y: " + Pixy.getY());
-//				System.out.println("X: " + Pixy.getX());
-//				System.out.println("C: " + Pixy.GetTargetX());
-//			}
-//			else
-//			{
-//				System.out.println("not tracking :(");
-//			}
-//			try
-//			{
-//				Thread.sleep(500);
-//			}
-//			catch (InterruptedException e)
-//			{
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-		
-
 		while (DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{
-			int target = (int) Pixy.GetTargetX();
+			int target = (int) Pixy.GetTargetX(xStart, yStart, xTarget, yTarget);
 			int allowedError = 25;
 			
 			if (Pixy.getIsTracking())
 			{
-				System.out.println(Pixy.getX());
 				int currentError = target - Pixy.getX();
 				if (Math.abs(currentError) < allowedError)
 				{
@@ -189,6 +164,31 @@ public class Drive
 			try
 			{
 				Thread.sleep(1);
+			}
+			catch (InterruptedException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void PrintValues()
+	{
+		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
+		{
+			if(Pixy.getIsTracking())
+			{
+				System.out.println("Y: " + Pixy.getY());
+				System.out.println("X: " + Pixy.getX());
+			}
+			else
+			{
+				System.out.println("Not tracking :(");
+			}
+			try
+			{
+				Thread.sleep(500);
 			}
 			catch (InterruptedException e)
 			{

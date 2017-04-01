@@ -36,7 +36,7 @@ public class ShootAndGearBlue extends AutonModes
 			DriveInst.DriveDistance(15, 1);
 			Thread.sleep(100);
 
-			DriveInst.DriveToTarget();
+			DriveInst.DriveToTarget(Constants.AUTON_GEAR_START_X, Constants.AUTON_GEAR_START_Y, Constants.AUTON_GEAR_TARGET_X, Constants.AUTON_GEAR_TARGET_Y);
 			Thread.sleep(100);
 			DriveInst.setLeft(1);
 			DriveInst.setRight(1);

@@ -100,8 +100,14 @@ public class Constants
 	public static final int AUTON_GEAR_FORWARD_WAIT_TIME = 1000; // in ms
 	public static final double AUTON_DRIVE_SPEED = .5;
 	public static final double AUTON_TURN_SPEED = .2;
-	public static final int AUTON_TARGET_X = 200;
-	public static final int AUTON_TARGET_Y = 0; //TODO
+	public static final double AUTON_GEAR_START_X = 180;
+	public static final double AUTON_GEAR_START_Y = 62;
+	public static final double AUTON_GEAR_TARGET_X = 250;
+	public static final double AUTON_GEAR_TARGET_Y = 21;
+	public static final double AUTON_SHOOT_START_X = 163;
+	public static final double AUTON_SHOOT_START_Y = 105;
+	public static final double AUTON_SHOOT_TARGET_X = 180;
+	public static final double AUTON_SHOOT_TARGET_Y = 2;
 	public static final int AUTON_SWITCH_CHANNEL_1 = 4;
 	public static final int AUTON_SWITCH_CHANNEL_2 = 5;
 	public static final int AUTON_SWITCH_CHANNEL_3 = 6;
