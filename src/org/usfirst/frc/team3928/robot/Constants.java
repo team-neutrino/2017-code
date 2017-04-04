@@ -89,6 +89,7 @@ public class Constants
 	public static final int BUTTON_SHOOT = 2; // joystick top
 	public static final int BUTTON_DRIVE_STRAIGHT = 3; //joystick top
 	public static final int BUTTON_CLIMB = 8; //gamepad start
+	public static final int BUTTON_CLIMB_BACKWARDS = 7; //gamepad back
 	public static final int BUTTON_SHOOTER_SPIN_UP = 4; // gamepad y
 	public static final int BUTTON_GEAR_MOVE = 2; // gamepad b
 	public static final int BUTTON_GEAR_DROP = 3; //gamepad right trigger

@@ -15,6 +15,8 @@ import org.usfirst.frc.team3928.robot.subsytems.GearManipulator;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -61,10 +63,9 @@ public class Robot extends IterativeRobot
 			Climber = new Victor(Constants.CLIMBER_CHANNEL);
 		}
 
-//		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-//		camera.setFPS(10);
-//		camera.setResolution(Constants.CAMERA_XRES, Constants.CAMERA_YRES);
-//		camera.setExposureManual(35);
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.setResolution(Constants.CAMERA_XRES, Constants.CAMERA_YRES);
+		camera.setExposureManual(35);
 
 	}
 
@@ -74,8 +75,6 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit()
 	{
-//		AutonModes mode = getAutonModes();
-//		mode.execute();
 		AutonModes mode = new GearForward(DriveInst, GearManipulatorInst, BallManagerInst);
 		mode.execute();	
 	}
@@ -121,8 +120,9 @@ public class Robot extends IterativeRobot
 
 		if (JoyLeft.getRawButton(Constants.BUTTON_INVERT_DIRECTION))
 		{
+			double tempLeftSpeed = leftSpeed;
 			leftSpeed = -rightSpeed;
-			rightSpeed = -leftSpeed;
+			rightSpeed = -tempLeftSpeed;
 		}
 		else if (JoyRight.getRawButton(Constants.BUTTON_HALF_SPEED))
 		{
@@ -130,7 +130,12 @@ public class Robot extends IterativeRobot
 			leftSpeed = leftSpeed / 2;
 		}
 
-		if (JoyRight.getRawButton(Constants.BUTTON_DRIVE_STRAIGHT))
+		if (JoyRight.getRawButton(Constants.BUTTON_DRIVE_STRAIGHT) && JoyLeft.getRawButton(Constants.BUTTON_INVERT_DIRECTION))
+		{
+			DriveInst.setRight(leftSpeed);
+			DriveInst.setLeft(leftSpeed);
+		}
+		else if(JoyRight.getRawButton(Constants.BUTTON_DRIVE_STRAIGHT))
 		{
 			DriveInst.setRight(rightSpeed);
 			DriveInst.setLeft(rightSpeed);
@@ -144,6 +149,12 @@ public class Robot extends IterativeRobot
 		if (Pad.getRawButton(Constants.BUTTON_CLIMB))
 		{
 			Climber.set(1);
+			GearManipulatorInst.GearMove(true);
+			GearManipulatorInst.GearDrop(true);
+		}
+		else if(Pad.getRawButton(Constants.BUTTON_CLIMB_BACKWARDS))
+		{
+			Climber.set(-1);
 			GearManipulatorInst.GearMove(true);
 			GearManipulatorInst.GearDrop(true);
 		}
