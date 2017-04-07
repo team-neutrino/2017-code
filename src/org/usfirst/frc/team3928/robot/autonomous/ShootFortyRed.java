@@ -21,17 +21,21 @@ public class ShootFortyRed extends AutonModes
 		try
 		{
 			
-			DriveInst.DriveDistance(66, 1);
+			DriveInst.DriveDistance(70, 1); //added 4
 			Thread.sleep(300);
 			DriveInst.TurnDegrees(-75, 1);
 			Thread.sleep(300);
-			DriveInst.DriveDistance(36, 1);
+			DriveInst.DriveDistance(36, 0.75); // was 1
+			DriveInst.setLeft(0.2);
+			DriveInst.setRight(0.2);
 			Thread.sleep(2000);
-			DriveInst.DriveDistance(-50, 1);
+			DriveInst.setLeft(0);
+			DriveInst.setRight(0);
+			DriveInst.DriveDistance(-50, 1); 
 			BallManagerInst.SpinUpShooter(true);
 			Thread.sleep(300);
-			DriveInst.TurnDegrees(-40, 1);
-			Thread.sleep(300);
+			DriveInst.TurnDegrees(-70, 1); //40
+			Thread.sleep(1000); //increased sleep was 500
 			if (DriveInst.getCamera().getIsTracking())
 			{
 				DriveInst.DriveDistance(20, 1);
@@ -48,6 +52,12 @@ public class ShootFortyRed extends AutonModes
 			else
 			{
 				DriveInst.DriveDistance(60, 1);
+				DriveInst.setLeft(1);
+				DriveInst.setRight(1);
+				BallManagerInst.Shoot(true);
+				Thread.sleep(500);
+				DriveInst.setLeft(0);
+				DriveInst.setRight(0);
 			}
 			
 		}
