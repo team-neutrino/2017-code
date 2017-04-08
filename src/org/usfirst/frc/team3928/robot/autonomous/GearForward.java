@@ -41,10 +41,10 @@ public class GearForward extends AutonModes
 		System.out.println("GearForward");
 		try
 		{
-			DriveInst.DriveDistance(76, 0.35);
+			DriveInst.DriveDistance(76, 0.25);
 			Thread.sleep(1000);
-    		DriveInst.setLeft(1);
-    		DriveInst.setRight(1);
+    		DriveInst.setLeft(.6);
+    		DriveInst.setRight(.6);
     		Thread.sleep(350);
     		DriveInst.setLeft(0);
     		DriveInst.setRight(0);

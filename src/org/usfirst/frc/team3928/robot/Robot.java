@@ -1,20 +1,11 @@
 package org.usfirst.frc.team3928.robot;
 
-import org.usfirst.frc.team3928.robot.autonomous.AutonModes;
-import org.usfirst.frc.team3928.robot.autonomous.GearForward;
-import org.usfirst.frc.team3928.robot.autonomous.GearLeftBlue;
-import org.usfirst.frc.team3928.robot.autonomous.GearLeftRed;
-import org.usfirst.frc.team3928.robot.autonomous.GearRightBlue;
-import org.usfirst.frc.team3928.robot.autonomous.GearRightRed;
-import org.usfirst.frc.team3928.robot.autonomous.RotarySwitch;
-import org.usfirst.frc.team3928.robot.autonomous.ShootFortyBlue;
-import org.usfirst.frc.team3928.robot.autonomous.ShootFortyRed;
+import org.usfirst.frc.team3928.robot.autonomous.*;
 import org.usfirst.frc.team3928.robot.subsytems.BallManager;
 import org.usfirst.frc.team3928.robot.subsytems.Drive;
 import org.usfirst.frc.team3928.robot.subsytems.GearManipulator;
 
 import com.ctre.CANTalon;
-
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -75,7 +66,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit()
 	{
-		AutonModes mode = new ShootFortyRed(DriveInst, GearManipulatorInst, BallManagerInst);
+		AutonModes mode = new GearLeftBlue(DriveInst, GearManipulatorInst, BallManagerInst);
 		mode.execute();	
 	}
 
