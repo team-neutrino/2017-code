@@ -41,7 +41,7 @@ public class GearLeftRed extends AutonModes
     	{
     		DriveInst.DriveDistance(78, 0.5);
     		Thread.sleep(500);
-    		DriveInst.TurnDegrees(55, 0.8);
+    		DriveInst.TurnDegrees(-40, 0.8);
     		Thread.sleep(500);
     		DriveInst.DriveDistance(-12, 0.5);
     		Thread.sleep(1000);
