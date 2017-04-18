@@ -42,7 +42,7 @@ public class GearForward extends AutonModes
 		try
 		{
 			GearManipulatorInst.FloorGearDown(false);
-			DriveInst.DriveDistance(76, 0.25);
+			DriveInst.DriveDistance(76, 0.5);
 			Thread.sleep(1000);
     		DriveInst.setLeft(.6);
     		DriveInst.setRight(.6);

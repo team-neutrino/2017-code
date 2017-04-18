@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3928.robot.subsytems;
 
+import org.opencv.core.Mat;
 import org.usfirst.frc.team3928.robot.Constants;
 
 import com.ctre.CANTalon;
@@ -228,7 +229,7 @@ public class Drive
 			double distancePercentDiff = Math.abs(rightDistancePercentCompleted - leftDistancePercentCompleted);
 			if (rightDistancePercentCompleted >= leftDistancePercentCompleted)
 			{
-				rightSpeed = speed - distancePercentDiff;
+				rightSpeed = speed - Math.pow(distancePercentDiff, 0.2);
 				if (rightDistanceToDrive > 0)
 				{
 					setRight(rightSpeed);
@@ -240,7 +241,7 @@ public class Drive
 			}
 			if (leftDistancePercentCompleted >= rightDistancePercentCompleted)
 			{
-				leftSpeed = speed - distancePercentDiff;
+				leftSpeed = speed - Math.pow(distancePercentDiff, 0.2);
 				if (leftDistanceToDrive > 0)
 				{
 					setLeft(leftSpeed);

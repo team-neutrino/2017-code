@@ -8,7 +8,7 @@ package org.usfirst.frc.team3928.robot;
  */
 public class Constants
 {
-	public static final boolean REAL_ROBOT = true;
+	public static final boolean REAL_ROBOT = false;
 
 	// Drive
 	public static final int DRIVE_RIGHT_1_CHANNEL = 3;
@@ -24,7 +24,7 @@ public class Constants
 	public static final int DRIVE_ENCODER_LEFT_CHANNEL_A = 2;
 	public static final int DRIVE_ENCODER_LEFT_CHANNEL_B = 3;
 	public static final double DRIVE_WHEEL_DIAMETER = 4;
-	public static final double DRIVE_TURN_RADIUS = 14.9;
+	public static final double DRIVE_TURN_RADIUS = 12; //14.9
 	public static final double DRIVE_DISTANCE_PER_TURN_DEGREE = 2 * DRIVE_TURN_RADIUS * Math.PI / 360;
 	public static final int DRIVE_GYRO_CHANNEL = 0;
 	public static final int DRIVE_TIME_PER_INCH = 100; // In ms
