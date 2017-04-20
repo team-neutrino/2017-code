@@ -33,10 +33,8 @@ public class Constants
 	public static final int DRIVE_PULSE_PER_REV = DRIVE_CYCLES_PER_REV * 4;
 
 	// Gear Manipulator
-	public static final int GEAR_FLAP_SOLENOID_A_CHANNEL = 5;
-	public static final int GEAR_FLAP_SOLENOID_B_CHANNEL = 4;
-	public static final int GEAR_HOPPER_SOLENOID_A_CHANNEL = 3;
-	public static final int GEAR_HOPPER_SOLENOID_B_CHANNEL = 2;
+	public static final int GEAR_HOPPER_SOLENOID_A_CHANNEL = 4;
+	public static final int GEAR_HOPPER_SOLENOID_B_CHANNEL = 5;
 	public static final int GEAR_DROP_SOLENOID_A_CHANNEL = 6;
 	public static final int GEAR_DROP_SOLENOID_B_CHANNEL = 7;
 	
@@ -91,9 +89,8 @@ public class Constants
 	public static final int BUTTON_CLIMB = 8; //gamepad start
 	public static final int BUTTON_CLIMB_BACKWARDS = 7; //gamepad back
 	public static final int BUTTON_SHOOTER_SPIN_UP = 4; // gamepad y
-	public static final int BUTTON_GEAR_MOVE = 2; // gamepad b
 	public static final int BUTTON_GEAR_DROP = 3; //gamepad right trigger
-	public static final int BUTTON_GEAR_FLAP = 6; //gamepad right bumper
+	public static final int BUTTON_GEAR_MOVE = 6; //gamepad right bumper
 	public static final int BUTTON_FLOOR_GEAR_INTAKE = 5; // gamepad left bumper
 	public static final int BUTTON_FLOOR_GEAR_OUTTAKE = 2; //gamepad left trigger
 

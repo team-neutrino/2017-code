@@ -11,7 +11,7 @@ import org.usfirst.frc.team3928.robot.subsytems.GearManipulator;
  * 
  * @author JamesBeetham
  */
-public class GearRightBlue extends AutonModes
+public class GearLeft extends AutonModes
 {
 
     /**
@@ -24,7 +24,7 @@ public class GearRightBlue extends AutonModes
      * @param cannon
      *            Shooter to use
      */
-    public GearRightBlue(Drive driveInst, GearManipulator gear, BallManager ballManagerInst)
+    public GearLeft(Drive driveInst, GearManipulator gear, BallManager ballManagerInst)
     {
     	super(driveInst, gear, ballManagerInst);
     }
@@ -36,14 +36,14 @@ public class GearRightBlue extends AutonModes
      */
     public void execute()
     {
-    	System.out.println("GearRightBlue");
+    	System.out.println("GearLeftRed");
     	try
     	{
-    		DriveInst.DriveDistance(78, 0.5);
+    		DriveInst.DriveDistance(78, 0.7);
     		Thread.sleep(500);
-    		DriveInst.TurnDegrees(55, 0.8);
+    		DriveInst.TurnDegrees(-45, 1);
     		Thread.sleep(500);
-    		DriveInst.DriveDistance(-12, 0.5);
+    		DriveInst.DriveDistance(-12, 0.7);
     		Thread.sleep(1000);
     		if (DriveInst.getCamera().getIsTracking())
         	{
@@ -53,7 +53,7 @@ public class GearRightBlue extends AutonModes
         	else
         	{
         		System.out.println("not tracking");
-        		DriveInst.DriveDistance(48, 0.3);
+        		DriveInst.DriveDistance(52, 0.3);
 
         	}
     		Thread.sleep(1000);
@@ -62,12 +62,12 @@ public class GearRightBlue extends AutonModes
     		Thread.sleep(350);
     		DriveInst.setLeft(0);
     		DriveInst.setRight(0);
-//    		Thread.sleep(500);
-//    		GearManipulatorInst.GearDrop(true);
-//    		Thread.sleep(Constants.AUTON_GEAR_FORWARD_WAIT_TIME);
-//    		DriveInst.DriveDistance(-10, 0.25);
-//    		DriveInst.DriveDistance(-20, 1);
-//        	GearManipulatorInst.GearDrop(false);
+    		Thread.sleep(500);
+    		GearManipulatorInst.GearDrop(true);
+    		Thread.sleep(Constants.AUTON_GEAR_FORWARD_WAIT_TIME);
+    		DriveInst.DriveDistance(-10, 0.7);
+    		DriveInst.DriveDistance(-20, 1);
+        	GearManipulatorInst.GearDrop(false);
     	}
     	catch (InterruptedException e)
     	{

@@ -17,19 +17,25 @@ public class ShootBlue extends AutonModes
 		try
 		{
 			BallManagerInst.SpinUpShooter(true);
-			DriveInst.DriveDistance(-36, 0.5);
+			DriveInst.DriveDistance(-36, 0.7);
 			Thread.sleep(100);
-			DriveInst.TurnDegrees(-45, 0.5);
+			DriveInst.TurnDegrees(-60, 1);
 			Thread.sleep(100);
-			DriveInst.DriveDistance(42, 0.5);
+			DriveInst.DriveDistance(30, 0.7);
 			Thread.sleep(100);
+			DriveInst.setLeft(1);
+    		DriveInst.setRight(1);
+    		Thread.sleep(350);
+    		DriveInst.setLeft(0);
+    		DriveInst.setRight(0);
+			Thread.sleep(500);
 			BallManagerInst.Shoot(true);
 			Thread.sleep(8000);
-			DriveInst.DriveDistance(-42, 0.5);
+			DriveInst.DriveDistance(-42, 0.7);
 			Thread.sleep(100);
-			DriveInst.TurnDegrees(45, 0.5);
+			DriveInst.TurnDegrees(60, 1);
 			Thread.sleep(100);
-			DriveInst.DriveDistance(-50, 0.5);
+			DriveInst.DriveDistance(-50, 0.7);
 			Thread.sleep(100);
 		}
 		catch (InterruptedException e)

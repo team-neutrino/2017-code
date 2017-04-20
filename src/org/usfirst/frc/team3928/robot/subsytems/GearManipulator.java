@@ -17,9 +17,6 @@ import edu.wpi.first.wpilibj.Victor;
  */
 public class GearManipulator
 {
-
-	private Solenoid GearFlapA;
-	private Solenoid GearFlapB;
 	private Solenoid GearHopperA;
 	private Solenoid GearHopperB;
 	private Solenoid GearDropA;
@@ -29,7 +26,6 @@ public class GearManipulator
 
 	private SpeedController FloorGearMotor;
 
-	private boolean Moved;
 	private boolean LastFloorGearManipulatorState;
 
 	/**
@@ -37,8 +33,6 @@ public class GearManipulator
 	 */
 	public GearManipulator()
 	{
-		GearFlapA = new Solenoid(Constants.GEAR_FLAP_SOLENOID_A_CHANNEL);
-		GearFlapB = new Solenoid(Constants.GEAR_FLAP_SOLENOID_B_CHANNEL);
 		GearHopperA = new Solenoid(Constants.GEAR_HOPPER_SOLENOID_A_CHANNEL);
 		GearHopperB = new Solenoid(Constants.GEAR_HOPPER_SOLENOID_B_CHANNEL);
 		GearDropA = new Solenoid(Constants.GEAR_DROP_SOLENOID_A_CHANNEL);
@@ -56,7 +50,6 @@ public class GearManipulator
 		}
 
 		GearMove(false);
-		GearFlap(false);
 		GearDrop(false);
 		FloorGearDown(false);
 	}
@@ -67,45 +60,16 @@ public class GearManipulator
 	 * @param isOpen
 	 *            true to open, false default to close
 	 */
-	public void GearFlap(boolean isOpen)
-	{
-		if (Moved && isOpen)
-		{
-			GearFlapA.set(isOpen);
-			GearFlapB.set(!isOpen);
-		}
-		else
-		{
-			GearFlapA.set(!isOpen);
-			GearFlapB.set(isOpen);
-		}
-	}
-
-	/**
-	 * Controls whether or not the gear is tilted.
-	 * 
-	 * @param isTilted
-	 *            true to move, false default to down
-	 */
 	public void GearMove(boolean isMoved)
 	{
-		Moved = isMoved;
-		GearHopperA.set(!isMoved);
-		GearHopperB.set(isMoved);
+		GearHopperA.set(isMoved);
+		GearHopperB.set(!isMoved);
 	}
 	
 	public void GearDrop(boolean isDropped)
 	{
-		if(Moved && isDropped)
-		{
-			GearDropA.set(!isDropped);
-			GearDropB.set(isDropped);
-		}
-		else
-		{
-			GearDropA.set(isDropped);
-			GearDropB.set(!isDropped);
-		}
+		GearDropA.set(isDropped);
+		GearDropB.set(!isDropped);
 	}
 	
 	public void FloorGearDown(boolean isDown)

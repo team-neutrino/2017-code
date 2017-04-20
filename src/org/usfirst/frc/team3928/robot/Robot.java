@@ -140,14 +140,10 @@ public class Robot extends IterativeRobot
 		if (Pad.getRawButton(Constants.BUTTON_CLIMB))
 		{
 			Climber.set(1);
-			GearManipulatorInst.GearMove(true);
-			GearManipulatorInst.GearDrop(true);
 		}
 		else if(Pad.getRawButton(Constants.BUTTON_CLIMB_BACKWARDS))
 		{
 			Climber.set(-1);
-			GearManipulatorInst.GearMove(true);
-			GearManipulatorInst.GearDrop(true);
 		}
 		else
 		{
@@ -156,9 +152,8 @@ public class Robot extends IterativeRobot
 
 		BallManagerInst.SpinUpShooter(Pad.getRawButton(Constants.BUTTON_SHOOTER_SPIN_UP));
 		BallManagerInst.Shoot(JoyRight.getRawButton(Constants.BUTTON_SHOOT) || JoyLeft.getRawButton(Constants.BUTTON_SHOOT));
-		GearManipulatorInst.GearMove(Pad.getRawButton(Constants.BUTTON_CLIMB) || Pad.getRawButton(Constants.BUTTON_GEAR_MOVE));
 		
-		GearManipulatorInst.GearFlap(Pad.getRawButton(Constants.BUTTON_GEAR_FLAP));
+		GearManipulatorInst.GearMove(Pad.getRawButton(Constants.BUTTON_CLIMB) || Pad.getRawButton(Constants.BUTTON_GEAR_MOVE));
 
 
 		// converting the analog input from the trigger to a value we can use
@@ -208,19 +203,11 @@ public class Robot extends IterativeRobot
 		}
 		case 1:
 		{
-			return new GearLeftBlue(DriveInst, GearManipulatorInst, BallManagerInst);
+			return new GearLeft(DriveInst, GearManipulatorInst, BallManagerInst);
 		}
 		case 2:
 		{
-			return new GearRightBlue(DriveInst, GearManipulatorInst, BallManagerInst);
-		}
-		case 3:
-		{
-			return new GearRightRed(DriveInst, GearManipulatorInst, BallManagerInst);
-		}
-		case 4:
-		{
-			return new GearLeftRed(DriveInst, GearManipulatorInst, BallManagerInst);
+			return new GearRight(DriveInst, GearManipulatorInst, BallManagerInst);
 		}
 		default:
 		{
