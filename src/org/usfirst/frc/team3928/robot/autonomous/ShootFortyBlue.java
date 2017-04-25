@@ -20,11 +20,11 @@ public class ShootFortyBlue extends AutonModes
 		System.out.println("Shoot Forty Blue auton mode");
 		try
 		{
-			
-			DriveInst.DriveDistance(70, 1); //added 4
-			Thread.sleep(300);
-			DriveInst.TurnDegrees(75, 1);
-			Thread.sleep(300);
+			GearManipulatorInst.GearMove(true);
+			DriveInst.DriveDistance(60, 1); //added 4, changed to 60 
+			Thread.sleep(500);
+			DriveInst.TurnDegrees(85, 1);
+			Thread.sleep(500);
 			DriveInst.DriveDistance(36, 0.75); //was 1
 			DriveInst.setLeft(0.2); // used to not be here, we don't want to bounce
 			DriveInst.setRight(0.2);
@@ -36,22 +36,23 @@ public class ShootFortyBlue extends AutonModes
 			Thread.sleep(300);
 			DriveInst.TurnDegrees(70, 1); //40
 			Thread.sleep(1000); //increased sleep was 500
+			//DriveInst.DriveDistance(30, 1);
 			if (DriveInst.getCamera().getIsTracking())
 			{
-				DriveInst.DriveDistance(20, 1);
-				Thread.sleep(500);
-				DriveInst.DriveToTarget(Constants.AUTON_SHOOT_START_X, Constants.AUTON_SHOOT_START_Y,
-						Constants.AUTON_SHOOT_TARGET_X, Constants.AUTON_SHOOT_TARGET_Y);
-				DriveInst.setLeft(1);
-				DriveInst.setRight(1);
-				BallManagerInst.Shoot(true);
-				Thread.sleep(500);
-				DriveInst.setLeft(0);
-				DriveInst.setRight(0);
+//				Thread.sleep(500);
+//				DriveInst.DriveToTarget(Constants.AUTON_SHOOT_START_X, Constants.AUTON_SHOOT_START_Y,
+//						Constants.AUTON_SHOOT_TARGET_X, Constants.AUTON_SHOOT_TARGET_Y);
+//				DriveInst.setLeft(1);
+//				DriveInst.setRight(1);
+//				BallManagerInst.Shoot(true);
+//				Thread.sleep(500);
+//				DriveInst.setLeft(0);
+//				DriveInst.setRight(0);
 			}
 			else
 			{
-				DriveInst.DriveDistance(60, 1);
+				DriveInst.DriveDistance(45, 1);
+				Thread.sleep(1000);
 				DriveInst.setLeft(1);
 				DriveInst.setRight(1);
 				BallManagerInst.Shoot(true);

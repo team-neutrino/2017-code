@@ -119,7 +119,7 @@ public class BallManager extends PIDSubsystem
 	protected double returnPIDInput()
 	{
 		double rate = ShooterBeamBreak.getRate();
-		System.out.println(ShooterBeamBreak.getRate());
+		//System.out.println(ShooterBeamBreak.getRate());
 		return rate;
 	}
 

@@ -16,6 +16,7 @@ public class ShootBlue extends AutonModes
 	{
 		try
 		{
+			GearManipulatorInst.GearMove(true);
 			BallManagerInst.SpinUpShooter(true);
 			DriveInst.DriveDistance(-36, 0.7);
 			Thread.sleep(100);

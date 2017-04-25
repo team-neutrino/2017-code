@@ -20,42 +20,45 @@ public class ShootFortyRed extends AutonModes
 		System.out.println("Shoot Forty Red auton mode");
 		try
 		{
-			
-			DriveInst.DriveDistance(70, 1); //added 4
-			Thread.sleep(300);
-			DriveInst.TurnDegrees(-75, 1);
-			Thread.sleep(300);
-			DriveInst.DriveDistance(36, 0.75); // was 1
+			GearManipulatorInst.GearMove(true);
+			DriveInst.DriveDistance(59, 1); //added 4
+			Thread.sleep(500);
+			GearManipulatorInst.GearMove(false);
+			DriveInst.TurnDegrees(-80, 1);
+			Thread.sleep(500);
+			DriveInst.DriveDistance(27, 0.75); // was 1
 			DriveInst.setLeft(0.2);
 			DriveInst.setRight(0.2);
-			Thread.sleep(2000);
+			Thread.sleep(500);
 			DriveInst.setLeft(0);
 			DriveInst.setRight(0);
 			DriveInst.DriveDistance(-50, 1); 
 			BallManagerInst.SpinUpShooter(true);
-			Thread.sleep(300);
-			DriveInst.TurnDegrees(-70, 1); //40
-			Thread.sleep(1000); //increased sleep was 500
+			GearManipulatorInst.GearMove(true);
+			Thread.sleep(2000);
+			DriveInst.TurnDegrees(-50, 1); //40
+			Thread.sleep(500); //increased sleep was 500
 			if (DriveInst.getCamera().getIsTracking())
 			{
-				DriveInst.DriveDistance(20, 1);
-				Thread.sleep(500);
-				DriveInst.DriveToTarget(Constants.AUTON_SHOOT_START_X, Constants.AUTON_SHOOT_START_Y,
-						Constants.AUTON_SHOOT_TARGET_X, Constants.AUTON_SHOOT_TARGET_Y);
-				DriveInst.setLeft(1);
-				DriveInst.setRight(1);
-				BallManagerInst.Shoot(true);
-				Thread.sleep(500);
-				DriveInst.setLeft(0);
-				DriveInst.setRight(0);
+//				DriveInst.DriveDistance(20, 1);
+//				Thread.sleep(500);
+//				DriveInst.DriveToTarget(Constants.AUTON_SHOOT_START_X, Constants.AUTON_SHOOT_START_Y,
+//						Constants.AUTON_SHOOT_TARGET_X, Constants.AUTON_SHOOT_TARGET_Y);
+//				DriveInst.setLeft(1);
+//				DriveInst.setRight(1);
+//				BallManagerInst.Shoot(true);
+//				Thread.sleep(500);
+//				DriveInst.setLeft(0);
+//				DriveInst.setRight(0);
 			}
 			else
 			{
-				DriveInst.DriveDistance(60, 1);
+				DriveInst.DriveDistance(30, 1);
 				DriveInst.setLeft(1);
 				DriveInst.setRight(1);
 				BallManagerInst.Shoot(true);
-				Thread.sleep(500);
+				GearManipulatorInst.GearMove(false);
+				Thread.sleep(250);
 				DriveInst.setLeft(0);
 				DriveInst.setRight(0);
 			}
