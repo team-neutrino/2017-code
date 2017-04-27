@@ -54,9 +54,10 @@ public class Robot extends IterativeRobot
 			Climber = new Victor(Constants.CLIMBER_CHANNEL);
 		}
 
-//		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-//		camera.setResolution(Constants.CAMERA_XRES, Constants.CAMERA_YRES);
-//		camera.setExposureManual(35);
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.setResolution(Constants.CAMERA_XRES, Constants.CAMERA_YRES);
+		camera.setExposureManual(35);
+		camera.setFPS(15);
 
 	}
 
@@ -66,7 +67,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit()
 	{
-		AutonModes mode = new ShootFortyRed(DriveInst, GearManipulatorInst, BallManagerInst);
+		AutonModes mode = new GearLeft(DriveInst, GearManipulatorInst, BallManagerInst);
 		mode.execute();	
 	}
 
