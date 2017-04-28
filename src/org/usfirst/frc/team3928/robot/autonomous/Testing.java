@@ -16,7 +16,7 @@ public class Testing extends AutonModes
 	 */
 	public void execute()
 	{
-		DriveInst.TurnDegrees(45, 0.8);
+		DriveInst.TurnDegrees(-45, 1);
 	}
 
 }

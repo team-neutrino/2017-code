@@ -67,7 +67,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit()
 	{
-		AutonModes mode = new GearLeft(DriveInst, GearManipulatorInst, BallManagerInst);
+		AutonModes mode = new GearRight(DriveInst, GearManipulatorInst, BallManagerInst);
 		mode.execute();	
 	}
 

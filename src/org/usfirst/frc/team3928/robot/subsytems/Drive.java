@@ -224,6 +224,7 @@ public class Drive
 		while (rightDistancePercentCompleted < 1 && leftDistancePercentCompleted < 1
 				&& DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{
+			
 			rightDistancePercentCompleted = Math.abs(EncoderRight.getDistance() / rightDistanceToDrive);
 			leftDistancePercentCompleted = Math.abs(EncoderLeft.getDistance() / leftDistanceToDrive);
 			double distancePercentDiff = Math.abs(rightDistancePercentCompleted - leftDistancePercentCompleted);
@@ -233,11 +234,29 @@ public class Drive
 				if (rightDistanceToDrive > 0)
 				{
 					setRight(rightSpeed);
+					if(leftDistanceToDrive > 0)
+					{
+						setLeft(speed);
+					}
+					else
+					{
+						setLeft(-speed);
+					}
 				}
 				else
 				{
 					setRight(-rightSpeed);
+					if(leftDistanceToDrive > 0)
+					{
+						setLeft(speed);
+					}
+					else
+					{
+						setLeft(-speed);
+					}
 				}
+
+				System.out.println("Right speed: " + rightSpeed + " Left Speed: " + leftSpeed);
 			}
 			if (leftDistancePercentCompleted >= rightDistancePercentCompleted)
 			{
@@ -245,11 +264,28 @@ public class Drive
 				if (leftDistanceToDrive > 0)
 				{
 					setLeft(leftSpeed);
+					if(rightDistanceToDrive > 0)
+					{
+						setRight(speed);
+					}
+					else
+					{
+						setRight(-speed);
+					}
 				}
 				else
 				{
 					setLeft(-leftSpeed);
+					if(rightDistanceToDrive > 0)
+					{
+						setRight(speed);
+					}
+					else
+					{
+						setRight(-speed);
+					}
 				}
+				System.out.println("Right speed: " + rightSpeed + " Left Speed: " + leftSpeed);
 			}
 			
 			Timer.delay(0.005);
