@@ -45,8 +45,8 @@ public class Constants
 	public static final double FLOOR_GEAR_OUTTAKE_SPEED = -1;
 	public static final int FLOOR_GEAR_INTAKE_BEAM_BREAK_POWER_CHANNEL = 0; //TODO
 	public static final int FLOOR_GEAR_INTAKE_BEAM_BREAK_CHANNEL = 0; //TODO
-	public static final int FLOOR_GEAR_DOWN_SOLENOID_A_CHANNEL = 1; //old intake solenoid
-	public static final int FLOOR_GEAR_DOWN_SOLENOID_B_CHANNEL = 0; //old intake solenoid
+	public static final int FLOOR_GEAR_DOWN_SOLENOID_A_CHANNEL = 1;
+	public static final int FLOOR_GEAR_DOWN_SOLENOID_B_CHANNEL = 0;
 	
 	// Elevator
 	public static final int ELEVATOR_CHANNEL = 8;
@@ -93,6 +93,7 @@ public class Constants
 	public static final int BUTTON_GEAR_MOVE = 6; //gamepad right bumper
 	public static final int BUTTON_FLOOR_GEAR_INTAKE = 5; // gamepad left bumper
 	public static final int BUTTON_FLOOR_GEAR_OUTTAKE = 2; //gamepad left trigger
+	public static final int BUTTON_FLOOR_GEAR_DOWN = 2; //gamepad b
 
 	// Auton mode
 	public static final int AUTON_GEAR_FORWARD_WAIT_TIME = 1000; // in ms

@@ -55,15 +55,15 @@ public class GearRight extends AutonModes
         		System.out.println("not tracking");
         		DriveInst.DriveDistance(48, 0.3);
         	}
-    		Thread.sleep(1000);
+    		Thread.sleep(500);
     		DriveInst.setLeft(1);
     		DriveInst.setRight(1);
     		Thread.sleep(350);
     		DriveInst.setLeft(0);
     		DriveInst.setRight(0);
-    		Thread.sleep(500);
+    		//Thread.sleep(500);
     		GearManipulatorInst.GearDrop(true);
-    		Thread.sleep(Constants.AUTON_GEAR_FORWARD_WAIT_TIME);
+    		Thread.sleep(500);
     		DriveInst.DriveDistance(-10, 0.7);
     		DriveInst.DriveDistance(-20, 1);
         	GearManipulatorInst.GearDrop(false);

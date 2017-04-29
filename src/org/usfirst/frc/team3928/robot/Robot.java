@@ -178,14 +178,20 @@ public class Robot extends IterativeRobot
 			GearManipulatorInst.FloorGearDown(true);
 			GearManipulatorInst.FloorGearOuttake(true);
 		}
+		else if(Pad.getRawButton(Constants.BUTTON_FLOOR_GEAR_DOWN))
+		{
+			GearManipulatorInst.FloorGearDown(true);
+			GearManipulatorInst.FloorGearIntake(false);
+		}
 		else
 		{
-			GearManipulatorInst.FloorGearOuttake(false) ;
+			GearManipulatorInst.FloorGearOuttake(false);
 			GearManipulatorInst.FloorGearDown(false);
 		}
 		
 		Timer.delay(0.005);
 	}
+
 
 	@Override
 	public void testPeriodic()
