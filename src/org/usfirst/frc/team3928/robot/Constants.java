@@ -63,7 +63,7 @@ public class Constants
 	public static final double SHOOTER_P = 0.05; // TODO
 	public static final double SHOOTER_I = 0; // TODO
 	public static final double SHOOTER_D = 0; // TODO
-	public static final double SHOOTER_TARGET_SPEED = 54;
+	public static final double SHOOTER_TARGET_SPEED = 20; //competition = 54, demo = 
 
 	public static final int AGITATOR_CHANNEL = 0;
 	public static final int AGITATOR_POWER_CHANNEL = 9;
