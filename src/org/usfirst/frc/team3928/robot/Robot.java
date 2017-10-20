@@ -8,6 +8,7 @@ import org.usfirst.frc.team3928.robot.subsytems.GearManipulator;
 import com.ctre.CANTalon;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -30,7 +31,10 @@ public class Robot extends IterativeRobot
 	private BallManager BallManagerInst;
 	private GearManipulator GearManipulatorInst;
 	private RotarySwitch AutonSwitch;
-
+	private DriverStation DriverStationInst; //This is where you can get battery voltage
+	private long FirstTimeBatteryTooLow;
+	private boolean FirstTimeTooLow;
+	
 	/**
 	 * Initializes the robot.
 	 */
@@ -42,7 +46,9 @@ public class Robot extends IterativeRobot
 		JoyLeft = new Joystick(Constants.JOY_RIGHT_CHANNEL);
 		Pad = new Joystick(Constants.JOY_PAD_CHANNEL);
 		AutonSwitch = new RotarySwitch();
-
+		DriverStationInst = DriverStation.getInstance(); //This maybe correct??
+		FirstTimeTooLow = true;
+		
 		GearManipulatorInst = new GearManipulator();
 		BallManagerInst = new BallManager();
 		if (Constants.REAL_ROBOT)
@@ -90,6 +96,25 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic()
 	{
+		if (DriverStationInst.getBatteryVoltage() < 11.9)
+		{ 
+			if (FirstTimeTooLow)
+			{
+				FirstTimeBatteryTooLow = System.currentTimeMillis();
+				FirstTimeTooLow = false;
+			}
+			
+			if (System.currentTimeMillis() - FirstTimeBatteryTooLow >= 7000)
+			{
+				DriverStation.reportError("Change the battery", false);
+				//throw new IllegalStateException("Battery was under 11.9 volts for 7 seconds   ");
+			}
+		}
+		else
+		{
+			FirstTimeTooLow = true;
+		}
+		
 		double rightSpeed;
 		double leftSpeed;
 

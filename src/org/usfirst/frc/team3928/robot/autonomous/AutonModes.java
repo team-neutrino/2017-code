@@ -31,8 +31,7 @@ public abstract class AutonModes
 		DriveInst = driveInst;
 		GearManipulatorInst = gearManipulatorInst;
 		BallManagerInst = ballManagerInst;
-		GearManipulatorInst.GearMove(false);
-		GearManipulatorInst.GearMove(false);
+		GearManipulatorInst.FloorGearDown(false);
 	}
 
 	/**

@@ -256,7 +256,7 @@ public class Drive
 					}
 				}
 
-				System.out.println("Right speed: " + rightSpeed + " Left Speed: " + leftSpeed);
+				//System.out.println("Right speed: " + rightSpeed + " Left Speed: " + leftSpeed);
 			}
 			if (leftDistancePercentCompleted >= rightDistancePercentCompleted)
 			{
@@ -285,7 +285,7 @@ public class Drive
 						setRight(-speed);
 					}
 				}
-				System.out.println("Right speed: " + rightSpeed + " Left Speed: " + leftSpeed);
+				//System.out.println("Right speed: " + rightSpeed + " Left Speed: " + leftSpeed);
 			}
 			
 			Timer.delay(0.005);
